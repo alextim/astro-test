@@ -1,0 +1,12 @@
+---
+import i18n from '../config/i18n.js';
+import { localizePath } from '../lib/i18n-utils.js';
+
+const { to, ...rest } = Astro.props;
+const { locale } = Astro.request.params;
+const path = localizePath(to, locale || i18n.defaultLocale);
+---
+
+<a href={path} {...rest}>
+  <slot />
+</a>

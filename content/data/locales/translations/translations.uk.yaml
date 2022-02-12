@@ -1,0 +1,180 @@
+- key: post.minToRead
+  value: хв читання
+- key: post.readMore
+  value: Читати далі...
+- key: post.lastUpdated
+  value: Останнє оновлення
+- key: post.share
+  value: Поділитися
+- key: post.widget.category
+  value: Категорії
+- key: post.widget.tags
+  value: Теги
+- key: post.widget.years
+  value: Архіви по роках
+- key: post.widget.recent
+  value: Нові статті
+- key: post.widget.featured
+  value: Цікаві статті
+- key: author
+  value: Автор
+- key: all_rights_reserved
+  value: Всі права захищені.
+- key: cookie_warning.text
+  value: Этот сайт использует куки для оптимизации, анализа трафика и сохранения ваших настроек.
+- key: cookie_warning.details
+  value: Подробнее
+- key: home.customer
+  value: Замовник
+- key: form.send
+  value: Надіслати
+- key: form.send_message
+  value: Надіслати повідомлення
+- key: form.has_input_errors
+  value: Форма містить помилки введення
+- key: form.pls_wait
+  value: Будь ласка зачекайте...
+- key: form.cancel
+  value: Скасувати
+- key: form.close
+  value: Закрити
+- key: form.error
+  value: Помилка
+- key: form.sending
+  value: Відправлення
+- key: form.success
+  value: Завершено
+- key: validation.required
+  value: "{{name}} обов'язково."
+- key: validation.length
+  value: Поле "{{name}}" має бути не менше {{min}} і не більше {{max}} символів.
+- key: validation.maxLength
+  value: Поле "{{name}}" має бути не більше {{max}} символів.
+- key: validation.minLength
+  value: Поле "{{name}}" має бути не менше {{min}} символів.
+- key: validation.only_symbols
+  value: Допускаються тільки символи і пробіл
+- key: validation.only_digits
+  value: Допускаються тільки цифри
+- key: validation.invalid
+  value: Помилка в "{{name}}".
+- key: error.err400
+  value: '400: помилкові дані'
+- key: error.err401
+  value: 401 не авторизовано
+- key: error.err403
+  value: '403: заборонено'
+- key: error.err405
+  value: '405: неприпустимих метод'
+- key: error.network
+  value: Помилка мережі
+- key: cf.name
+  value: Ім'я
+- key: cf.your_name
+  value: Ваше ім'я
+- key: cf.your_email
+  value: Ваш e-mail
+- key: cf.message
+  value: Повідомлення
+- key: cf.your_message
+  value: Ваше повідомлення
+- key: cf.phone
+  value: Телефон
+- key: cf.your_phone
+  value: Номер вашогу телефону
+- key: cf.sorry
+  value: Вибачте. Сталася помилка під час відправки повідомлення.
+- key: cf.try_later
+  value: Будь ласка, повторіть вашу спробу пізніше.
+- key: cf.thanks
+  value: Дякуємо за ваше повідомлення!
+- key: cf.we_will_response
+  value: Ми відповімо вам найближчим часом.
+- key: if.subject.title
+  value: Тема
+- key: if.subject.description
+  value: Оберіть з переліку, або власний варіант
+- key: if.other
+  value: Інше
+- key: if.message.title
+  value: Ваш запит
+- key: if.message.description
+  value: Опишіть вашу потребу, технічне завдання, або задайте питання нашим спеціалістам
+- key: if.vc.title
+  value: Ваша візитівка
+- key: if.vc.description
+  value: Залиште Ваші контакти
+- key: if.name
+  value: Ім'я
+- key: if.position
+  value: Посада
+- key: if.company
+  value: Компанія
+- key: if.phone
+  value: Телефон
+- key: if.agree
+  value: Згода на обробку даних
+- key: if.privacy.agree_with
+  value: погоджуюсь з
+- key: if.privacy.policy
+  value: умовами конфіденційності
+- key: if.sorry
+  value: Вибачте. Сталася помилка під час відправки вашего запиту.
+- key: if.try_later
+  value: Будь ласка, повторіть вашу спробу пізніше.
+- key: if.thanks
+  value: Дякуємо за ваш запит!
+- key: if.we_will_response
+  value: Ми відповімо вам найближчим часом.
+- key: nav.inquiry
+  value: Надіслати запит
+- key: footer.contacts
+  value: Контакти
+- key: footer.call_us
+  value: Звертайтеся до нас
+- key: footer.opening_time
+  value: Робочий час
+- key: footer.our_address
+  value: Юридична адреса
+- key: footer.inquiry.title
+  value: Звертайтеся до нас!
+- key: footer.inquiry.text
+  value: Для уточнення Вартості робіт за Вашим технічним завданням, та з питань співпраці, заповніть цю форму, і наш спеціаліст зв'яжеться з вами. 
+- key: footer.inquiry.button_title
+  value: НАДІСЛАТИ ЗАПИТ
+- key: footer.privacyPolicy
+  value: Конфіденційність
+- key: contacts.title
+  value: Контакти
+- key: contacts.wait_you_on_address
+  value: Юридична адреса
+- key: contacts.opening_time
+  value: Робочий час
+- key: contacts.call_us
+  value: Звертайтеся до нас
+- key: contacts.write_us
+  value: Напишіть нам
+- key: dow.d2.mo
+  value: Пн
+- key: dow.d2.tu
+  value: Вт
+- key: dow.d2.we
+  value: Ср
+- key: dow.d2.th
+  value: Чт
+- key: dow.d2.fr
+  value: Пт
+- key: dow.d2.sa
+  value: Сб
+- key: dow.d2.su
+  value: Нд
+- key: day_off
+  value: Вихідний
+- key: days_off
+  value: Вихідні
+- key: priceList.name
+  value: Вид робіт
+- key: priceList.price
+  value: Ціна
+- key: priceList.description
+  value: Опис

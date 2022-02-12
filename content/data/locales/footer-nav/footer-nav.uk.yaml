@@ -1,0 +1,12 @@
+- title: Головна
+  to: /
+- title: Послуги
+  to: /services/
+- title: Типи об'єктів
+  to: /tipy-obektov/
+- title: Блог
+  to: /blog/
+- title: Про нас
+  to: /about/
+- title: Контакти
+  to: /contacts/

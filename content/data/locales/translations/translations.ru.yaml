@@ -1,0 +1,180 @@
+- key: post.minToRead
+  value: мин чтения
+- key: post.readMore
+  value: Читать дальше...
+- key: post.lastUpdated
+  value: Последнее обновление
+- key: post.share
+  value: Поделиться
+- key: post.widget.category
+  value: Категории
+- key: post.widget.tags
+  value: Теги
+- key: post.widget.years
+  value: Архивы по годам
+- key: post.widget.recent
+  value: Новые статьи
+- key: post.widget.featured
+  value: Интересные статьи
+- key: author
+  value: Автор
+- key: all_rights_reserved
+  value: Все права защищены.
+- key: cookie_warning.text
+  value: Этот сайт использует куки для оптимизации, анализа трафика и сохранения ваших настроек.
+- key: cookie_warning.details
+  value: Подробнее
+- key: home.customer
+  value: Заказчик
+- key: form.send
+  value: Отправить
+- key: form.send_message
+  value: Отправить сообщение
+- key: form.has_input_errors
+  value: Форма содержит ошибки ввода
+- key: form.pls_wait
+  value: Пожалуйста, подождите...
+- key: form.cancel
+  value: Отменить
+- key: form.close
+  value: Закрыть
+- key: form.error
+  value: Ошибка
+- key: form.sending
+  value: Отправка
+- key: form.success
+  value: Завершено
+- key: validation.required
+  value: '{{name}} обязательно.'
+- key: validation.length
+  value: Поле "{{name}}" должно быть не меньше {{min}} и не больше {{max}} символов.
+- key: validation.maxLength
+  value: Поле "{{name}}" должно быть не не больше {{max}} символов.
+- key: validation.minLength
+  value: Поле "{{name}}" должно быть не меньше {{min}} символов.
+- key: validation.only_symbols
+  value: Допускаются только символы и пробел
+- key: validation.only_digits
+  value: Допускаються только цифры
+- key: validation.invalid
+  value: Ошибка в "{{name}}".
+- key: error.err400
+  value: '400: ошибочные данные'
+- key: error.err401
+  value: 401 не авторизовано
+- key: error.err403
+  value: '403: запрещено'
+- key: error.err405
+  value: '405: недопуcтимый метод'
+- key: error.network
+  value: Ошибка сети
+- key: cf.name
+  value: Имя
+- key: cf.your_name
+  value: Ваше имя
+- key: cf.your_email
+  value: Ваш e-mail
+- key: cf.message
+  value: Сообщение
+- key: cf.your_message
+  value: Ваше сообщение
+- key: cf.phone
+  value: Телефон
+- key: cf.your_phone
+  value: Номер вашего телефона
+- key: cf.sorry
+  value: Извините. Произошла ошибка во время отправки сообщения.
+- key: cf.try_later
+  value: Пожалуйста, повторите вашу попытку позже.
+- key: cf.thanks
+  value: Спасибо за ваше сообщение!
+- key: cf.we_will_response
+  value: Мы ответим вам в ближайшее время.
+- key: if.subject.title
+  value: Тема
+- key: if.subject.description
+  value: Выберите из списка, или свой вариант
+- key: if.other
+  value: Другое
+- key: if.message.title
+  value: Ваш запрос
+- key: if.message.description
+  value: Опишите вашу потребность, техническое задание, или задайте вопрос нашим специалистам
+- key: if.vc.title
+  value: Ваша визитка
+- key: if.vc.description
+  value: Оставьте Ваши контакты
+- key: if.name
+  value: Имя
+- key: if.position
+  value: Должность
+- key: if.company
+  value: Компания
+- key: if.phone
+  value: Телефон
+- key: if.agree
+  value: Согласие на обработку данных
+- key: if.privacy.agree_with
+  value: согласен с
+- key: if.privacy.policy
+  value: политикой конфиденциальности
+- key: if.sorry
+  value: Извините. Произошла ошибка во время отправки вашего запроса.
+- key: if.try_later
+  value: Пожалуйста, повторите вашу попытку позже.
+- key: if.thanks
+  value: Спасибо за ваш запрос!
+- key: if.we_will_response
+  value: Мы ответим вам в ближайшее время.
+- key: nav.inquiry
+  value: Отправить запрос
+- key: footer.contacts
+  value: Контакты
+- key: footer.call_us
+  value: Обращайтесь к нам
+- key: footer.opening_time
+  value: Рабочее время
+- key: footer.our_address
+  value: Юридический адрес
+- key: footer.inquiry.title
+  value: Обращайтесь к нам!
+- key: footer.inquiry.text
+  value: Для уточнения стоимости работ по Вашему техническому заданию, а также по вопросам сотрудничества, заполните эту форму, и наш специалист свяжется с вами.
+- key: footer.inquiry.button_title
+  value: ОТПРАВИТЬ ЗАПРОС
+- key: footer.privacyPolicy
+  value: Конфиденциальность
+- key: contacts.title
+  value: Контакты
+- key: contacts.wait_you_on_address
+  value: Юридический адрес
+- key: contacts.opening_time
+  value: Рабочее время
+- key: contacts.call_us
+  value: Обращайтесь к нам
+- key: contacts.write_us
+  value: Напишите нам
+- key: dow.d2.mo
+  value: Пн
+- key: dow.d2.tu
+  value: Вт
+- key: dow.d2.we
+  value: Ср
+- key: dow.d2.th
+  value: Чт
+- key: dow.d2.fr
+  value: Пт
+- key: dow.d2.sa
+  value: Сб
+- key: dow.d2.su
+  value: Вс
+- key: day_off
+  value: Выходной
+- key: days_off
+  value: Выходные
+- key: priceList.name
+  value: Название работ
+- key: priceList.price
+  value: Цена
+- key: priceList.description
+  value: Описание

@@ -1,0 +1,19 @@
+---
+import styleContainer from '../styleContainer';
+import NavbarWrap from './NavbarWrap';
+
+//  TODO: contain: 'layout',
+//  TODO: boxShadow: shadows.raised,
+const {
+  pathname,
+  locale,
+  contacts,
+  mainNav,
+  translations,
+} = Astro.props.data;
+---
+<header role="navigation" class="w-full h-14 xl:h-18 fixed top-0 left-0 text-sm shadow-sm z-30">
+	<div class={`flex items-center h-full ${styleContainer}`}>
+		<NavbarWrap client:load context={{ pathname, locale, contacts, mainNav, translations }} />
+	</div>
+</header>

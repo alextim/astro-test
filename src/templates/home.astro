@@ -1,0 +1,12 @@
+---
+import Layout from '../components/Layout.astro';
+import Tour from '../components/Tour.astro';
+import ReactCounter from '../components/ReactCounter.jsx';
+
+const title = 'My Astro Site';
+---
+<Layout title={title}>
+	<img width="60" height="80" src="/assets/logo.svg" alt="Astro logo">
+	<Tour />
+	<ReactCounter client:visible />
+</Layout>

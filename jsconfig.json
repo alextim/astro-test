@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "es2020",
+    "allowSyntheticDefaultImports": false,
+    "baseUrl": "."
+  },
+  "exclude": ["node_modules"],
+  "comments": {
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
+}

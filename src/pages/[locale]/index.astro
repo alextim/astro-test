@@ -1,0 +1,11 @@
+---
+import getPaths from '../../lib/getPaths.js';
+import Home from '../../templates/home.astro';
+
+export async function getStaticPaths() {
+	return getPaths();
+}
+
+const {locale} = Astro.request.params;
+---
+<Home locale={locale} />

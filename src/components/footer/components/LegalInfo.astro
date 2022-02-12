@@ -1,0 +1,14 @@
+---
+const { foundingDate, name, text } = Astro.props;
+
+const currentYear = new Date().getFullYear();
+
+let foundingYear = '';
+if (foundingDate) {
+  const y = new Date(foundingDate).getFullYear();
+  if (y !== currentYear) {
+    foundingYear = `${y}-`;
+  }
+}
+---
+<div class="xl:mr-14">{`© ${foundingYear}${currentYear} ${name}${text ? `. ${text}` : ''}`}</div>

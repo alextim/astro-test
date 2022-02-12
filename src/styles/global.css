@@ -1,0 +1,87 @@
+/* purgecss start ignore */
+@tailwind base;
+@tailwind components;
+/* purgecss end ignore */
+
+@tailwind utilities;
+
+/* purgecss start ignore */
+/* purgecss end ignore */
+
+.h-main-menu {
+  height: calc(100vh - theme('spacing.14'));
+}
+
+@layer components {
+  .at-menu-item {
+    @apply inline-flex items-center justify-between 
+    py-4 px-8
+    w-full
+    whitespace-nowrap 
+    cursor-pointer
+    opacity-100 no-underline uppercase font-semibold text-gray-900 
+    border-b border-solid 
+    
+    first-of-type:border-t first-of-type:border-t-gray-900
+
+    hover:no-underline hover:outline-none
+    active:no-underline active:outline-none
+    focus:no-underline focus:outline-none
+
+    focus:bg-gray-600
+
+    hover:text-black hover:bg-slate-50
+
+    active:bg-slate-100;
+  }
+  .at-menu-item-xl {
+    @apply xl:justify-start xl:p-4 xl:border-b-0 xl:h-full xl:first-of-type:border-t-0;
+  }
+
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeSpeed;
+  margin: 0;
+  padding: 0;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+html {
+  scroll-padding-top: calc(theme('spacing.14') + 1.5rem);
+}
+
+@media (min-width: theme('screens.xl')) {
+  html {
+    scroll-padding-top: calc(theme('spacing.18') + 1.5rem);
+  }
+}  
+
+@media (max-width: theme('screens.xl')) {
+  .js-body__no-scroll {
+    height: 100%;
+    position: fixed;  
+  }
+}
+
+@media (min-width: theme('screens.xl')) {
+  .menu-item-extra::after {
+    display: inline-block;
+    content: "";
+    border-style: solid;
+    border-color: theme('colors.gray.500');
+    border-width: 0 1px 1px 0;
+    padding: 3px;
+    margin-left: theme('spacing.2');
+    transform: rotate(45deg);
+  }
+}    

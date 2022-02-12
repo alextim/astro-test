@@ -1,0 +1,52 @@
+---
+import Header from './header/Header.astro';
+import Footer from './footer/Footer.astro';
+import i18n from '../config/i18n';
+
+import { fetchContacts, fetchMainNav, fetchFooterNav, fetchSocialLinks, fetchAddress, fetchTranslations } from '../lib/api';
+
+const pathname = Astro.request.url.pathname;
+const locale = Astro.request.params.locale || i18n.defaultLocale;
+
+const contacts = fetchContacts();
+const mainNav = fetchMainNav(locale);
+const footerNav = fetchFooterNav(locale);
+const socialLinks = fetchSocialLinks(locale);
+const address = fetchAddress(locale);
+const translations = fetchTranslations(locale);
+
+const data = {
+  pathname,
+  locale,
+  contacts,
+  mainNav,
+  footerNav,
+  socialLinks,
+  address,
+  translations,
+};
+
+const {title} = Astro.props;
+// const styleMain = `w-full flex-auto mt-${headerHeight.sm} pb-${headerHeight.sm} xl:mt-${headerHeight.xl} xl:pb-${headerHeight.xl}`
+---
+<html lang={locale}>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<title>{title}</title>
+
+	<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+	<style global>
+			@import "../styles/global.css";
+	</style>
+</head>
+<body>
+	<div class="flex flex-col min-h-screen">
+		<Header data={data} />
+		<main class="w-full flex-auto mt-14 pb-14 xl:mt-18 xl:pb-18">
+			<slot />
+		</main>
+		<Footer data={data} />
+	</div>
+</body>
+</html>

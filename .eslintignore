@@ -1,0 +1,8 @@
+.cache
+.git
+.husky
+.netlify
+.vscode
+node_modules
+public
+s-bars.content

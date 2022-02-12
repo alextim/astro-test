@@ -1,0 +1,62 @@
+---
+import LocalizedLink from '../LocalizedLink.astro';
+
+import theme from './theme';
+import Container from './components/Container.astro';
+import LegalInfo from './components/LegalInfo.astro';
+import SocialLinks from './components/SocialLinks.astro';
+import FooterNavigation from './components/FooterNavigation.astro';
+import FooterWidget from './components/FooterWidget.astro';
+import WidgetWrapper from './components/WidgetWrapper.astro';
+
+import translate from '../../lib/translate';
+
+const {
+  contacts,
+  footerNav,
+  socialLinks,
+  address,
+  translations,
+} = Astro.props.data;
+
+const { foundingDate } = contacts;
+const t = (key, params = undefined) => translate(key, translations, params);
+---
+<footer class={`w-full text-small ${theme.colors.text} ${theme.colors.bg}`}>
+      <Container>
+        <div class="grid gap-6 py-5 xl:py-6 xl:grid-cols-[1fr_1fr_2fr]">
+          <WidgetWrapper>
+            <FooterWidget title={t('footer.contacts')}>
+     test 1
+            </FooterWidget>
+          </WidgetWrapper>
+
+          <WidgetWrapper>
+            <FooterWidget title={t('footer.opening_time')}>
+              test 2
+            </FooterWidget>
+          </WidgetWrapper>
+
+          <WidgetWrapper>
+            <FooterWidget title={t('footer.inquiry.title')}>
+            test3
+            </FooterWidget>
+          </WidgetWrapper>
+        </div>
+      </Container>
+
+      <div class="w-full py-6 px-0 bg-slate-500">
+        <Container>
+          {socialLinks && <SocialLinks items={socialLinks} />}
+          <FooterNavigation items={footerNav} />
+        </Container>
+      </div>
+      <div class="w-full py-2 px-0 bg-slate-900 text-xs">
+        <Container>
+          <div class="flex justify-between xl:justify-center">
+            <LegalInfo foundingDate={foundingDate} name={address ? address.name : undefined} />
+            <LocalizedLink to="/privacy/">{t('footer.privacyPolicy')}</LocalizedLink>
+          </div>
+        </Container
+      </div>
+</footer>

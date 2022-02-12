@@ -1,0 +1,19 @@
+---
+import getPostInfo, { getLocaleFromPathname } from '../lib/getPostInfo';
+import Layout from '../components/Layout.astro';
+import i18n from '../config/i18n';
+
+const locale = Astro.request.params.locale || i18n.defaultLocale;
+
+const [page] = Astro.fetchContent('../../content/blog/pages/blog/blog.??.md')?.filter((p) =>getLocaleFromPathname(p.file.pathname, true) === locale);
+const posts = Astro.fetchContent('../../content/blog/posts/*/*.??.md')?.filter((p) => getLocaleFromPathname(p.file.pathname, true) === locale);
+
+const title = page?.title;
+---
+<Layout title={title}>
+  {posts?.map((post) => (
+    <article>
+      <h2><a href={getPostInfo(post).slug}>{post.title}</a></h2>
+    </article>
+  ))}
+</Layout>
