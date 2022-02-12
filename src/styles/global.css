@@ -8,20 +8,38 @@
 /* purgecss start ignore */
 /* purgecss end ignore */
 
+@layer base {
+  /* https://google-webfonts-helper.herokuapp.com/fonts */
+  /* oswald-700 - cyrillic */
+  @font-face {
+    font-family: 'Oswald';
+    font-display: swap;
+    font-style: normal;
+    font-weight: 700;
+    src: local('Oswald Bold'), local('Oswald-Bold'), local('OswaldBold'),
+      url('/assets/fonts/oswald-v36-cyrillic-700.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'fallback-heading-font';
+    advance-override: -0.0923828125; /* Letter spacing: -1.5px */
+    src: local('Arial');
+  }
+}
+
 .h-main-menu {
   height: calc(100vh - theme('spacing.14'));
 }
 
 @layer components {
   .at-menu-item {
-    @apply inline-flex items-center justify-between 
+    @apply inline-flex items-center justify-between
     py-4 px-8
     w-full
-    whitespace-nowrap 
+    whitespace-nowrap
     cursor-pointer
-    opacity-100 no-underline uppercase font-semibold text-gray-900 
-    border-b border-solid 
-    
+    opacity-100 no-underline uppercase font-semibold text-gray-900
+    border-b border-solid
+
     first-of-type:border-t first-of-type:border-t-gray-900
 
     hover:no-underline hover:outline-none
@@ -64,12 +82,12 @@ html {
   html {
     scroll-padding-top: calc(theme('spacing.18') + 1.5rem);
   }
-}  
+}
 
 @media (max-width: theme('screens.xl')) {
   .js-body__no-scroll {
     height: 100%;
-    position: fixed;  
+    position: fixed;
   }
 }
 
@@ -84,4 +102,4 @@ html {
     margin-left: theme('spacing.2');
     transform: rotate(45deg);
   }
-}    
+}

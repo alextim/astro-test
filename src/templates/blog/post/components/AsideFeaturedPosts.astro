@@ -1,0 +1,6 @@
+---
+import AsidePosts from './AsidePosts.astro';
+
+const { items, t} = Astro.props;
+---
+<AsidePosts title={t('post.widget.featured')} items={items} />

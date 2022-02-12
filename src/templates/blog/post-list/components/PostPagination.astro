@@ -1,0 +1,62 @@
+---
+import { currentLink, prevLink, nextLink } from './page-link-params';
+
+// https://gist.github.com/kottenator/9d936eb3e4e3c3e02598
+function pagination(currentPage, pageCount, delta = 2) {
+  const separate = (a, b) => [
+    a,
+    ...({
+      0: [],
+      1: [b],
+      2: [a + 1, b],
+    }[b - a] || ['...', b]),
+  ];
+    // .fill() after array
+  return Array(delta * 2 + 1)
+    .map((_, index) => currentPage - delta + index)
+    .filter((page) => page > 0 && page <= pageCount)
+    .flatMap((page, index, { length }) => {
+      if (!index) {
+        return separate(1, page);
+      }
+      if (index === length - 1) {
+        return separate(page, pageCount);
+      }
+
+      return [page];
+    });
+}
+
+const { currentPage, numPages, slug } = Astro.props;
+
+const isFirst = currentPage === 1;
+const isLast = currentPage === numPages;
+
+const pages = pagination(currentPage, numPages);
+
+const stylePaginationNumber = 'h-10 mx-1 min-w-[2.5rem] text-center transition-shadow hover:shadow hover:no-underline';
+---
+{ numPages > 1 && (
+  <div class="flex flex-wrap justify-center w-full my-12">
+    {!isFirst && <a to={prevLink(currentPage, slug)}>{'<'}</a>}
+    {pages.map((page) => {
+      if (typeof page !== 'number') {
+        return <span key="ellipsis">{page}</span>;
+      }
+      return (
+        <a
+          key={page}
+          to={currentLink(page, slug)}
+          class={`${stylePaginationNumber}${page === currentPage ? 'text-white shadow-md' : ''}`}
+        >
+          {page}
+        </a>
+      );
+    })}
+    {!isLast && (
+      <a to={nextLink(currentPage, slug)} class={stylePaginationNumber}>
+        {'>'}
+      </a>
+    )}
+  </div>
+)}

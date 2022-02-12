@@ -1,0 +1,14 @@
+---
+import format from './formatDate';
+
+const locale = Astro.request.params.locale;
+const { author, datePublished, timeToRead, t } = Astro.props;
+---
+{(author || datePublished || timeToRead) && (
+  <div class="my-5 text-xs">
+    {author && author.length > 0 && <span class="mr-3">{author.join(', ')}</span>}
+    {datePublished && <span>{format(datePublished, locale)}</span>}
+    {datePublished && timeToRead && <span class="my-0 mx-1">·</span>}
+    {timeToRead && <span>{`${timeToRead} ${t('post.minToRead')}`}</span>}
+  </div>
+)}

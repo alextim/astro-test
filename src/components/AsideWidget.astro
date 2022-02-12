@@ -1,0 +1,9 @@
+---
+const { title, extraStyle } = Astro.props;
+---
+<div class={`mb-6 ${extraStyle || ''}`}>
+  <h3 class="uppercase text-center text-lg font-normal font-body">{title}</h3>
+  <div class="flex flex-col">
+    <slot />
+  </div>
+</div>

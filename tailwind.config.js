@@ -11,11 +11,16 @@ module.exports = {
     },
     extend: {
       colors: {
+        text: 'black',
         brand: {
           light: '#3fbaeb',
           DEFAULT: '#0fa9e6',
           dark: '#0c87b8',
         },
+      },
+      fontFamily: {
+        body: ['Helvetica', 'Arial', 'sans-serif'],
+        heading: ['Oswald', 'fallback-heading-font', 'sans-serif'],
       },
       rotate: {
         225: '225deg',
