@@ -30,6 +30,11 @@ const data = {
 
 const {seo} = Astro.props;
 // const styleMain = `w-full flex-auto mt-${headerHeight.sm} pb-${headerHeight.sm} xl:mt-${headerHeight.xl} xl:pb-${headerHeight.xl}`
+
+
+// https://github.com/withastro/astro/issues/2410
+// @import "../styles/global.css";
+
 ---
 <html lang={i18n.locales[locale].htmlLang}>
 <head>
@@ -39,8 +44,11 @@ const {seo} = Astro.props;
 
 	<link rel="icon" type="image/x-icon" href="/favicon.ico" />
   <link rel="preload" href="/assets/fonts/oswald-v36-cyrillic-700.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
-	<style global>
-		@import "../styles/global.css";
+
+  <link rel="stylesheet" href={Astro.resolve("../styles/global.css")} />
+
+  <style global>
+
 	</style>
 </head>
 <body>

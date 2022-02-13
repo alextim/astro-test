@@ -1,10 +1,10 @@
-import { ComponentContext as NavbarContext } from '../ComponentContext';
+import { ComponentContext } from '../ComponentContext';
 import Navbar from './components/Navbar';
 
 const NavbarWrap = ({ context }) => (
-  <NavbarContext.Provider value={context}>
+  <ComponentContext.Provider value={context}>
     <Navbar />
-  </NavbarContext.Provider>
+  </ComponentContext.Provider>
 );
 
 export default NavbarWrap;

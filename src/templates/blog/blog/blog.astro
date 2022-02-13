@@ -6,13 +6,12 @@ import { fetchAuthors } from '../../../lib/api';
 
 const locale = Astro.request.params.locale || i18n.defaultLocale;
 
-const [page] = Astro.fetchContent('../../../../content/blog/pages/blog/blog.??.md')?.filter((p) => getLocaleFromPathname(p.file.pathname, true) === locale);
+const [indexPage] = Astro.fetchContent('../../../../content/blog/pages/blog/blog.??.md')?.filter((p) => getLocaleFromPathname(p.file.pathname, true) === locale);
 
-// TODO: sort: { fields: [featured, datePublished], order: [ASC, DESC] }
-const posts = Astro.fetchContent('../../../../content/blog/posts/*/*.??.md')?.filter((p) => getLocaleFromPathname(p.file.pathname, true) === locale);
+const { page } = Astro.props;
 
 const authors = fetchAuthors(locale);
-posts.forEach((p) => {
+page.data.forEach((p) => {
   if (p.author && Array.isArray(p.author)) {
     p.author = p.author.map((key) => {
       const a = authors.find((el) => el.email === key);
@@ -25,4 +24,4 @@ posts.forEach((p) => {
 });
 
 ---
-<PostList page={page} posts={posts} />
+<PostList indexPage={indexPage} page={page} />

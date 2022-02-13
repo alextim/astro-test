@@ -7,7 +7,6 @@ import getPostInfo from '../../../../lib/getPostInfo';
 
 import Layout from '../../../../components/Layout.astro';
 
-import { prevLink, nextLink } from './page-link-params';
 import PostCard from './PostCard.astro';
 import PostPagination from './PostPagination.astro';
 
@@ -19,37 +18,40 @@ const siteUrl = Astro.site.href; //Astro.site.origin - without trailing slash
 const translations = fetchTranslations(locale);
 
 const {
+  page: {
+    data: posts,
+    currentPage,
+    total: numPages,
+    url,
+   },
+  indexPage: { html, title: defaultTitle, metaTitle, headline, metaDescription, noindex, breadcrumbs },
+} = Astro.props;
+
+const {
   // TODO:
   title,
   readMore,
-  to,
   // TODO end
-  page: { html, title: defaultTitle, metaTitle, headline, metaDescription, noindex, breadcrumbs },
-  posts,
 } = Astro.props;
 
 const t = (key, params = undefined) => translate(key, translations, params);
 
-// TODO
-const currentPage = 1;
-const numPages = 1;
 
 const isFirst = currentPage === 1;
-const isLast = currentPage === numPages;
 
 const links = [];
 
 if (numPages > 1) {
-  if (!isFirst) {
+  if (url.prev) {
     links.push({
       rel: 'prev',
-      href: siteUrl + prevLink(currentPage, to),
+      href: siteUrl + url.prev,
     });
   }
-  if (!isLast) {
+  if (url.next) {
     links.push({
       rel: 'next',
-      href: siteUrl + nextLink(currentPage, to),
+      href: siteUrl + url.next,
     });
   }
 }
@@ -66,6 +68,6 @@ const readMoreText = t(readMore || config.readMore);
   <div class="grid gap-7 lg:grid-cols-2 xl:grid-cols-3">
     {posts.map((post) => <PostCard to={getPostInfo(post).slug} post={post} readMore={readMoreText} />)}
   </div>
-  <PostPagination currentPage={currentPage} numPages={numPages} slug={to} />
+  <PostPagination currentPage={currentPage} numPages={numPages} url={url} />
 </Layout>
 

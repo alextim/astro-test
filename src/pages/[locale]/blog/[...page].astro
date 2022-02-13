@@ -1,0 +1,21 @@
+---
+import config from '../../../config/website';
+import { getLocaleFromPathname } from '../../../lib/getPostInfo';
+// import getPaths from '../../../lib/getPaths.js';
+import BlogIndex from '../../../templates/blog/blog/blog.astro';
+
+export async function getStaticPaths({ paginate }) {
+  const locale = Astro.request.params.locale;
+  // TODO: sort: { fields: [featured, datePublished], order: [ASC, DESC] }
+
+  const posts = Astro.fetchContent('../../../../content/blog/posts/*/*.??.md')
+    .filter((p) => getLocaleFromPathname(p.file.pathname, true) === locale)
+    .sort((a, b) => new Date(b.datePublished).valueOf() - new Date(a.datePublished).valueOf());
+  console.log(posts.length);
+
+  return paginate(posts, {pageSize: config.pageSize});
+}
+
+const { page } = Astro.props;
+---
+<BlogIndex page={page} />

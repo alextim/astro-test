@@ -1,62 +1,42 @@
 ---
-import { currentLink, prevLink, nextLink } from './page-link-params';
+import pagination from '../../../../lib/pagination';
 
-// https://gist.github.com/kottenator/9d936eb3e4e3c3e02598
-function pagination(currentPage, pageCount, delta = 2) {
-  const separate = (a, b) => [
-    a,
-    ...({
-      0: [],
-      1: [b],
-      2: [a + 1, b],
-    }[b - a] || ['...', b]),
-  ];
-    // .fill() after array
-  return Array(delta * 2 + 1)
-    .map((_, index) => currentPage - delta + index)
-    .filter((page) => page > 0 && page <= pageCount)
-    .flatMap((page, index, { length }) => {
-      if (!index) {
-        return separate(1, page);
-      }
-      if (index === length - 1) {
-        return separate(page, pageCount);
-      }
+const getBasePath = (p) => {
+  const a = p.split('/');
+  if (!p.endsWith('/')) {
+    a.push('');
+  }
+  if (isNaN(a[a.length - 2])) {
+    return a.join('/');
+  }
+  a.splice(-2, 1);
+  return a.join('/');
+};
 
-      return [page];
-    });
-}
-
-const { currentPage, numPages, slug } = Astro.props;
-
-const isFirst = currentPage === 1;
-const isLast = currentPage === numPages;
+const { url, currentPage, numPages } = Astro.props;
 
 const pages = pagination(currentPage, numPages);
+const basePath = getBasePath(url.current);
 
-const stylePaginationNumber = 'h-10 mx-1 min-w-[2.5rem] text-center transition-shadow hover:shadow hover:no-underline';
+const style = 'h-10 mx-1 min-w-[2.5rem] text-center';
+const styleLink = 'transition-shadow hover:shadow hover:no-underline';
 ---
 { numPages > 1 ? (
   <div class="flex flex-wrap justify-center w-full my-12">
-    {!isFirst ? <a to={prevLink(currentPage, slug)}>{'<'}</a> : null}
+    {url.prev ? <a class={`${style} ${styleLink}`} href={url.prev}>&larr;</a> : null}
     {pages.map((page) => {
       if (typeof page !== 'number') {
-        return <span key="ellipsis">{page}</span>;
+        return <span class="style">{page}</span>;
       }
       return (
         <a
-          key={page}
-          to={currentLink(page, slug)}
-          class={`${stylePaginationNumber}${page === currentPage ? 'text-white shadow-md' : ''}`}
+          href={`${basePath}${page}/`}
+          class={`${style} ${styleLink}${page === currentPage ? 'text-black shadow-md' : ''}`}
         >
           {page}
         </a>
       );
     })}
-    {!isLast ? (
-      <a to={nextLink(currentPage, slug)} class={stylePaginationNumber}>
-        {'>'}
-      </a>
-    ) : null}
+    {url.next ? <a href={url.next} class={`${style} ${styleLink}`}>&rarr;</a> : null}
   </div>
 ) :  null}
