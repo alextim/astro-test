@@ -36,9 +36,9 @@ const pages = pagination(currentPage, numPages);
 
 const stylePaginationNumber = 'h-10 mx-1 min-w-[2.5rem] text-center transition-shadow hover:shadow hover:no-underline';
 ---
-{ numPages > 1 && (
+{ numPages > 1 ? (
   <div class="flex flex-wrap justify-center w-full my-12">
-    {!isFirst && <a to={prevLink(currentPage, slug)}>{'<'}</a>}
+    {!isFirst ? <a to={prevLink(currentPage, slug)}>{'<'}</a> : null}
     {pages.map((page) => {
       if (typeof page !== 'number') {
         return <span key="ellipsis">{page}</span>;
@@ -53,10 +53,10 @@ const stylePaginationNumber = 'h-10 mx-1 min-w-[2.5rem] text-center transition-s
         </a>
       );
     })}
-    {!isLast && (
+    {!isLast ? (
       <a to={nextLink(currentPage, slug)} class={stylePaginationNumber}>
         {'>'}
       </a>
-    )}
+    ) : null}
   </div>
-)}
+) :  null}

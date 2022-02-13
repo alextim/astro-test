@@ -2,13 +2,34 @@
 import format from './formatDate';
 
 const locale = Astro.request.params.locale;
-const { author, datePublished, timeToRead, t } = Astro.props;
+const { authors, datePublished, timeToRead, t } = Astro.props;
+let names = '';
+if (authors && Array.isArray(authors) && authors.length > 0 ) {
+  authors.forEach(({ lastName, firstName, email }) => {
+    if (names) {
+      names = `${names}, `;
+    }
+    if (lastName || firstName) {
+      let name = lastName || '';
+      if (name && firstName) {
+        name = `${name} `;
+      }
+      if (firstName) {
+        name = `${name}${firstName}`;
+      }
+      names = `${names}${name}`;
+
+    } else {
+      names = `${names}${email}`;
+    }
+  });
+}
 ---
-{(author || datePublished || timeToRead) && (
+{(names || datePublished || timeToRead) ? (
   <div class="my-5 text-xs">
-    {author && author.length > 0 && <span class="mr-3">{author.join(', ')}</span>}
-    {datePublished && <span>{format(datePublished, locale)}</span>}
-    {datePublished && timeToRead && <span class="my-0 mx-1">·</span>}
-    {timeToRead && <span>{`${timeToRead} ${t('post.minToRead')}`}</span>}
+    {names ? <span class="mr-3">{names}</span> : null}
+    {datePublished ? <span class="inline-block first-letter:uppercase">{format(datePublished, locale)}</span> :  null}
+    {datePublished && timeToRead ? <span class="my-0 mx-1">·</span> :  null}
+    {timeToRead ? <span>{`${timeToRead} ${t('post.minToRead')}`}</span> : null}
   </div>
-)}
+) : null}

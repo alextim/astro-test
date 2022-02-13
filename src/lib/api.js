@@ -33,3 +33,7 @@ export function fetchTranslations(locale) {
 export function fetchAddress(locale) {
   return getYaml(`content/data/locales/address/address.${locale}.yaml`);
 }
+
+export function fetchAuthors(locale) {
+  return getYaml(`content/blog/authors/authors.${locale}.yaml`);
+}

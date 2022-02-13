@@ -47,7 +47,7 @@ const t = (key, params = undefined) => translate(key, translations, params);
 
       <div class="w-full py-6 px-0 bg-slate-500">
         <Container>
-          {socialLinks && <SocialLinks items={socialLinks} />}
+          {socialLinks ? <SocialLinks items={socialLinks} /> : null}
           <FooterNavigation items={footerNav} />
         </Container>
       </div>

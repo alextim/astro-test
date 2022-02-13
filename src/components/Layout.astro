@@ -1,9 +1,11 @@
 ---
-import Header from './header/Header.astro';
-import Footer from './footer/Footer.astro';
-import i18n from '../config/i18n';
+import i18n from '../config/i18n.js';
 
 import { fetchContacts, fetchMainNav, fetchFooterNav, fetchSocialLinks, fetchAddress, fetchTranslations } from '../lib/api';
+
+import SEO from './SEO.astro';
+import Header from './header/Header.astro';
+import Footer from './footer/Footer.astro';
 
 const pathname = Astro.request.url.pathname;
 const locale = Astro.request.params.locale || i18n.defaultLocale;
@@ -26,19 +28,19 @@ const data = {
   translations,
 };
 
-const {title} = Astro.props;
+const {seo} = Astro.props;
 // const styleMain = `w-full flex-auto mt-${headerHeight.sm} pb-${headerHeight.sm} xl:mt-${headerHeight.xl} xl:pb-${headerHeight.xl}`
 ---
-<html lang={locale}>
+<html lang={i18n.locales[locale].htmlLang}>
 <head>
-	<meta charset="UTF-8">
+	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>{title}</title>
+  <SEO seo={seo} />
 
 	<link rel="icon" type="image/x-icon" href="/favicon.ico" />
   <link rel="preload" href="/assets/fonts/oswald-v36-cyrillic-700.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
 	<style global>
-			@import "../styles/global.css";
+		@import "../styles/global.css";
 	</style>
 </head>
 <body>

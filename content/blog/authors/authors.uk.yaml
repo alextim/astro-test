@@ -1,0 +1,8 @@
+- firstName: А.
+  lastName: Карпенко
+  email: ak@example.com
+- firstName: Имя
+  email: n@example.com
+- lastName: Фамилия
+  email: f@example.com
+- email: email-only@example.com

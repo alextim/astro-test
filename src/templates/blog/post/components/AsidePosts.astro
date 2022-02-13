@@ -3,10 +3,10 @@ import AsideWidget from '../../../../components/AsideWidget.astro';
 
 const { title, items } = Astro.props;
 ---
-{(items || items.length) && (
+{(items && items.length) ? (
   <AsideWidget title={title}>
     <ul class="list-none list-outside m-0">
-      {items.map(({ node: { title: itemTitle, slug: to } }) => (
+      {items.map(({ title: itemTitle, slug: to }) => (
         <li class="py-1 px-4 bg-white relative mb-3 after:content-empty after:block after:absolute after:right-0 after:top-0 after:w-1 after:h-full after-bg-[#b4d5e7] hover:after:w-full hover:after:transition-all">
           <a href={to} class="block no-underline relative z-10 mb-1 pb-1 border-b border-solid border-[#b4d5e7] hover:no-underline focus:no-underline active:no-underline hover:text-white hover:transition-all">
             {itemTitle}
@@ -15,4 +15,4 @@ const { title, items } = Astro.props;
       ))}
     </ul>
   </AsideWidget>
-)}
+) : null}

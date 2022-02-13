@@ -1,0 +1,39 @@
+---
+import getCardSchema from '../../../../lib/getCardSchema';
+import ReadMore from './ReadMore.astro';
+const { to, post: { cover, title, excerpt, headline, metaDescription, datePublished, dateModified, author }, readMore } = Astro.props;
+
+---
+<article class="bg-gray-50 rounded hover:shadow">
+  <script type="application/ld+json">
+    {JSON.stringify(
+      getCardSchema({
+        // TODO:
+        locale: '',
+        organizationName: '',
+        siteUrl: '',
+        siteLogo: '',
+        to,
+        title,
+        headline: headline || metaDescription,
+        cover,
+        datePublished,
+        dateModified,
+        author,
+        pageType: 'BlogPosting',
+      }),
+    )}
+  </script>
+  {cover ? (
+    <a href={to}>
+      <img class="rounded-t w-full h-auto" src={cover.sm} alt={cover.alt} title={cover.title} />
+    </a>
+  ) : null}
+  <div class="p-4">
+    <a href={to} class="color-text focus:no-underline hover:no-underline active:no-underline">
+      <h2 class="m-0 text-lg font-body font-semibold normal-case text-left">{title}</h2>
+    </a>
+    <p class="pt-2">{excerpt}</p>
+    <ReadMore to={to} title={readMore} />
+  </div>
+</article>

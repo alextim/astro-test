@@ -1,0 +1,71 @@
+---
+import i18n from '../../../../config/i18n';
+import config from '../../../../config/website';
+import { fetchTranslations } from '../../../../lib/api';
+import translate from '../../../../lib/translate';
+import getPostInfo from '../../../../lib/getPostInfo';
+
+import Layout from '../../../../components/Layout.astro';
+
+import { prevLink, nextLink } from './page-link-params';
+import PostCard from './PostCard.astro';
+import PostPagination from './PostPagination.astro';
+
+// import { CategoryWidget, TagsWidget, YearsWidget } from '@/components/post-widgets';
+
+const pathname = Astro.request.url.pathname;
+const locale = Astro.request.params.locale || i18n.defaultLocale;
+const siteUrl = Astro.site.href; //Astro.site.origin - without trailing slash
+const translations = fetchTranslations(locale);
+
+const {
+  // TODO:
+  title,
+  readMore,
+  to,
+  // TODO end
+  page: { html, title: defaultTitle, metaTitle, headline, metaDescription, noindex, breadcrumbs },
+  posts,
+} = Astro.props;
+
+const t = (key, params = undefined) => translate(key, translations, params);
+
+// TODO
+const currentPage = 1;
+const numPages = 1;
+
+const isFirst = currentPage === 1;
+const isLast = currentPage === numPages;
+
+const links = [];
+
+if (numPages > 1) {
+  if (!isFirst) {
+    links.push({
+      rel: 'prev',
+      href: siteUrl + prevLink(currentPage, to),
+    });
+  }
+  if (!isLast) {
+    links.push({
+      rel: 'next',
+      href: siteUrl + nextLink(currentPage, to),
+    });
+  }
+}
+
+const readMoreText = t(readMore || config.readMore);
+---
+<Layout
+  title={title || defaultTitle}
+  headline={headline}
+  breadcrumbs={breadcrumbs}
+  seo={{ locale, title: metaTitle || title, description: metaDescription || headline, pathname, noindex, breadcrumbs, pageType: 'Blog', links} }>
+  {isFirst && html ? <div class="mt-6 mb-10">{html}</div> : null}
+
+  <div class="grid gap-7 lg:grid-cols-2 xl:grid-cols-3">
+    {posts.map((post) => <PostCard to={getPostInfo(post).slug} post={post} readMore={readMoreText} />)}
+  </div>
+  <PostPagination currentPage={currentPage} numPages={numPages} slug={to} />
+</Layout>
+

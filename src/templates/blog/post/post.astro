@@ -1,12 +1,13 @@
 ---
 import readingTime from 'reading-time';
 
+import translate from '../../../lib/translate';
+import { fetchTranslations, fetchAuthors } from '../../../lib/api';
 import Layout from '../../../components/Layout.astro';
 import InnerAsideLayout from '../../../components/InnerAsideLayout.astro';
-import SEO from '../../../components/SEO.astro';
 // import AsideServices from '../../service/components/AsideServices.astro';
-// import AsideFeaturedPosts from './components/AsideFeaturedPosts.astro';
-// import AsideRecentPosts from '@/components/AsideRecentPosts.astro';
+import AsideFeaturedPosts from './components/AsideFeaturedPosts.astro';
+import AsideRecentPosts from './components/AsideRecentPosts.astro';
 import PostInfo from './components/PostInfo.astro';
 import LastUpdated from './components/LastUpdated.astro';
 
@@ -32,9 +33,18 @@ const {
   breadcrumbs,
   datePublished,
   dateModified,
-  author,
   astro,
 } = Astro.props.post;
+
+let {
+  author,
+} = Astro.props.post;
+
+let authors;
+if (author && Array.isArray(author)) {
+  const allAuthors = fetchAuthors(locale);
+  authors = allAuthors.filter((el) => author.some((email) => email === el.email));
+}
 
 const { html } = astro;
 const timeToRead = getTimeToRead(astro.source);
@@ -45,40 +55,40 @@ featuredPosts: allMdPost(
   limit: 10
   filter: { featured: { eq: true }, locale: { eq: $locale } }
 */
-// {cover && cover.sm && <img src={Astro.resolve(cover.sm)} alt={cover.alt} />}
-const t = (s) => s;
+// {cover && cover.sm ? <img src={Astro.resolve(cover.sm)} alt={cover.alt} /> :  null}
 
       /* <AsideServices mainNav={mainNav} /> */
-      /* <AsideFeaturedPosts items={data.featuredPosts.edges} /> */
-      /* <AsideRecentPosts items={data.recentPosts.edges} /> */
+const translations = fetchTranslations(locale);
+const t = (key, params = undefined) => translate(key, translations, params);
 
 ---
 <Layout
   title={title}
   headline={headline}
   breadcrumbs={breadcrumbs}
->
-  <SEO
-    locale={locale}
-    title={metaTitle}
-    description={metaDescription}
-    headline={headline}
-    pathname={pathname}
-    noindex={noindex}
-    breadcrumbs={breadcrumbs}
-    datePublished={datePublished}
-    dateModified={dateModified}
-    author={author}
-    pageType="BlogPosting"
-    imgPath={cover?.sm?.publicURL}
-  />
-  <PostInfo author={author} datePublished={datePublished} timeToRead={timeToRead} t={t} />
+  seo={{
+    locale,
+    title: metaTitle || title,
+    description: metaDescription || headline,
+    headline,
+    pathname,
+    noindex,
+    breadcrumbs,
+    datePublished,
+    dateModified,
+    author,
+    pageType: 'BlogPosting',
+    imgPath: cover?.sm?.publicURL,
+  }}
+  >
+  <PostInfo authors={authors} datePublished={datePublished} timeToRead={timeToRead} t={t} />
   <InnerAsideLayout
     cover={cover}
     html={html}>
     <aside slot="aside" class="flex flex-col">
-      test aside
+      <AsideRecentPosts t={t} />
+      <AsideFeaturedPosts t={t} />
     </aside>
   </InnerAsideLayout>
-  {dateModified && ((datePublished && dateModified !== datePublished) || !datePublished) && <LastUpdated date={dateModified} t={t} />}
+  {dateModified && ((datePublished && dateModified !== datePublished) || !datePublished) ? <LastUpdated date={dateModified} t={t} /> : null}
 </Layout>
