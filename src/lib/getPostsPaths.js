@@ -21,7 +21,7 @@
 
 import i18n from '../config/i18n';
 import { isDefaultLocale } from './i18n-utils';
-import { getLocaleFromPathname } from './getPostInfo';
+import { getLocaleFromPathname } from './pathname-utils';
 import { getPage } from './cms';
 
 function getPostsPaths(data, isDefault = false) {

@@ -4,7 +4,7 @@ import sanitizeHTML from 'sanitize-html';
 
 import { localize } from './i18n-utils';
 import config from '../config/website';
-import { getLocaleFromPathname, getSlugFromPathname } from './getPostInfo';
+import { getLocaleFromPathname, getSlugFromPathname } from './pathname-utils';
 import { fetchAuthors } from './api';
 
 const getReadingTime = (pureText) => {

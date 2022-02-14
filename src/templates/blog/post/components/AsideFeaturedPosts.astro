@@ -1,7 +1,7 @@
 ---
 import AsidePosts from './AsidePosts.astro';
 import i18n from '../../../../config/i18n';
-import { getLocaleFromPathname } from '../../../../lib/getPostInfo';
+import { getLocaleFromPathname } from '../../../../lib/pathname-utils';
 
 const locale = Astro.request.params.locale || i18n.defaultLocale;
 

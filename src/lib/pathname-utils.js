@@ -1,4 +1,4 @@
-import { isValidLocale, localize } from './i18n-utils';
+import { isValidLocale } from './i18n-utils';
 
 export const getDirFromPathname = (pathname) => {
   const a = pathname.split('/');
@@ -33,18 +33,3 @@ export const getLocaleFromPathname = (pathname, warnings = false) => {
   }
   return locale;
 };
-
-const getPostInfo = (post, warnings = false) => {
-  const pathname = post.file.pathname;
-  const locale = getLocaleFromPathname(pathname, warnings);
-  if (!locale) {
-    return null;
-  }
-  let slug = post.slug || getSlugFromPathname(pathname);
-
-  slug = localize(['blog', slug], locale);
-  // slug = localize(slug, locale);
-  return { slug, locale };
-};
-
-export default getPostInfo;

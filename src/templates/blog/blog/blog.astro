@@ -1,6 +1,6 @@
 ---
 import i18n from '../../../config/i18n';
-import { getLocaleFromPathname } from '../../../lib/getPostInfo';
+import { getLocaleFromPathname } from '../../../lib/pathname-utils';
 import PostList from './components/PostList.astro';
 
 const locale = Astro.request.params.locale || i18n.defaultLocale;
