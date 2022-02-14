@@ -1,10 +1,9 @@
 ---
 const { title, description, canonical, noindex, nofollow } = Astro.props.seo;
 ---
+
 {title ? <title>{title}</title> : null}
 {description ? <meta name="description" content={description} /> : null}
-<meta name="robots" content={`${noindex ? "noindex" : "index"}, ${nofollow ? "nofollow" : "follow"}`} />
+<meta name="robots" content={`${noindex ? 'noindex' : 'index'}, ${nofollow ? 'nofollow' : 'follow'}`} />
 
 <link rel="canonical" href={canonical || Astro.request.canonicalURL.href} />
-
-

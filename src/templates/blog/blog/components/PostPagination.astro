@@ -21,22 +21,28 @@ const basePath = getBasePath(url.current);
 const style = 'h-10 mx-1 min-w-[2.5rem] text-center';
 const styleLink = 'transition-shadow hover:shadow hover:no-underline';
 ---
-{ numPages > 1 ? (
-  <div class="flex flex-wrap justify-center w-full my-12">
-    {url.prev ? <a class={`${style} ${styleLink}`} href={url.prev}>&larr;</a> : null}
+
+{numPages > 1 ? (
+  <div class="my-12 flex w-full flex-wrap justify-center">
+    {url.prev ? (
+      <a class={`${style} ${styleLink}`} href={url.prev}>
+        &larr;
+      </a>
+    ) : null}
     {pages.map((page) => {
       if (typeof page !== 'number') {
         return <span class="style">{page}</span>;
       }
       return (
-        <a
-          href={`${basePath}${page}/`}
-          class={`${style} ${styleLink}${page === currentPage ? 'text-black shadow-md' : ''}`}
-        >
+        <a href={`${basePath}${page}/`} class={`${style} ${styleLink}${page === currentPage ? 'text-black shadow-md' : ''}`}>
           {page}
         </a>
       );
     })}
-    {url.next ? <a href={url.next} class={`${style} ${styleLink}`}>&rarr;</a> : null}
+    {url.next ? (
+      <a href={url.next} class={`${style} ${styleLink}`}>
+        &rarr;
+      </a>
+    ) : null}
   </div>
-) :  null}
+) : null}

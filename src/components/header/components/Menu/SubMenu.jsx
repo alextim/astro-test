@@ -30,31 +30,31 @@ const SubMenu = ({ title, to, items, path, onClick }) => {
   };
 
   return (
-    <li className="xl:flex xl:items-center xl:relative xl:h-full" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-      <div className="inline-flex items-center w-full relative xl:h-full">
+    <li className="xl:relative xl:flex xl:h-full xl:items-center" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+      <div className="relative inline-flex w-full items-center xl:h-full">
         <MenuItem isActive={path === to} to={to} extraStyle="menu-item-extra" onClick={(e) => onClickWrap(e, to)}>
           {title}
         </MenuItem>
         <div
           type="button"
           className={
-            `absolute w-16 h-full right-0 cursor-pointer 
-        after:inline-block
+            `absolute right-0 h-full w-16 cursor-pointer 
         after:absolute
         after:top-0
         after:bottom-0
         after:right-0
         after:left-0
         after:m-auto
+        after:inline-block
         after:h-2
         after:w-2
-        after:content-empty
-        after:border-solid
-        after:border-gray-900
         after:border-t-0
         after:border-r
         after:border-b
         after:border-l-0
+        after:border-solid
+        after:border-gray-900
+        after:content-empty
         xl:hidden ` + (visible ? 'after:rotate-225' : 'after:rotate-45')
           }
           onTouchStart={toggleVisible}
@@ -64,7 +64,7 @@ const SubMenu = ({ title, to, items, path, onClick }) => {
       <ul
         className={
           visible
-            ? 'flex flex-col list-none p-0 m-0 bg-slate-50 xl:absolute xl:top-18 xl:bg-white xl:left-0 xl:shadow-sm xl:z-50'
+            ? 'm-0 flex list-none flex-col bg-slate-50 p-0 xl:absolute xl:top-18 xl:left-0 xl:z-50 xl:bg-white xl:shadow-sm'
             : 'hidden'
         }
       >

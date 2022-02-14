@@ -1,8 +1,6 @@
 ---
-import readingTime from 'reading-time';
-
 import translate from '../../../lib/translate';
-import { fetchTranslations, fetchAuthors } from '../../../lib/api';
+import { fetchTranslations } from '../../../lib/api';
 import Layout from '../../../components/Layout.astro';
 import InnerAsideLayout from '../../../components/InnerAsideLayout.astro';
 // import AsideServices from '../../service/components/AsideServices.astro';
@@ -11,18 +9,9 @@ import AsideRecentPosts from './components/AsideRecentPosts.astro';
 import PostInfo from './components/PostInfo.astro';
 import LastUpdated from './components/LastUpdated.astro';
 
-
-const getTimeToRead = (source) => {
-  const stats = readingTime(source);
-  if (!stats.minutes) {
-    return 0;
-  }
-  return stats.minutes > 1 ?  Math.ceil(stats.minutes) : 1;
-};
-
 const {
   locale,
-  pathname,
+  pathname, // TODO: 
 
   title,
   metaTitle,
@@ -33,21 +22,11 @@ const {
   breadcrumbs,
   datePublished,
   dateModified,
-  astro,
+  readingTime,
+  html,
+  authors,
 } = Astro.props.post;
 
-let {
-  author,
-} = Astro.props.post;
-
-let authors;
-if (author && Array.isArray(author)) {
-  const allAuthors = fetchAuthors(locale);
-  authors = allAuthors.filter((el) => author.some((email) => email === el.email));
-}
-
-const { html } = astro;
-const timeToRead = getTimeToRead(astro.source);
 /*
 recentPosts: allMdPost(sort: { fields: [datePublished], order: DESC }, limit: 10, filter: { locale: { eq: $locale } }) {
 featuredPosts: allMdPost(
@@ -57,15 +36,15 @@ featuredPosts: allMdPost(
 */
 // {cover && cover.sm ? <img src={Astro.resolve(cover.sm)} alt={cover.alt} /> :  null}
 
-      /* <AsideServices mainNav={mainNav} /> */
+/* <AsideServices mainNav={mainNav} /> */
 const translations = fetchTranslations(locale);
 const t = (key, params = undefined) => translate(key, translations, params);
-
 ---
+
 <Layout
-  title={title}
-  headline={headline}
-  breadcrumbs={breadcrumbs}
+  {title}
+  {headline}
+  {breadcrumbs}
   seo={{
     locale,
     title: metaTitle || title,
@@ -76,18 +55,16 @@ const t = (key, params = undefined) => translate(key, translations, params);
     breadcrumbs,
     datePublished,
     dateModified,
-    author,
+    authors,
     pageType: 'BlogPosting',
     imgPath: cover?.sm?.publicURL,
   }}
-  >
-  <PostInfo authors={authors} datePublished={datePublished} timeToRead={timeToRead} t={t} />
-  <InnerAsideLayout
-    cover={cover}
-    html={html}>
+>
+  <PostInfo {authors} {datePublished} {readingTime} {t} />
+  <InnerAsideLayout {cover} {html}>
     <aside slot="aside" class="flex flex-col">
-      <AsideRecentPosts t={t} />
-      <AsideFeaturedPosts t={t} />
+      <AsideRecentPosts {t} />
+      <AsideFeaturedPosts {t} />
     </aside>
   </InnerAsideLayout>
   {dateModified && ((datePublished && dateModified !== datePublished) || !datePublished) ? <LastUpdated date={dateModified} t={t} /> : null}

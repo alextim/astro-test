@@ -9,3 +9,6 @@ package.json
 package-lock.json
 s-bars.content
 yarn.lock
+/content/website/src/data/blog-posts
+/dist
+/node_modules

@@ -8,4 +8,3 @@ const NavbarWrap = ({ context }) => (
 );
 
 export default NavbarWrap;
-

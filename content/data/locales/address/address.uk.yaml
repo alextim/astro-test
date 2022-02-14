@@ -7,9 +7,9 @@ foundingDate: 2009-01-01
 postalAddress:
   streetAddress:
     - Хмельницьке шосе, 2а, оф.110
-  addressLocality:  Вінниця
+  addressLocality: Вінниця
   addressRegion: Вінницька обл.
-  postalCode: "21036"
+  postalCode: '21036'
   addressCountry: UA
   addressCountryName: Україна
 
@@ -17,12 +17,12 @@ contactPoint:
   - name: Світлана Доляк
     description: Фарбування, послуги для комерційних об'єктів
     contactType: sales
-    contactTypeName: відділ роботи з корпоративним клієнтом 
+    contactTypeName: відділ роботи з корпоративним клієнтом
     telephone: [380965553092]
     emails: [promalp.s.bars@gmail.com]
   - name: Андрій Карпенко
     description: Утеплення квартир
     contactType: sales
     contactTypeName: клієнт-менеджер
-    telephone: [380979705376,380636521514]
+    telephone: [380979705376, 380636521514]
     emails: [andrey.karpenko7@gmail.com]

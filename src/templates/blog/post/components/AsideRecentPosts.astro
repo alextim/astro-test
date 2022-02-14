@@ -7,9 +7,11 @@ import { getLocaleFromPathname } from '../../../../lib/getPostInfo';
 const locale = Astro.request.params.locale || i18n.defaultLocale;
 
 // TODO: sort: { fields: [featured, datePublished], order: [ASC, DESC] }
-const posts = Astro.fetchContent('../../../../../content/blog/posts/*/*.??.md')?.filter((p) => getLocaleFromPathname(p.file.pathname, true) === locale)
+const posts = Astro.fetchContent('../../../../../content/blog/posts/*/*.??.md')
+  ?.filter((p) => getLocaleFromPathname(p.file.pathname, true) === locale)
   .sort((a, b) => new Date(b.datePublished).valueOf() - new Date(a.datePublished).valueOf())
   .slice(0, config.recentPostsLimit);
-const {t} = Astro.props;
+const { t } = Astro.props;
 ---
+
 <AsidePosts title={t('post.widget.recent')} items={posts} />

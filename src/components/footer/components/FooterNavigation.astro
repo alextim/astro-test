@@ -3,24 +3,27 @@ import theme from '../theme';
 import LocalizedLink from '../../LocalizedLink.astro';
 const { items } = Astro.props;
 ---
+
 <div class="inline-flex justify-center flex-wrap w-full">
   {items.map(({ to, title }) => (
-    <LocalizedLink to={to} class={`
+    <LocalizedLink
+      to={to}
+      class={`
     ${theme.colors.text}
-    my-0 mx-3 py-2 px-0 uppercase xl:my-0 xl:mx-4
+    my-0 mx-3 py-2 px-0 uppercase hover:text-white hover:no-underline
 
-    hover:text-white
     hover:outline-none
-    hover:no-underline
-
-    active:outline-none
-    active:no-underline
-
-    focus:outline-none
     focus:no-underline
-    `}>
+    focus:outline-none
+
+    active:no-underline
+    active:outline-none
+
+    xl:my-0
+    xl:mx-4
+    `}
+    >
       {title}
     </LocalizedLink>
   ))}
 </div>
-

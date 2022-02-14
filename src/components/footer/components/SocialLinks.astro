@@ -6,14 +6,15 @@ import SocialLink from './SocialLink.astro';
 const icons = {
   facebook: 'facebook-f',
 };
-const getIconName = (key) => icons[key] ? icons[key] : key;
+const getIconName = (key) => (icons[key] ? icons[key] : key);
 
 const { items } = Astro.props;
 ---
+
 <div class="inline-flex items-center justify-center py-4 px-0 mb-8 w-full">
   {Object.entries(items).map(([key, { to, title }]) => (
     <SocialLink name={utils.upperFirst(key)} to={to} title={title}>
-      <Icon class="w-4 h-4" name={getIconName(key)} />
+      <Icon class="h-4 w-4" name={getIconName(key)} />
     </SocialLink>
   ))}
 </div>

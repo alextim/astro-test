@@ -58,13 +58,13 @@ const Menu = ({ navItems, isMenuOpen, setIsMenuOpen }) => {
     (isMenuOpen ? 'pointer-events-auto visible transform-none' : 'pointer-events-none invisible -translate-x-[110%]') + styleWrapDefault;
   return (
     <div className={styleWrap}>
-      <ul className="flex flex-col m-0 p-0 list-none xl:inline-flex xl:flex-row xl:items-center xl:h-full">
+      <ul className="m-0 flex list-none flex-col p-0 xl:inline-flex xl:h-full xl:flex-row xl:items-center">
         {navItems.map(({ title, to, submenu }, i) => {
           if (submenu) {
             return <SubMenu key={i} to={to} title={title} items={submenu} path={pathname} onClick={onClick} />;
           }
           return (
-            <li key={i} className="m-0 xl:inline-flex xl:items-center xl:h-full">
+            <li key={i} className="m-0 xl:inline-flex xl:h-full xl:items-center">
               <MenuItem to={to} isActive={to === pathname} onClick={onClick}>
                 {title}
               </MenuItem>

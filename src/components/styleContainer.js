@@ -1,4 +1,4 @@
-  /*
+/*
     minWidth: '320px',
   maxWidth: '1280px',
   margin: '0 auto',

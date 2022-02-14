@@ -1,10 +1,9 @@
 ---
-import format from './formatDate';
-
-const locale = Astro.request.params.locale;
+import FormattedDate from '../../../../components/FormattedDate.astro';
 const { date, t } = Astro.props;
 ---
+
 <div class="mt-5 text-xs">
   <span class="inline-block first-letter:uppercase after:content-[':'] mr-1">{t('post.lastUpdated')}</span>
-  {format(date, locale)}
+  <FormattedDate date={date} />
 </div>

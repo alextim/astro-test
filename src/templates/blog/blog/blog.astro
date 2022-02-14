@@ -2,26 +2,13 @@
 import i18n from '../../../config/i18n';
 import { getLocaleFromPathname } from '../../../lib/getPostInfo';
 import PostList from './components/PostList.astro';
-import { fetchAuthors } from '../../../lib/api';
 
 const locale = Astro.request.params.locale || i18n.defaultLocale;
 
-const [indexPage] = Astro.fetchContent('../../../../content/blog/pages/blog/blog.??.md')?.filter((p) => getLocaleFromPathname(p.file.pathname, true) === locale);
-
+const [indexPage] = Astro.fetchContent('../../../../content/blog/pages/blog/blog.??.md')?.filter(
+  (p) => getLocaleFromPathname(p.file.pathname, true) === locale,
+);
 const { page } = Astro.props;
-
-const authors = fetchAuthors(locale);
-page.data.forEach((p) => {
-  if (p.author && Array.isArray(p.author)) {
-    p.author = p.author.map((key) => {
-      const a = authors.find((el) => el.email === key);
-      if (a) {
-        return a;
-      }
-      return {};
-    });
-  }
-});
-
 ---
-<PostList indexPage={indexPage} page={page} />
+
+<PostList {indexPage} {page} />

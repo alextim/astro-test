@@ -1,41 +1,40 @@
 - title: Услуги
   to: /services/
   submenu:
-  - title: Покраска металлоконструкций
-    to: /services/pokraska-metalla/
-  - title: Покраска бетонных конструкций
-    to: /services/pokraska-betonnyh-konstrukcij/
-  - title: Клининговые работы
-    to: /services/kliningovye-uslugi/
-  - title: Очистка и покраска крыш
-    to: /services/pokraska-kryishi/  
-  - title: Нанесение специальных покрытий
-    to: /services/nanesenie-specialnyx-pokrytij/
-  - title: Монтаж рекламных конструкций
-    to: /services/montazh-i-demontazh-reklamnyx-konstrukcij-shhitov-i-bannerov/
-  - title: Утепление фасадов
-    to: /services/uteplenie-sten-i-fasadov/
-  - title: Покраска фасадов
-    to: /services/pokraska-fasada/
-  - title: Внутренние малярные работы
-    to: /services/provedenie-vnutrennix-rabot/
-
+    - title: Покраска металлоконструкций
+      to: /services/pokraska-metalla/
+    - title: Покраска бетонных конструкций
+      to: /services/pokraska-betonnyh-konstrukcij/
+    - title: Клининговые работы
+      to: /services/kliningovye-uslugi/
+    - title: Очистка и покраска крыш
+      to: /services/pokraska-kryishi/
+    - title: Нанесение специальных покрытий
+      to: /services/nanesenie-specialnyx-pokrytij/
+    - title: Монтаж рекламных конструкций
+      to: /services/montazh-i-demontazh-reklamnyx-konstrukcij-shhitov-i-bannerov/
+    - title: Утепление фасадов
+      to: /services/uteplenie-sten-i-fasadov/
+    - title: Покраска фасадов
+      to: /services/pokraska-fasada/
+    - title: Внутренние малярные работы
+      to: /services/provedenie-vnutrennix-rabot/
 
 - title: Типы объектов
   to: /tipy-obektov/
   submenu:
-  - title: Путепроводы, мосты и эстакады
-    to: /tipy-obektov/puteprovody-mosty-i-estakady/
-  - title: "Электростанции: ГЭС, ТЭС, АЭС"
-    to: /tipy-obektov/elektrostancii-ges-tes-aes/
-  - title: ТРЦ, общественные объекты
-    to: /tipy-obektov/obshhestvennye-obekty-trc-vokzaly/
-  - title: Резервуары для жидкостей
-    to: /tipy-obektov/rezervuary-dlya-zhidkostej/
-  - title: Мостовые, козловые краны 
-    to: /tipy-obektov/krany-kozlovye-mostovye-portovye/
-  - title: Элеваторы, промышленные цеха
-    to: /tipy-obektov/elevatory-promyshlennye-cexa/
+    - title: Путепроводы, мосты и эстакады
+      to: /tipy-obektov/puteprovody-mosty-i-estakady/
+    - title: 'Электростанции: ГЭС, ТЭС, АЭС'
+      to: /tipy-obektov/elektrostancii-ges-tes-aes/
+    - title: ТРЦ, общественные объекты
+      to: /tipy-obektov/obshhestvennye-obekty-trc-vokzaly/
+    - title: Резервуары для жидкостей
+      to: /tipy-obektov/rezervuary-dlya-zhidkostej/
+    - title: Мостовые, козловые краны
+      to: /tipy-obektov/krany-kozlovye-mostovye-portovye/
+    - title: Элеваторы, промышленные цеха
+      to: /tipy-obektov/elevatory-promyshlennye-cexa/
 
 - title: Блог
   to: /blog/
@@ -48,6 +47,3 @@
 
 - title: Контакты
   to: /contacts/
-
-
-

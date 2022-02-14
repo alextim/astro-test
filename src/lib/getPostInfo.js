@@ -34,7 +34,6 @@ export const getLocaleFromPathname = (pathname, warnings = false) => {
   return locale;
 };
 
-
 const getPostInfo = (post, warnings = false) => {
   const pathname = post.file.pathname;
   const locale = getLocaleFromPathname(pathname, warnings);
@@ -44,6 +43,7 @@ const getPostInfo = (post, warnings = false) => {
   let slug = post.slug || getSlugFromPathname(pathname);
 
   slug = localize(['blog', slug], locale);
+  // slug = localize(slug, locale);
   return { slug, locale };
 };
 

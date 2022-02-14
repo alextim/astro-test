@@ -1,6 +1,28 @@
+/**
+ * Receives post's array and flag, extracts locale and slug from pathname (dir + file name)
+ *
+ * Returns Array with params and props
+ * [
+ *  {
+ *    params: { locale } | { locale, slug },
+ *    props: {
+ *      ...post,
+ *      locale,
+ *      slug,
+ *    }
+ *  },
+ *  ...
+ * ]
+ *
+ * @param {Array} data - Raw posts Array.
+ * @param {boolean} isDefault [isDefault=false] - If isDefault is false - params: { locale, slug }, if true - params: { locale }.
+ * @returns {Array}
+ */
+
 import i18n from '../config/i18n';
 import { isDefaultLocale } from './i18n-utils';
-import { getLocaleFromPathname, getSlugFromPathname } from './getPostInfo';
+import { getLocaleFromPathname } from './getPostInfo';
+import { getPage } from './cms';
 
 function getPostsPaths(data, isDefault = false) {
   let predicat;
@@ -14,25 +36,14 @@ function getPostsPaths(data, isDefault = false) {
     getParams = (slug, locale) => ({ locale, slug });
   }
 
-  const posts = data.map((p) => {
-      const locale = getLocaleFromPathname(p.file.pathname);
-      return {...p, locale };
-  }).filter(({ locale }) => predicat(locale));
+  const posts = data.filter(({ file: { pathname } }) => predicat(getLocaleFromPathname(pathname))).map(getPage);
 
-  const paths = posts.map((p) => {
-    const slug = p.slug ? p.slug : getSlugFromPathname(p.file.pathname);
-    
-    return {
-      params: getParams(slug, p.locale),
-      props: {
-        ...p,
-        locale: p.locale,
-        slug,
-      },
-    };
-  });
-
-  paths.forEach((p) => console.log(p.props.slug));
+  const paths = posts.map((p) => ({
+    params: getParams(p.slug, p.locale),
+    props: {
+      ...p,
+    },
+  }));
 
   return paths;
 }

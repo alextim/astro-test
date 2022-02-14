@@ -16,8 +16,7 @@
     font-display: swap;
     font-style: normal;
     font-weight: 700;
-    src: local('Oswald Bold'), local('Oswald-Bold'), local('OswaldBold'),
-      url('/assets/fonts/oswald-v36-cyrillic-700.woff2') format('woff2');
+    src: local('Oswald Bold'), local('Oswald-Bold'), local('OswaldBold'), url('/assets/fonts/oswald-v36-cyrillic-700.woff2') format('woff2');
   }
   @font-face {
     font-family: 'fallback-heading-font';
@@ -32,30 +31,29 @@
 
 @layer components {
   .at-menu-item {
-    @apply inline-flex items-center justify-between
-    py-4 px-8
-    w-full
+    @apply inline-flex w-full cursor-pointer
+    items-center justify-between
     whitespace-nowrap
-    cursor-pointer
-    opacity-100 no-underline uppercase font-semibold text-gray-900
-    border-b border-solid
+    border-b
+    border-solid
+    py-4 px-8 font-semibold uppercase text-gray-900
+    no-underline opacity-100
 
     first-of-type:border-t first-of-type:border-t-gray-900
 
+    hover:bg-slate-50 hover:text-black
     hover:no-underline hover:outline-none
-    active:no-underline active:outline-none
-    focus:no-underline focus:outline-none
+    focus:bg-gray-600 focus:no-underline
 
-    focus:bg-gray-600
+    focus:outline-none
 
-    hover:text-black hover:bg-slate-50
+    active:bg-slate-100 active:no-underline
 
-    active:bg-slate-100;
+    active:outline-none;
   }
   .at-menu-item-xl {
-    @apply xl:justify-start xl:p-4 xl:border-b-0 xl:h-full xl:first-of-type:border-t-0;
+    @apply xl:h-full xl:justify-start xl:border-b-0 xl:p-4 xl:first-of-type:border-t-0;
   }
-
 }
 *,
 *::before,
@@ -94,7 +92,7 @@ html {
 @media (min-width: theme('screens.xl')) {
   .menu-item-extra::after {
     display: inline-block;
-    content: "";
+    content: '';
     border-style: solid;
     border-color: theme('colors.gray.500');
     border-width: 0 1px 1px 0;

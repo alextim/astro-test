@@ -3,9 +3,10 @@ import getPaths from '../../lib/getPaths.js';
 import NotFound from '../../templates/404.astro';
 
 export async function getStaticPaths() {
-	return getPaths();
+  return getPaths();
 }
 
-const {locale} = Astro.request.params;
+const { locale } = Astro.request.params;
 ---
-<NotFound locale={locale} />
+
+<NotFound {locale} />

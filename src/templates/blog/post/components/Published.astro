@@ -1,7 +1,4 @@
 ---
-import format from './formatDate';
-
-const locale = Astro.request.params.locale;
 const { date } = Astro.props;
 ---
-{date ? <div class="text-xs mb-2">{format(date, locale)}</div> : null}
+{date ? <div class="mb-2 text-xs">{date}</div> : null}

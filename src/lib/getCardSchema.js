@@ -17,7 +17,7 @@ const getCardSchema = ({
   author,
   pageType = 'Article',
 }) => {
-   const { htmlLang } = i18n.locales[locale];
+  const { htmlLang } = i18n.locales[locale];
   if (pageType !== 'Article' && pageType !== 'BlogPosting') {
     throw new Error(`getCardSchema: Unsupported pageType ${pageType}!`);
   }

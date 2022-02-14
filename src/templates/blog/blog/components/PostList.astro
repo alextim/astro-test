@@ -18,12 +18,7 @@ const siteUrl = Astro.site.href; //Astro.site.origin - without trailing slash
 const translations = fetchTranslations(locale);
 
 const {
-  page: {
-    data: posts,
-    currentPage,
-    total: numPages,
-    url,
-   },
+  page: { data: posts, currentPage, total: numPages, url },
   indexPage: { html, title: defaultTitle, metaTitle, headline, metaDescription, noindex, breadcrumbs },
 } = Astro.props;
 
@@ -35,7 +30,6 @@ const {
 } = Astro.props;
 
 const t = (key, params = undefined) => translate(key, translations, params);
-
 
 const isFirst = currentPage === 1;
 
@@ -58,16 +52,26 @@ if (numPages > 1) {
 
 const readMoreText = t(readMore || config.readMore);
 ---
+
 <Layout
   title={title || defaultTitle}
-  headline={headline}
-  breadcrumbs={breadcrumbs}
-  seo={{ locale, title: metaTitle || title, description: metaDescription || headline, pathname, noindex, breadcrumbs, pageType: 'Blog', links} }>
+  {headline}
+  {breadcrumbs}
+  seo={{
+    locale,
+    title: metaTitle || title,
+    description: metaDescription || headline,
+    pathname,
+    noindex,
+    breadcrumbs,
+    pageType: 'Blog',
+    links,
+  }}
+>
   {isFirst && html ? <div class="mt-6 mb-10">{html}</div> : null}
 
   <div class="grid gap-7 lg:grid-cols-2 xl:grid-cols-3">
-    {posts.map((post) => <PostCard to={getPostInfo(post).slug} post={post} readMore={readMoreText} />)}
+    {posts.map((post) => <PostCard post={post} readMore={readMoreText} />)}
   </div>
-  <PostPagination currentPage={currentPage} numPages={numPages} url={url} />
+  <PostPagination {currentPage} {numPages} {url} />
 </Layout>
-

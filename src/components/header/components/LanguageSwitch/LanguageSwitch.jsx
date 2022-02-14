@@ -11,10 +11,11 @@ const LanguageSwitch = ({ onClick }) => {
         const { shortName } = i18n.locales[code];
         const isCurrentPage = locale === code;
         return (
-          <div key={code} className="after:content-['|'] after:mx-2 last:after:content-empty last:after:m-0">
+          <div key={code} className="after:mx-2 after:content-['|'] last:after:m-0 last:after:content-empty">
             <a
-              className={`text-gray-900 uppercase active:outline-none active:no-underline focus:outline-none focus:no-underline hover:outline-none hover:no-underline hover:text-blue-600${isCurrentPage ? 'text-blue-800' : ''
-                }`}
+              className={`uppercase text-gray-900 hover:no-underline hover:outline-none focus:no-underline focus:outline-none active:no-underline active:outline-none hover:text-blue-600${
+                isCurrentPage ? 'text-blue-800' : ''
+              }`}
               href={isCurrentPage ? pathname : localizePath(pureSlug(pathname), code)}
               onClick={onClick}
             >
