@@ -1,12 +1,10 @@
 ---
-import getPaths from '../../lib/getPaths.js';
-import NotFound from '../../templates/404.astro';
+import getPaths from '@/lib/getPaths';
+import NotFound from '@/templates/404.astro';
 
 export async function getStaticPaths() {
   return getPaths();
 }
-
-const { locale } = Astro.request.params;
 ---
 
-<NotFound {locale} />
+<NotFound />

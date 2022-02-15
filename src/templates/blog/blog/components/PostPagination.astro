@@ -1,7 +1,7 @@
 ---
-import pagination from '../../../../lib/pagination';
+import pagination from '@/lib/pagination';
 
-const getBasePath = (p) => {
+const getBasePath = (p): string => {
   const a = p.split('/');
   if (!p.endsWith('/')) {
     a.push('');

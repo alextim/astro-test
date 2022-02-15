@@ -1,5 +1,5 @@
 ---
-import getCardSchema from '../../../../lib/getCardSchema';
+import getCardSchema from '@/lib/getCardSchema';
 import ReadMore from './ReadMore.astro';
 const {
   post: { cover, title, excerpt, headline, metaDescription, datePublished, dateModified, authors, to },
@@ -25,8 +25,8 @@ const {
           dateModified,
           authors,
           pageType: 'BlogPosting',
-        })
-      )
+        }),
+      );
     }
   </script>
   {cover ? (

@@ -1,5 +1,4 @@
 ---
-
 import i18n from '../config/i18n';
 import formatDate from '../lib/formatDate';
 
@@ -7,4 +6,5 @@ const locale = Astro.request.params.locale || i18n.defaultLocale;
 const DATE_FORMAT = 'MMM D, YYYY';
 const { date } = Astro.props;
 ---
+
 {formatDate(date, locale, DATE_FORMAT)}

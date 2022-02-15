@@ -14,26 +14,26 @@ export function fetchContacts() {
   return getYaml('content/data/contacts.yaml');
 }
 
-export function fetchMainNav(locale) {
+export function fetchMainNav(locale: string) {
   return getYaml(`content/data/locales/main-nav/main-nav.${locale}.yaml`);
 }
 
-export function fetchFooterNav(locale) {
+export function fetchFooterNav(locale: string) {
   return getYaml(`content/data/locales/footer-nav/footer-nav.${locale}.yaml`);
 }
 
-export function fetchSocialLinks(locale) {
+export function fetchSocialLinks(locale: string) {
   return getYaml(`content/data/locales/social-links/social-links.${locale}.yaml`);
 }
 
-export function fetchTranslations(locale) {
+export function fetchTranslations(locale: string) {
   return getYaml(`content/data/locales/translations/translations.${locale}.yaml`);
 }
 
-export function fetchAddress(locale) {
+export function fetchAddress(locale: string) {
   return getYaml(`content/data/locales/address/address.${locale}.yaml`);
 }
 
-export function fetchAuthors(locale) {
+export function fetchAuthors(locale: string) {
   return getYaml(`content/blog/authors/authors.${locale}.yaml`);
 }

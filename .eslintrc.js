@@ -3,7 +3,7 @@ module.exports = {
   globals: {
     graphql: true,
   },
-  parser: '@babel/eslint-parser',
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 2021,
     requireConfigFile: false,
@@ -21,14 +21,16 @@ module.exports = {
     react: {
       version: 'detect',
     },
+    /*
     'import/resolver': {
       'eslint-import-resolver-custom-alias': {
         alias: {
           '@': './src',
         },
-        extensions: ['.js', '.jsx'],
+        extensions: ['.js', '.jsx', '.astro', '.ts', '.tsx'],
       },
     },
+    */
   },
   env: {
     browser: true,
@@ -43,12 +45,14 @@ module.exports = {
     'airbnb',
     'airbnb/hooks',
     'eslint:recommended',
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
     'plugin:react/recommended',
     'plugin:jsx-a11y/recommended',
     'plugin:import/errors',
     'prettier',
   ],
-  plugins: ['@emotion', 'import', 'jsx-a11y', 'react', 'react-hooks', 'prettier'],
+  plugins: ['@typescript-eslint', 'import', 'jsx-a11y', 'react', 'react-hooks', 'prettier'],
 
   rules: {
     indent: ['error', 2, { SwitchCase: 1 }],
@@ -70,10 +74,10 @@ module.exports = {
     'react/jsx-uses-react': 'off',
     'react/react-in-jsx-scope': 'off',
 
-    // 'no-anonymous-exports-page-templates': 'warn',
-    // 'limited-exports-page-templates': 'warn',
-    '@emotion/syntax-preference': [2, 'object'],
-    '@emotion/jsx-import': 0,
+    'no-anonymous-exports-page-templates': 'warn',
+    'limited-exports-page-templates': 'warn',
+
+    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
 
     'prettier/prettier': 'error',
   },

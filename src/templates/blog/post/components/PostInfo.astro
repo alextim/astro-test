@@ -1,33 +1,43 @@
 ---
-import FormattedDate from '../../../../components/FormattedDate.astro';
+import FormattedDate from '@/components/FormattedDate.astro';
+
+export interface Props {
+  authors: Array<Author>;
+  datePublished?: string;
+  readingTime: number;
+  t: (string) => string;
+}
 
 const { authors, datePublished, readingTime, t } = Astro.props;
+
 let names = '';
-if (authors && Array.isArray(authors) && authors.length > 0) {
-  authors.forEach(({ lastName, firstName, email }) => {
-    if (names) {
-      names = `${names}, `;
+authors?.forEach(({ lastName, firstName, email }) => {
+  if (names) {
+    names = `${names}, `;
+  }
+  if (lastName || firstName) {
+    let name = lastName || '';
+    if (name && firstName) {
+      name = `${name} `;
     }
-    if (lastName || firstName) {
-      let name = lastName || '';
-      if (name && firstName) {
-        name = `${name} `;
-      }
-      if (firstName) {
-        name = `${name}${firstName}`;
-      }
-      names = `${names}${name}`;
-    } else {
-      names = `${names}${email}`;
+    if (firstName) {
+      name = `${name}${firstName}`;
     }
-  });
-}
+    names = `${names}${name}`;
+  } else {
+    names = `${names}${email}`;
+  }
+});
 ---
 
 {names || datePublished || readingTime ? (
   <div class="my-5 text-xs">
     {names ? <span class="mr-3">{names}</span> : null}
-    {datePublished ? <span class="inline-block first-letter:uppercase"><FormattedDate date={datePublished} /></span> : null}
+    {datePublished ? (
+      <span class="inline-block first-letter:uppercase">
+        <FormattedDate date={datePublished} />
+      </span>
+    ) : null}
     {datePublished && readingTime ? <span class="my-0 mx-1">·</span> : null}
     {readingTime ? <span>{`${readingTime} ${t('post.minToRead')}`}</span> : null}
   </div>

@@ -1,8 +1,8 @@
 ---
-import translate from '../../../lib/translate';
-import { fetchTranslations } from '../../../lib/api';
-import Layout from '../../../components/Layout.astro';
-import InnerAsideLayout from '../../../components/InnerAsideLayout.astro';
+import translate from '@/lib/translate';
+import { fetchTranslations } from '@/lib/api';
+import Layout from '@/components/Layout.astro';
+import InnerAsideLayout from '@/components/InnerAsideLayout.astro';
 // import AsideServices from '../../service/components/AsideServices.astro';
 import AsideFeaturedPosts from './components/AsideFeaturedPosts.astro';
 import AsideRecentPosts from './components/AsideRecentPosts.astro';
@@ -11,7 +11,7 @@ import LastUpdated from './components/LastUpdated.astro';
 
 const {
   locale,
-  pathname, // TODO: 
+  pathname, // TODO:
 
   title,
   metaTitle,

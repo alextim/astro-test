@@ -1,17 +1,19 @@
 ---
-import config from '../../../config/website';
-import i18n from '../../../config/i18n';
-import { getLocaleFromPathname } from '../../../lib/pathname-utils';
-import { getPage, defaultSort } from '../../../lib/cms';
-import BlogIndex from '../../../templates/blog/blog/blog.astro';
+import config from '@/config/website';
+import i18n from '@/config/i18n';
+import { getLocaleFromPathname } from '@/lib/pathname-utils';
+import { getPage, defaultSort } from '@/lib/cms';
+import BlogIndex from '@/templates/blog/blog/blog.astro';
 
 export async function getStaticPaths({ paginate }) {
   const locale = i18n.defaultLocale;
   // TODO: sort: { fields: [featured, datePublished], order: [ASC, DESC] }
 
   const allPosts = Astro.fetchContent('../../../../content/blog/posts/*/*.??.md');
-  const posts = allPosts.filter((p) => getLocaleFromPathname(p.file.pathname, true) === locale)
-    .sort(defaultSort).map(getPage);
+  const posts = allPosts
+    .filter((p) => getLocaleFromPathname(p.file.pathname) === locale)
+    .sort(defaultSort)
+    .map(getPage);
 
   return paginate(posts, { pageSize: config.pageSize });
 }

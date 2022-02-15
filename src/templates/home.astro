@@ -1,13 +1,17 @@
 ---
-import Layout from '../components/Layout.astro';
-import Tour from '../components/Tour.astro';
-import ReactCounter from '../components/ReactCounter.jsx';
+import Layout from '@/components/Layout.astro';
+import Modal from '@/components/Modal.astro';
 
 const title = 'My Astro Site';
 ---
 
 <Layout {title} seo={{}}>
-  <img width="60" height="80" src="/assets/logo.svg" alt="Astro logo" />
-  <Tour />
-  <ReactCounter client:visible />
+  <Modal id="dialog" open="Open modal">
+    <div slot="main">
+      <p>Some extra content you would like here</p>
+      <hr />
+      <img width="60" height="80" src="/assets/logo.svg" alt="Astro logo" />
+    </div>
+    <button slot="close">Close modal</button>
+  </Modal>
 </Layout>

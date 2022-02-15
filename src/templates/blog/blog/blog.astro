@@ -1,12 +1,12 @@
 ---
-import i18n from '../../../config/i18n';
-import { getLocaleFromPathname } from '../../../lib/pathname-utils';
+import i18n from '@/config/i18n';
+import { getLocaleFromPathname } from '@/lib/pathname-utils';
 import PostList from './components/PostList.astro';
 
 const locale = Astro.request.params.locale || i18n.defaultLocale;
 
 const [indexPage] = Astro.fetchContent('../../../../content/blog/pages/blog/blog.??.md')?.filter(
-  (p) => getLocaleFromPathname(p.file.pathname, true) === locale,
+  (p) => getLocaleFromPathname(p.file.pathname) === locale,
 );
 const { page } = Astro.props;
 ---

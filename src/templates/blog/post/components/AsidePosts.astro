@@ -1,5 +1,10 @@
 ---
-import AsideWidget from '../../../../components/AsideWidget.astro';
+import AsideWidget from '@/components/AsideWidget.astro';
+
+export interface Props {
+  title: string;
+  items: Array<any> | undefined;
+}
 
 const { title, items } = Astro.props;
 ---

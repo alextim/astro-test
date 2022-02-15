@@ -1,4 +1,8 @@
-const translate = (key, translations, params) => {
+export default function translate(
+  key: string,
+  translations: Array<{ key: string; value: string }>,
+  params?: { [id: string]: string },
+): string {
   if (!key) {
     return 'Undefined translation key';
   }
@@ -10,15 +14,13 @@ const translate = (key, translations, params) => {
   if (!params) {
     return e.value;
   }
-  const ids = Object.keys(params);
+  const ids: string[] = Object.keys(params);
   if (ids.length === 0) {
     return e.value;
   }
-  let s = e.value;
+  let s: string = e.value;
   ids.forEach((id) => {
-    s = s.replace(`{{${id}}}`, params[id]);
+    s = s.replace(`{{${id}}}`, params[id] + '');
   });
   return s;
-};
-
-export default translate;
+}

@@ -1,7 +1,7 @@
 ---
-import Post from '../../templates/blog/post/post.astro';
+import Post from '@/templates/blog/post/post.astro';
 
-import getPostsPaths from '../../lib/getPostsPaths';
+import getPostsPaths from '@/lib/getPostsPaths';
 
 export async function getStaticPaths() {
   const data = Astro.fetchContent('../../../content/blog/posts/*/*.??.md');

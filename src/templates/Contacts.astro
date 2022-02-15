@@ -1,0 +1,22 @@
+---
+import i18n from '@/config/i18n';
+import { getLocaleFromPathname } from '@/lib/pathname-utils';
+import { getPage } from '@/lib/cms';
+
+import Layout from '@/components/Layout.astro';
+
+const locale = Astro.request.params.locale || i18n.defaultLocale;
+const [page] = Astro.fetchContent('../../../content/pages/contacts/contacts.??.md')
+  ?.filter((p) => getLocaleFromPathname(p.file.pathname) === locale)
+  .map(getPage);
+const { title, headline, metaTitle, metaDescription, noindex, nofollow } = page;
+
+const seo = {
+  title: metaTitle || title,
+  description: metaDescription || headline,
+  noindex,
+  nofollow,
+};
+---
+
+<Layout {seo} />

@@ -1,5 +1,40 @@
 {
   "compilerOptions": {
-    "moduleResolution": "node"
-  }
+    "target": "ES2021",
+    "removeComments": true,
+
+    "baseUrl": ".",
+    "paths": {
+      "@/components/*": ["src/components/*"],
+      "@/templates/*": ["src/templates/*"],
+      "@/lib/*": ["src/lib/*"],
+      "@/config/*": ["src/config/*"]
+    },
+
+    "typeRoots": [ "./types", "./node_modules/@types"],
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+
+    "sourceMap": true,
+
+    "alwaysStrict": true,
+    "allowUnreachableCode": false,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+
+    "noImplicitReturns": true,
+    "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+
+    "allowJs": true,
+    "jsx": "react"
+  },
+  "include": ["./**/*.ts"],
+  "exclude": [
+    "node_modules/**/*",
+    "dist",
+    "scripts",
+    "types"
+  ]
 }

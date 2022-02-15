@@ -1,4 +1,9 @@
 ---
+export interface Props {
+  date: string;
+}
+
 const { date } = Astro.props;
 ---
+
 {date ? <div class="mb-2 text-xs">{date}</div> : null}
