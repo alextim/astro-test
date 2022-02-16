@@ -1,4 +1,10 @@
 ---
+export interface Props {
+  foundingDate?: string;
+  name: string;
+  text?: string;
+}
+
 const { foundingDate, name, text } = Astro.props;
 
 const currentYear = new Date().getFullYear();

@@ -9,7 +9,7 @@ cover:
   xl:
   alt: Фото Гидроизоляция жидкой резиной промальп "Снежный Барс"
 datePublished: 2019-05-02T16:38:00Z
-author:
+authors:
   - ak@example.com
 ---
 

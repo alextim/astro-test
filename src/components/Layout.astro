@@ -1,14 +1,14 @@
 ---
-import i18n from '../config/i18n.js';
+import i18n from '../config/i18n';
 
-import { fetchContacts, fetchMainNav, fetchFooterNav, fetchSocialLinks, fetchAddress, fetchTranslations } from '../lib/api';
+import { fetchContacts, fetchMainNav, fetchFooterNav, fetchSocialLinks, fetchAddress, fetchTranslations } from '@/lib/api';
 
 import SEO from './SEO.astro';
 import Header from './header/Header.astro';
 import Footer from './footer/Footer.astro';
 
 const pathname = Astro.request.url.pathname;
-const locale = Astro.request.params.locale || i18n.defaultLocale;
+const locale: string = Astro.request.params.locale || i18n.defaultLocale;
 
 const contacts = fetchContacts();
 const mainNav = fetchMainNav(locale);

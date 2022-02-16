@@ -3,16 +3,21 @@ import utils from '@alextim/utils';
 import { Icon } from 'astro-icon';
 import SocialLink from './SocialLink.astro';
 
-const icons = {
-  facebook: 'facebook-f',
-};
-const getIconName = (key) => (icons[key] ? icons[key] : key);
+export interface Props {
+  socialLinks: SocialLinks;
+}
 
-const { items } = Astro.props;
+const icons: Record<string, string> = {
+  facebook: 'facebook-f',
+} as const;
+
+const getIconName = (key: string) => (icons[key] ? icons[key] : key);
+
+const { socialLinks } = Astro.props as Props;
 ---
 
 <div class="inline-flex items-center justify-center py-4 px-0 mb-8 w-full">
-  {Object.entries(items).map(([key, { to, title }]) => (
+  {Object.entries(socialLinks).map(([key, { to, title }]) => (
     <SocialLink name={utils.upperFirst(key)} to={to} title={title}>
       <Icon class="h-4 w-4" name={getIconName(key)} />
     </SocialLink>

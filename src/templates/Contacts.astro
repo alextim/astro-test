@@ -6,17 +6,20 @@ import { getPage } from '@/lib/cms';
 import Layout from '@/components/Layout.astro';
 
 const locale = Astro.request.params.locale || i18n.defaultLocale;
-const [page] = Astro.fetchContent('../../../content/pages/contacts/contacts.??.md')
-  ?.filter((p) => getLocaleFromPathname(p.file.pathname) === locale)
+const [page] = Astro.fetchContent('../../content/pages/contacts/contacts.??.md')
+  .filter((p) => getLocaleFromPathname(p.file.pathname) === locale)
   .map(getPage);
-const { title, headline, metaTitle, metaDescription, noindex, nofollow } = page;
+const { title, headline, metaTitle, metaDescription, noindex, nofollow } = page as Page;
 
 const seo = {
-  title: metaTitle || title,
-  description: metaDescription || headline,
+  title: metaTitle,
+  description: metaDescription,
   noindex,
   nofollow,
 };
 ---
 
-<Layout {seo} />
+<Layout {seo}>
+<h1>{title}</h1>
+<div>{headline}</div>
+</Layout>

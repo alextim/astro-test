@@ -8,7 +8,7 @@ cover:
   xl:
   alt: Фото покраска металлоконструкции от коррозии
 datePublished: 2019-04-25T17:38:00Z
-author:
+authors:
   - ak@example.com
 ---
 

@@ -1,28 +1,32 @@
 ---
 import theme from '../theme';
+
+export interface Props extends ILink {
+  name: string;
+}
+
 const { name, title, to } = Astro.props;
 
 // Google Does Not Use rel=me Microformats
 // rel="me noreferrer"
+const style = `
+  flex justify-center items-center
+  w-8 h-8
+  my-0 mx-3
+
+  no-underline
+  border-2 border-solid rounded
+  ${theme.colors.text}
+  ${theme.colors.highlight}
+
+  hover:bg-white
+  hover:text-black
+  hover:border-transparent
+  hover:transition-colors
+  hover:ease-in-out
+`;
 ---
 
-<a
-  class={`
-flex justify-center items-center
- ${theme.colors.text} no-underline w-8 h-8 my-0 mx-3
- border-2 border-solid rounded
- ${theme.colors.highlight}
- hover:bg-white
- hover:text-black
- hover:border-transparent
- hover:transition-colors
- hover:ease-in-out
- `}
-  href={to}
-  target="_blank"
-  rel="noreferrer"
-  aria-label={name}
-  {title}
->
+<a class={style} href={to} target="_blank" rel="noreferrer" aria-label={name} {title}>
   <slot />
 </a>

@@ -2,7 +2,7 @@
 import config from '@/config/website';
 import i18n from '@/config/i18n';
 import { getLocaleFromPathname } from '@/lib/pathname-utils';
-import { getPage, defaultSort } from '@/lib/cms';
+import { getPost, defaultSort } from '@/lib/cms';
 import BlogIndex from '@/templates/blog/blog/blog.astro';
 
 export async function getStaticPaths({ paginate }) {
@@ -13,7 +13,7 @@ export async function getStaticPaths({ paginate }) {
   const posts = allPosts
     .filter((p) => getLocaleFromPathname(p.file.pathname) === locale)
     .sort(defaultSort)
-    .map(getPage);
+    .map(getPost);
 
   return paginate(posts, { pageSize: config.pageSize });
 }

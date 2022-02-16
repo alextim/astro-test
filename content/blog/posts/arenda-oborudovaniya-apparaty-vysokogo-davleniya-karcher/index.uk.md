@@ -9,7 +9,7 @@ cover:
   alt: Фото аппарат высокого давления Karcher - Снежный Барс
 datePublished: 2020-04-25T17:09:00Z
 dateModified: 2021-13-32T17:09:00Z
-author:
+authors:
   - ak@example.com
   - n@example.com
   - f@example.com

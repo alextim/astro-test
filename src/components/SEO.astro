@@ -1,4 +1,8 @@
 ---
+export interface Props {
+  seo: SEO;
+}
+
 const { title, description, canonical, noindex, nofollow } = Astro.props.seo;
 ---
 

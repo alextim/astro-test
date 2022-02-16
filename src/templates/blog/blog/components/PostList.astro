@@ -11,30 +11,44 @@ import PostPagination from './PostPagination.astro';
 
 // import { CategoryWidget, TagsWidget, YearsWidget } from '@/components/post-widgets';
 
+export interface Props {
+  title?: string;
+  readMoreKey?: string;
+  page: {
+    data: Array<Post>,
+    currentPage: number;
+    total: number;
+    url: {
+      prev?: string;
+      next?: string;
+      current: string;
+    };
+  };
+  indexPage: Page;
+}
+
+const {
+  title,
+  readMoreKey,
+  page: { data: posts, currentPage, total, url },
+  indexPage: { html, title: defaultTitle, metaTitle, headline, metaDescription, noindex, nofollow, breadcrumbs },
+} = Astro.props;
+
 const pathname = Astro.request.url.pathname;
 const locale = Astro.request.params.locale || i18n.defaultLocale;
 const siteUrl = Astro.site.href; //Astro.site.origin - without trailing slash
+
+
 const translations = fetchTranslations(locale);
-
-const {
-  page: { data: posts, currentPage, total: numPages, url },
-  indexPage: { html, title: defaultTitle, metaTitle, headline, metaDescription, noindex, breadcrumbs },
-} = Astro.props;
-
-const {
-  // TODO:
-  title,
-  readMore,
-  // TODO end
-} = Astro.props;
-
-const t = (key, params = undefined) => translate(key, translations, params);
+const t: ITranslationFunc = function(key: string, params?: Record<string, string>): string {
+  return translate(key, translations, params);
+};
 
 const isFirst = currentPage === 1;
 
 const links = [];
 
-if (numPages > 1) {
+if (total > 1) {
   if (url.prev) {
     links.push({
       rel: 'prev',
@@ -49,28 +63,29 @@ if (numPages > 1) {
   }
 }
 
-const readMoreText = t(readMore || config.readMore);
+const seo = {
+  title: metaTitle,
+  description: metaDescription,
+  noindex,
+  nofollow,
+  /*
+  TODO:
+  pathname,
+  locale,
+  breadcrumbs,
+  pageType: 'Blog',
+  links,
+  */
+};
+
+const readMore = t(readMoreKey || config.readMore);
 ---
 
-<Layout
-  title={title || defaultTitle}
-  {headline}
-  {breadcrumbs}
-  seo={{
-    locale,
-    title: metaTitle || title,
-    description: metaDescription || headline,
-    pathname,
-    noindex,
-    breadcrumbs,
-    pageType: 'Blog',
-    links,
-  }}
->
+<Layout {seo} title={title || defaultTitle} {headline} {breadcrumbs}>
   {isFirst && html ? <div class="mt-6 mb-10">{html}</div> : null}
 
   <div class="grid gap-7 lg:grid-cols-2 xl:grid-cols-3">
-    {posts.map((post) => <PostCard post={post} readMore={readMoreText} />)}
+    {posts.map((post: Post) => <PostCard {post} {readMore} />)}
   </div>
-  <PostPagination {currentPage} {numPages} {url} />
+  <PostPagination {currentPage} {total} {url} />
 </Layout>

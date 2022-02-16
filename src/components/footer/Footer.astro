@@ -9,12 +9,22 @@ import FooterNavigation from './components/FooterNavigation.astro';
 import FooterWidget from './components/FooterWidget.astro';
 import WidgetWrapper from './components/WidgetWrapper.astro';
 
-import translate from '../../lib/translate';
+import translate from '@/lib/translate';
+
+export interface Props {
+  data: {
+    contacts: Contacts;
+    footerNav: FooterNav;
+    socialLinks: SocialLinks;
+    address: Address;
+    translations: Translations;
+  };
+}
 
 const { contacts, footerNav, socialLinks, address, translations } = Astro.props.data;
 
 const { foundingDate } = contacts;
-const t = (key, params = undefined) => translate(key, translations, params);
+const t = (key: string, params = undefined) => translate(key, translations, params);
 ---
 
 <footer class={`w-full text-small ${theme.colors.text} ${theme.colors.bg}`}>
@@ -36,8 +46,8 @@ const t = (key, params = undefined) => translate(key, translations, params);
 
   <div class="w-full py-6 px-0 bg-slate-500">
     <Container>
-      {socialLinks ? <SocialLinks items={socialLinks} /> : null}
-      <FooterNavigation items={footerNav} />
+      {socialLinks ? <SocialLinks {socialLinks} /> : null}
+      <FooterNavigation {footerNav} />
     </Container>
   </div>
 

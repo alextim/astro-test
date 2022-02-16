@@ -9,9 +9,13 @@ import AsideRecentPosts from './components/AsideRecentPosts.astro';
 import PostInfo from './components/PostInfo.astro';
 import LastUpdated from './components/LastUpdated.astro';
 
+export interface Props {
+  post: Post;
+}
+
 const {
   locale,
-  pathname, // TODO:
+  to, // TODO:
 
   title,
   metaTitle,
@@ -19,6 +23,7 @@ const {
   metaDescription,
   cover,
   noindex,
+  nofollow,
   breadcrumbs,
   datePublished,
   dateModified,
@@ -27,45 +32,43 @@ const {
   authors,
 } = Astro.props.post;
 
-/*
-recentPosts: allMdPost(sort: { fields: [datePublished], order: DESC }, limit: 10, filter: { locale: { eq: $locale } }) {
-featuredPosts: allMdPost(
-  sort: { fields: [datePublished], order: DESC }
-  limit: 10
-  filter: { featured: { eq: true }, locale: { eq: $locale } }
-*/
-// {cover && cover.sm ? <img src={Astro.resolve(cover.sm)} alt={cover.alt} /> :  null}
-
 /* <AsideServices mainNav={mainNav} /> */
 const translations = fetchTranslations(locale);
-const t = (key, params = undefined) => translate(key, translations, params);
+const t: ITranslationFunc = function (key: string, params?: Record<string, string>): string {
+  return translate(key, translations, params);
+};
+
+const seo = {
+  title: metaTitle,
+  description: metaDescription,
+  noindex,
+  nofollow,
+
+  locale,
+  headline,
+  to,
+
+  breadcrumbs,
+  datePublished,
+  dateModified,
+  authors,
+  pageType: 'BlogPosting',
+  imgPath: cover?.sm?.publicURL, // TODO:
+};
 ---
 
 <Layout
   {title}
   {headline}
   {breadcrumbs}
-  seo={{
-    locale,
-    title: metaTitle || title,
-    description: metaDescription || headline,
-    headline,
-    pathname,
-    noindex,
-    breadcrumbs,
-    datePublished,
-    dateModified,
-    authors,
-    pageType: 'BlogPosting',
-    imgPath: cover?.sm?.publicURL,
-  }}
+  {seo}
 >
   <PostInfo {authors} {datePublished} {readingTime} {t} />
   <InnerAsideLayout {cover} {html}>
     <aside slot="aside" class="flex flex-col">
-      <AsideRecentPosts {t} />
-      <AsideFeaturedPosts {t} />
+      <AsideRecentPosts t={t} />
+      <AsideFeaturedPosts t={t} />
     </aside>
   </InnerAsideLayout>
-  {dateModified && ((datePublished && dateModified !== datePublished) || !datePublished) ? <LastUpdated date={dateModified} t={t} /> : null}
+  {dateModified && ((datePublished && dateModified !== datePublished) || !datePublished) ? <LastUpdated {dateModified} {t} /> : null}
 </Layout>

@@ -1,7 +1,11 @@
 ---
-const { extraStyle } = Astro.props;
+export interface Props {
+  extraStyle?: string;
+}
+
+const { extraStyle = '' } = Astro.props;
 ---
 
-<div class={`flex flex-col leading-relaxed ${extraStyle || ''}`}>
+<div class={`flex flex-col leading-relaxed ${extraStyle}`}>
   <slot />
 </div>

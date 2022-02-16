@@ -1,7 +1,7 @@
 export default function translate(
   key: string,
-  translations: Array<{ key: string; value: string }>,
-  params?: { [id: string]: string },
+  translations: Translations,
+  params?: Record<string, string>,
 ): string {
   if (!key) {
     return 'Undefined translation key';

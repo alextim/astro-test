@@ -7,31 +7,6 @@ import config from '../config/website';
 import { getLocaleFromPathname, getSlugFromPathname } from './pathname-utils';
 import { fetchAuthors } from './api';
 
-type MdSource = {
-  astro: {
-    html: string;
-  };
-  file: {
-    pathname: string;
-  };
-  content: any;
-  Content: any;
-  url: any;
-
-  title?: string;
-  headline?: string;
-  metaTitle: string;
-  metaDescription?: string;
-  cover?: Image;
-  datePublished?: string;
-  dateModified?: string;
-  author?: Array<string>;
-  slug?: string;
-  featured?: boolean;
-  noindex?: boolean;
-  nofollow?: boolean;
-};
-
 const getReadingTime = (pureText: string): number => {
   const stats = readingTime(pureText);
   if (!stats.minutes) {
@@ -50,23 +25,24 @@ const getAuthors = (authors: undefined | string[], locale: string): Array<Author
   return allAuthors.filter((el: { email: string }) => authors.some((email) => email === el.email));
 };
 
-export function getPage({
+export function getPost({
   astro: { html },
   file: { pathname },
+  // Strip Astro
+  url,
   content,
   Content,
-  url,
 
   title,
   headline,
   metaTitle,
   metaDescription,
 
-  author,
+  authors,
 
   slug: sourceSlug,
   ...rest
-}: MdSource): Page {
+}: AstroPost): Post {
   const locale = getLocaleFromPathname(pathname);
   const pureText = sanitizeHTML(html, { allowedTags: [], allowedAttributes: {} });
 
@@ -78,12 +54,50 @@ export function getPage({
     headline,
     metaTitle: metaTitle || title,
     metaDescription: metaDescription || headline,
+
     html,
     readingTime: getReadingTime(pureText),
     excerpt: getExcerpt(pureText),
-    authors: getAuthors(author, locale),
+
+    authors: getAuthors(authors, locale),
+
     slug,
     to: localize([config.blogPath, slug], locale),
+    locale,
+  };
+}
+
+export function getPage({
+  astro: { html },
+  file: { pathname },
+  // Strip Astro
+  url,
+  content,
+  Content,
+
+  title,
+  headline,
+  metaTitle,
+  metaDescription,
+
+  slug: sourceSlug,
+  ...rest
+}: AstroPage): Page {
+  const locale = getLocaleFromPathname(pathname);
+
+  const slug: string = sourceSlug || getSlugFromPathname(pathname);
+
+  return {
+    ...rest,
+    title,
+    headline,
+    metaTitle: metaTitle || title,
+    metaDescription: metaDescription || headline,
+
+    html,
+
+    slug,
+    to: localize(slug, locale),
     locale,
   };
 }

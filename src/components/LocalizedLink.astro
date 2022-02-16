@@ -1,10 +1,15 @@
 ---
-import i18n from '../config/i18n.js';
-import { localizePath } from '../lib/i18n-utils.js';
+import i18n from '@/config/i18n';
+import { localizePath } from '@/lib/i18n-utils';
 
+/*
+export interface Props {
+  to: string;
+}
+*/
 const { to, ...rest } = Astro.props;
-const { locale } = Astro.request.params;
-const path = localizePath(to, locale || i18n.defaultLocale);
+const locale = Astro.request.params.locale || i18n.defaultLocale;
+const path = localizePath(to, locale);
 ---
 
 <a href={path} {...rest}>

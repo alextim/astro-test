@@ -10,30 +10,30 @@ const fetchAPI = (query, { variables } = {}) => _fetchAPI(API_URL, query, variab
 */
 import getYaml from './getYaml';
 
-export function fetchContacts() {
+export function fetchContacts(): Contacts {
   return getYaml('content/data/contacts.yaml');
 }
 
-export function fetchMainNav(locale: string) {
+export function fetchMainNav(locale: string): MainNav {
   return getYaml(`content/data/locales/main-nav/main-nav.${locale}.yaml`);
 }
 
-export function fetchFooterNav(locale: string) {
+export function fetchFooterNav(locale: string): FooterNav {
   return getYaml(`content/data/locales/footer-nav/footer-nav.${locale}.yaml`);
 }
 
-export function fetchSocialLinks(locale: string) {
+export function fetchSocialLinks(locale: string): SocialLinks {
   return getYaml(`content/data/locales/social-links/social-links.${locale}.yaml`);
 }
 
-export function fetchTranslations(locale: string) {
+export function fetchTranslations(locale: string): Translations {
   return getYaml(`content/data/locales/translations/translations.${locale}.yaml`);
 }
 
-export function fetchAddress(locale: string) {
+export function fetchAddress(locale: string): Address {
   return getYaml(`content/data/locales/address/address.${locale}.yaml`);
 }
 
-export function fetchAuthors(locale: string) {
+export function fetchAuthors(locale: string): Array<Author> {
   return getYaml(`content/blog/authors/authors.${locale}.yaml`);
 }

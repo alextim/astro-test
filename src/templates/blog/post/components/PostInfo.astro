@@ -2,16 +2,16 @@
 import FormattedDate from '@/components/FormattedDate.astro';
 
 export interface Props {
-  authors: Array<Author>;
+  authors?: Array<Author>;
   datePublished?: string;
   readingTime: number;
-  t: (string) => string;
+  t: ITranslationFunc;
 }
 
 const { authors, datePublished, readingTime, t } = Astro.props;
 
 let names = '';
-authors?.forEach(({ lastName, firstName, email }) => {
+authors?.forEach(({ lastName, firstName, email }: Author) => {
   if (names) {
     names = `${names}, `;
   }

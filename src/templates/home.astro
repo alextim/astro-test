@@ -1,11 +1,29 @@
 ---
+import i18n from '@/config/i18n';
+import { getLocaleFromPathname } from '@/lib/pathname-utils';
+import { getPage } from '@/lib/cms';
+
 import Layout from '@/components/Layout.astro';
 import Modal from '@/components/Modal.astro';
 
-const title = 'My Astro Site';
+
+const locale = Astro.request.params.locale || i18n.defaultLocale;
+const [page] = Astro.fetchContent('../../content/pages/home/home.??.md')
+  .filter((p) => getLocaleFromPathname(p.file.pathname) === locale)
+  .map(getPage);
+const { title, headline, metaTitle, metaDescription, noindex, nofollow } = page as Page;
+
+const seo = {
+  title: metaTitle,
+  description: metaDescription,
+  noindex,
+  nofollow,
+};
 ---
 
-<Layout {title} seo={{}}>
+<Layout {seo}>
+  <h1>{title}</h1>
+  <div>{headline}</div>
   <Modal id="dialog" open="Open modal">
     <div slot="main">
       <p>Some extra content you would like here</p>

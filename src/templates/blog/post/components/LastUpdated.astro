@@ -2,14 +2,14 @@
 import FormattedDate from '@/components/FormattedDate.astro';
 
 export interface Props {
-  date: string;
-  t: (string) => string;
+  dateModified: string;
+  t: ITranslationFunc;
 }
 
-const { date, t } = Astro.props;
+const { dateModified, t } = Astro.props;
 ---
 
 <div class="mt-5 text-xs">
   <span class="inline-block first-letter:uppercase after:content-[':'] mr-1">{t('post.lastUpdated')}</span>
-  <FormattedDate {date} />
+  <FormattedDate {dateModified} />
 </div>

@@ -3,16 +3,16 @@ import AsideWidget from '@/components/AsideWidget.astro';
 
 export interface Props {
   title: string;
-  items: Array<any> | undefined;
+  posts: Array<Post>;
 }
 
-const { title, items } = Astro.props;
+const { title, posts } = Astro.props;
 ---
 
-{items && items.length ? (
+{posts && posts.length ? (
   <AsideWidget title={title}>
     <ul class="m-0 list-outside list-none">
-      {items.map(({ title: itemTitle, slug: to }) => (
+      {posts.map(({ title: itemTitle, slug: to }: Post) => (
         <li class="after-bg-[#b4d5e7] relative mb-3 bg-white py-1 px-4 after:absolute after:right-0 after:top-0 after:block after:h-full after:w-1 after:content-empty hover:after:w-full hover:after:transition-all">
           <a
             href={to}

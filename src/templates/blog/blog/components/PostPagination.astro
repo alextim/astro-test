@@ -1,28 +1,38 @@
 ---
 import pagination from '@/lib/pagination';
 
-const getBasePath = (p): string => {
-  const a = p.split('/');
-  if (!p.endsWith('/')) {
+export interface Props {
+  currentPage: number;
+  total: number;
+  url: {
+    prev?: string;
+    next?: string;
+    current: string;
+  };
+}
+
+const { url, currentPage, total } = Astro.props;
+
+const getBasePath = (pathname: string): string => {
+  const a = pathname.split('/');
+  if (!pathname.endsWith('/')) {
     a.push('');
   }
-  if (isNaN(a[a.length - 2])) {
+  if (isNaN(a[a.length - 2] as any)) { // as any - to bypass compiler check
     return a.join('/');
   }
   a.splice(-2, 1);
   return a.join('/');
 };
 
-const { url, currentPage, numPages } = Astro.props;
-
-const pages = pagination(currentPage, numPages);
+const pages = pagination(currentPage, total);
 const basePath = getBasePath(url.current);
 
 const style = 'h-10 mx-1 min-w-[2.5rem] text-center';
 const styleLink = 'transition-shadow hover:shadow hover:no-underline';
 ---
 
-{numPages > 1 ? (
+{total > 1 ? (
   <div class="my-12 flex w-full flex-wrap justify-center">
     {url.prev ? (
       <a class={`${style} ${styleLink}`} href={url.prev}>

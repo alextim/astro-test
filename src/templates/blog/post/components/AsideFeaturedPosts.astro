@@ -1,7 +1,12 @@
 ---
-import AsidePosts from './AsidePosts.astro';
 import i18n from '@/config/i18n';
 import { getLocaleFromPathname } from '@/lib/pathname-utils';
+
+import AsidePosts from './AsidePosts.astro';
+
+export interface Props {
+  t: ITranslationFunc;
+}
 
 const locale = Astro.request.params.locale || i18n.defaultLocale;
 
@@ -9,7 +14,9 @@ const locale = Astro.request.params.locale || i18n.defaultLocale;
 const posts = Astro.fetchContent('../../../../../content/blog/posts/*/*.??.md')
   ?.filter((p) => getLocaleFromPathname(p.file.pathname) === locale && p.featured)
   .sort((a, b) => new Date(b.datePublished).valueOf() - new Date(a.datePublished).valueOf());
+
 const { t } = Astro.props;
+const title = t('post.widget.featured');
 ---
 
-<AsidePosts title={t('post.widget.featured')} items={posts} />
+<AsidePosts {title} {posts} />

@@ -9,7 +9,7 @@ cover:
   xl:
   alt: Фото Гідроізоляція рідкої гумою промальп "Сніговий Барс"
 datePublished: 2019-05-02T16:38:00Z
-author:
+authors:
   - ak@example.com
 ---
 

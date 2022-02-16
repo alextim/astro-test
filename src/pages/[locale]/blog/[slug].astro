@@ -1,5 +1,5 @@
 ---
-import Post from '@/templates/blog/post/post.astro';
+import Post from '@/templates/blog/post/Post.astro';
 
 import getPostsPaths from '@/lib/getPostsPaths';
 
@@ -9,4 +9,4 @@ export async function getStaticPaths() {
 }
 ---
 
-<Post post={Astro.props} />
+<Post post={Astro.props as Post} />
