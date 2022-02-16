@@ -1,0 +1,18 @@
+---
+import utils from '@alextim/utils';
+
+import IconLink from '../IconLink.astro';
+
+export interface Props {
+  phones: Array<Phone>;
+}
+
+const { phones } = Astro.props;
+---
+
+{phones?.map((phone: string, i: number) => (
+  <IconLink icon={i === 0 ? 'phone' : ''} to={utils.phoneUrl(phone)}>
+    {utils.formatPhone(phone)}
+  </IconLink>
+))}
+

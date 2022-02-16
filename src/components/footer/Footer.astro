@@ -1,4 +1,14 @@
 ---
+export interface Props {
+  data: {
+    contacts: Contacts;
+    footerNav: FooterNav;
+    socialLinks: SocialLinks;
+    address: Address;
+    translations: Translations;
+  };
+}
+import translate from '@/lib/translate';
 import LocalizedLink from '../LocalizedLink.astro';
 
 import theme from './theme';
@@ -9,37 +19,46 @@ import FooterNavigation from './components/FooterNavigation.astro';
 import FooterWidget from './components/FooterWidget.astro';
 import WidgetWrapper from './components/WidgetWrapper.astro';
 
-import translate from '@/lib/translate';
+import OrganizationEmail from '../organization/OrganizationEmail.astro';
+import OrganizationOpeningHours from '../organization/OrganizationOpeningHours.astro';
+import OrganizationPhones from '../organization/OrganizationPhones.astro';
 
-export interface Props {
-  data: {
-    contacts: Contacts;
-    footerNav: FooterNav;
-    socialLinks: SocialLinks;
-    address: Address;
-    translations: Translations;
-  };
-}
+// import OrganizationSite from '../organization/OrganizationSite.astro';
+//             <OrganizationSite />
 
-const { contacts, footerNav, socialLinks, address, translations } = Astro.props.data;
+import Button from '../Button.astro';
 
-const { foundingDate } = contacts;
-const t = (key: string, params = undefined) => translate(key, translations, params);
+const { contacts: { phones, emails, openingHours, foundingDate }, footerNav, socialLinks, address, translations } = Astro.props.data;
+
+const t: ITranslationFunc = function(key: string, params?: Record<string, string>): string {
+  return translate(key, translations, params);
+};
 ---
-
 <footer class={`w-full text-small ${theme.colors.text} ${theme.colors.bg}`}>
   <Container>
     <div class="grid gap-6 py-5 xl:py-6 xl:grid-cols-[1fr_1fr_2fr]">
       <WidgetWrapper>
-        <FooterWidget title={t('footer.contacts')}>test 1</FooterWidget>
+        <FooterWidget title={t('footer.contacts')}>
+          <div class="grid gap-3 xl:gap-0">
+            <OrganizationEmail {emails} />
+            <OrganizationPhones {phones} />
+          </div>
+        </FooterWidget>
       </WidgetWrapper>
 
       <WidgetWrapper>
-        <FooterWidget title={t('footer.opening_time')}>test 2</FooterWidget>
+        <FooterWidget title={t('footer.opening_time')}>
+          <OrganizationOpeningHours {openingHours} {t} />
+        </FooterWidget>
       </WidgetWrapper>
 
       <WidgetWrapper>
-        <FooterWidget title={t('footer.inquiry.title')}>test3</FooterWidget>
+        <FooterWidget title={t('footer.inquiry.title')}>
+          <div class="mb-3">{t('footer.inquiry.text')}</div>
+          <Button as="link" overrideCSS="justify-center xl:self-start" to="/inquiry/">
+            {t('footer.inquiry.button_title')}
+          </Button>
+        </FooterWidget>
       </WidgetWrapper>
     </div>
   </Container>

@@ -1,0 +1,48 @@
+---
+import utils from '@alextim/utils';
+import IconLink from '../IconLink.astro';
+
+export interface Props {
+  voice: Voice;
+}
+
+const { voice } = Astro.props;
+---
+{voice && voice.whatsapp && (
+  <IconLink
+    icon="whatsapp"
+    extraStyle="color-brands-whatsapp"
+    to={utils.whatsappUrl(voice.whatsapp)}
+    title="WhatsApp"
+    target="_blank"
+    rel="noindex noopener noreferrer"
+  >
+    {utils.formatPhone(voice.whatsapp)}
+  </IconLink>
+)}
+
+{voice && voice.telegram && (
+  <IconLink
+    icon="telegram"
+    extraStyle="color-brands-telegram"
+    to={utils.telegramUrl(voice.telegram)}
+    title="Telegram"
+    target="_blank"
+    rel="noindex noopener noreferrer"
+  >
+    {voice.telegram}
+  </IconLink>
+)}
+
+{voice && voice.viber && (
+  <IconLink
+    icon="viber"
+    extraStyle="color-brands-viber"
+    to={utils.viberUrl(voice.viber)}
+    title="Viber"
+    target="_blank"
+    rel="noindex noopener noreferrer"
+  >
+    {utils.formatPhone(voice.viber)}
+  </IconLink>
+)}

@@ -17,6 +17,12 @@ module.exports = {
           DEFAULT: '#0fa9e6',
           dark: '#0c87b8',
         },
+        brands: {
+          skype: 'rgb(0, 175, 240)',
+          viber: '#bcaec7',
+          whatsapp: '#25d366',
+          telegram: '#0088cc',
+        },
       },
       fontFamily: {
         body: ['Helvetica', 'Arial', 'sans-serif'],

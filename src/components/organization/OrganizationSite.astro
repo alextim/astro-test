@@ -1,0 +1,8 @@
+---
+import IconLink from '../IconLink.astro';
+
+const { pathname, hostname } = Astro.site;
+---
+<IconLink icon="link" to={pathname}>
+  {hostname}
+</IconLink>

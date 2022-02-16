@@ -1,3 +1,7 @@
+type OpeningHoursRow = [string, Time, Time];
+type OpeningHours = Array<OpeningHoursRow>;
+type VoiceType = 'skype' | 'whatsapp' | 'telegram' | 'viber';
+type Voice = Record<VoiceType, string>;
 interface Contacts extends Record<string, any> {
   organizationType: 'LocalBusiness' | 'ProfessionalService';
   geo?: {
@@ -7,14 +11,13 @@ interface Contacts extends Record<string, any> {
   hasMap?: string;
   embedMap?: string;
   phones?: Array<Phone>;
-  voice?: Record<string, string>;
-  // skype, whatsapp, telegram, viber
+  voice?: Voice;
 
   fax?: string
 
   emails: Array<Email>;
 
-  openingHours?: Array<[string, Time, Time]>;
+  openingHours?: OpeningHours;
   /*
   - ['mo-sa', '09:00', '18:00']
   - ["mo", "10:00", "18:00"]

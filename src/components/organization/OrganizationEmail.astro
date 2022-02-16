@@ -1,0 +1,19 @@
+---
+import { obfuscate } from '@alextim/utils';
+
+import IconLink from '../IconLink.astro';
+
+export interface Props {
+  emails: Array<Email>;
+  hideIcon: boolean;
+}
+
+const { emails } = Astro.props;
+---
+
+{emails?.map(obfuscate)
+  .map((email: string, i: number) => (
+    <IconLink icon={i === 0 ? 'envelope' : ''} to={`mailto:${email}`}>
+      {email}
+    </IconLink>
+))}

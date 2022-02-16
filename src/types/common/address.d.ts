@@ -17,7 +17,7 @@ interface ContactPoint extends Record<string, any> {
   description:  string;
   contactType: ContactType;
   contactTypeName: string;
-  telephone: Array<Phone>;
+  phones: Array<Phone>;
   emails: Array<Email>;
 }
 

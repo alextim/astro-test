@@ -1,0 +1,18 @@
+---
+export interface Props {
+  address: Address;
+}
+
+const {
+  address: {
+    legalName,
+    postalAddress: { streetAddress, addressLocality, postalCode = '', addressCountryName },
+  }
+} = Astro.props;
+---
+<div>{legalName}</div>
+{streetAddress?.map((item: string) => (
+  <div>{item}</div>
+))}
+<div>{`${postalCode}  ${addressLocality}`}</div>
+<div>{addressCountryName}</div>

@@ -1,0 +1,40 @@
+---
+export interface Props {
+  openingHours: OpeningHours;
+  t: ITranslationFunc;
+}
+
+const { openingHours, t } = Astro.props;
+
+const parseDow = (s: any): string => {
+  if (!s) {
+    return '';
+  }
+
+  let dow = ('' + s).split('-');
+  if (dow.length > 1) {
+    return `${t(`dow.d2.${dow[0]?.trim()}`)}-${t(`dow.d2.${dow[1]?.trim()}`)}`;
+  }
+
+  dow = ('' + s).split(',');
+  if (dow.length > 1) {
+    return dow.reduce((acc, cur) => acc + (acc ? ', ' : '') + t(`dow.d2.${cur.trim()}`), '');
+  }
+
+  return t(`dow.d2.${s.trim()}`);
+};
+
+const isDayOff = (timeStart: string, timeFinish: string) => timeStart === timeFinish && timeFinish === '00:00';
+---
+<div class="grid grid-cols-[4rem_3rem_1rem_3rem] gap-[0.1rem]">
+  {openingHours.map(([dow, timeStart, timeFinish]: OpeningHoursRow) => (
+    <>
+      <div class="after:content-empty">{parseDow(dow)}</div>
+      {isDayOff(timeStart, timeFinish) ? (
+        <div class="col-start-2 col-span-3">{t(dow.length === 2 ? 'day_off' : 'days_off')}</div>
+      ) : (
+        <div>{timeStart}</div><div>-</div><div>{timeFinish}</div>
+      )}
+    </>
+  ))}
+</div>

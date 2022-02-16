@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-import i18n from '../../../../config/i18n';
-import { localizePath } from '../../../../lib/i18n-utils';
+import i18n from '@/config/i18n';
+import { localizePath } from '@/lib/i18n-utils';
 import { useLocale, useContacts, useMainNav } from '../../../ComponentContext/ComponentContext';
 import BODY_PREVENT_SCROLLING from './body-prevent-scrolling';
 
@@ -17,7 +17,7 @@ const Navbar = () => {
   const address = useContacts();
   const locale = useLocale();
 
-  const phone = String(address?.phone[0]);
+  const phone = String(address?.phones[0]);
 
   const { siteTitle, siteShortName } = i18n.locales[locale];
 
