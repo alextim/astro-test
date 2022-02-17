@@ -1,5 +1,5 @@
 import i18n from '../../../../config/i18n';
-import { localizePath, pureSlug } from '../../../../lib/i18n-utils';
+import { localizePath, getPurePathname } from '../../../../lib/i18n-utils';
 import { useLocale, usePathname } from '../../../ComponentContext';
 
 const LanguageSwitch = ({ onClick }) => {
@@ -16,7 +16,7 @@ const LanguageSwitch = ({ onClick }) => {
               className={`uppercase text-gray-900 hover:no-underline hover:outline-none focus:no-underline focus:outline-none active:no-underline active:outline-none hover:text-blue-600${
                 isCurrentPage ? 'text-blue-800' : ''
               }`}
-              href={isCurrentPage ? pathname : localizePath(pureSlug(pathname), code)}
+              href={isCurrentPage ? pathname : localizePath(getPurePathname(pathname), code)}
               onClick={onClick}
             >
               {shortName}

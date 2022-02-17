@@ -4,7 +4,7 @@ import config from '@/config/website';
 import { fetchTranslations } from '@/lib/api';
 import translate from '@/lib/translate';
 
-import Layout from '@/components/Layout.astro';
+import Layout from '@/components/Layout/Layout.astro';
 
 import PostCard from './PostCard.astro';
 import PostPagination from './PostPagination.astro';
@@ -31,7 +31,7 @@ const {
   title,
   readMoreKey,
   page: { data: posts, currentPage, total, url },
-  indexPage: { html, title: defaultTitle, metaTitle, headline, metaDescription, noindex, nofollow, breadcrumbs },
+  indexPage: { html, title: defaultTitle, metaTitle, headline, metaDescription, noindex, nofollow },
 } = Astro.props;
 
 const pathname = Astro.request.url.pathname;
@@ -79,6 +79,8 @@ const seo = {
 };
 
 const readMore = t(readMoreKey || config.readMore);
+
+const breadcrumbs = { lastItemTitle: title || defaultTitle };
 ---
 
 <Layout {seo} title={title || defaultTitle} {headline} {breadcrumbs}>

@@ -3,7 +3,7 @@ import i18n from '@/config/i18n';
 import { getLocaleFromPathname } from '@/lib/pathname-utils';
 import { getPage } from '@/lib/cms';
 
-import Layout from '@/components/Layout.astro';
+import Layout from '@/components/Layout/BaseLayout.astro';
 import Modal from '@/components/Modal.astro';
 
 
@@ -22,8 +22,7 @@ const seo = {
 ---
 
 <Layout {seo}>
-  <h1>{title}</h1>
-  <div>{headline}</div>
+  <div>{title} {headline}</div>
   <Modal id="dialog" open="Open modal">
     <div slot="main">
       <p>Some extra content you would like here</p>

@@ -54,7 +54,6 @@ type AstroPage = IAstro & IFrontmatterPage;
 
 interface IPageAndPostCommon {
   //TODO:
-  breadcrumbs?: any;
   html: string;
 
   slug: string;

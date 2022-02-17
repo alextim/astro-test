@@ -1,0 +1,13 @@
+---
+export interface Props {
+  title?: string;
+  headline?: string;
+
+}
+const { title, headline } = Astro.props;
+---
+
+<div class="my-7 mx-auto text-center text-center lg:py-0 lg:px-12 lg:leading-5 xl:px-40">
+  {title && <h1>{title}</h1>}
+  {headline && <p class="mt-4">{headline}</p>}
+</div>

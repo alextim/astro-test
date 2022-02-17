@@ -1,7 +1,11 @@
 ---
+import { getPage } from '@/lib/cms';
 import translate from '@/lib/translate';
 import { fetchTranslations } from '@/lib/api';
-import Layout from '@/components/Layout.astro';
+import { getLocaleFromPathname } from '@/lib/pathname-utils';
+
+import Layout from '@/components/Layout/Layout.astro';
+
 import InnerAsideLayout from '@/components/InnerAsideLayout.astro';
 // import AsideServices from '../../service/components/AsideServices.astro';
 import AsideFeaturedPosts from './components/AsideFeaturedPosts.astro';
@@ -24,7 +28,6 @@ const {
   cover,
   noindex,
   nofollow,
-  breadcrumbs,
   datePublished,
   dateModified,
   readingTime,
@@ -36,6 +39,14 @@ const {
 const translations = fetchTranslations(locale);
 const t: ITranslationFunc = function (key: string, params?: Record<string, string>): string {
   return translate(key, translations, params);
+};
+
+
+const [indexPage] = Astro.fetchContent('../../../../content/blog/pages/blog/blog.??.md').filter((p) => getLocaleFromPathname(p.file.pathname) === locale).map(getPage);
+
+const  breadcrumbs = {
+  lastItemTitle: title,
+  items: [{ to: indexPage?.to, title: indexPage?.title }],
 };
 
 const seo = {
@@ -56,13 +67,7 @@ const seo = {
   imgPath: cover?.sm?.publicURL, // TODO:
 };
 ---
-
-<Layout
-  {title}
-  {headline}
-  {breadcrumbs}
-  {seo}
->
+<Layout {seo} {title} {headline} {breadcrumbs}>
   <PostInfo {authors} {datePublished} {readingTime} {t} />
   <InnerAsideLayout {cover} {html}>
     <aside slot="aside" class="flex flex-col">

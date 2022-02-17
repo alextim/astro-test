@@ -1,34 +1,54 @@
-const getAuthor = (a) => {
+const getAuthor = (a: Array<Author> | undefined) => {
   if (!a || !a.length) {
-    return false;
+    return null;
   }
-  return a.map((name) => ({
+  return a.map(({ lastName, firstName }: Author) => ({
     '@type': 'Person',
-    name,
+    name: `${lastName} ${firstName}`.trim(),
     // TODO: add Url of author profile
     // url: 'http://example.com/profile/janedoe123'
   }));
 };
 
+export interface Params {
+  organizationName: string;
+  siteUrl: string;
+  siteLogo: string;
+  publisher?: string;
+  htmlLang: string;
+
+  pageUrl: string;
+  pageType: string;
+
+  title: string;
+  headline?: string;
+  datePublished?: string;
+  dateModified?: string;
+  authors?: Array<Author>;
+  imgUrl?: string;
+}
+
 const getPageSchema = ({
   organizationName,
   siteUrl,
   siteLogo,
+  publisher,
+  htmlLang,
+
   pageUrl,
+  pageType,
+
   title,
   headline,
-  htmlLang,
-  imgUrl,
   datePublished,
   dateModified,
-  pageType,
-  publisher,
-  author,
-}) => {
+  authors,
+  imgUrl,
+}: Params) => {
   const type = !pageType || !['Article', 'BlogPosting', 'Blog'].some((t) => pageType === t) ? 'WebPage' : pageType;
   const isArticle = pageType === 'Article' || pageType === 'BlogPosting';
 
-  const o = {
+  const o: Record<string, any> = {
     '@context': 'https://schema.org',
     '@type': type,
     name: title,
@@ -45,7 +65,7 @@ const getPageSchema = ({
   };
 
   if (isArticle) {
-    o.author = getAuthor(author) || o.publisher;
+    o.author = getAuthor(authors) || o.publisher;
     o.mainEntityOfPage = {
       '@type': 'WebPage',
       '@id': pageUrl,

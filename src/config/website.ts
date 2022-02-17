@@ -1,4 +1,5 @@
 const config: Record<string, any> = {
+  siteLogo: `assets/images/logo.svg`,
   recentPostsLimit: 5,
   pageSize: 1,
   readMore: 'post.readMore',

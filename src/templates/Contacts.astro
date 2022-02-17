@@ -1,13 +1,13 @@
 ---
 import utils from '@alextim/utils';
-
+import { localizePath } from '@/lib/i18n-utils';
 import i18n from '@/config/i18n';
 import translate from '@/lib/translate';
 import { fetchContacts, fetchAddress, fetchTranslations } from '@/lib/api';
 import { getLocaleFromPathname } from '@/lib/pathname-utils';
 import { getPage } from '@/lib/cms';
 
-import Layout from '@/components/Layout.astro';
+import Layout from '@/components/Layout/Layout.astro';
 import Section from '@/components/Section.astro';
 import OrganizationOpeningHours from '@/components/organization/OrganizationOpeningHours.astro';
 
@@ -43,12 +43,10 @@ const {
 
 
 const styleItemsWrap = 'grid gap-3 xl:gap-0';
+
+const breadcrumbs = { lastItemTitle: title };
 ---
-
-<Layout {seo}>
-  <h1>{title}</h1>
-  <div>{headline}</div>
-
+<Layout {seo} {title} {headline} {breadcrumbs}>
   <Section>
     <div class="grid gap-8 xl:grid-cols-3">
       <div>
