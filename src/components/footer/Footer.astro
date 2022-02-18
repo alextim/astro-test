@@ -1,13 +1,12 @@
 ---
 export interface Props {
-  data: {
-    contacts: Contacts;
-    footerNav: FooterNav;
-    socialLinks: SocialLinks;
-    address: Address;
-    translations: Translations;
-  };
+  contacts: Contacts;
+  footerNav: FooterNav;
+  socialLinks: SocialLinks;
+  address: Address;
+  translations: Translations;
 }
+
 import translate from '@/lib/translate';
 import LocalizedLink from '../LocalizedLink.astro';
 
@@ -28,12 +27,19 @@ import OrganizationPhones from '../organization/OrganizationPhones.astro';
 
 import Button from '../Button.astro';
 
-const { contacts: { phones, emails, openingHours, foundingDate }, footerNav, socialLinks, address, translations } = Astro.props.data;
+const {
+  contacts: { phones, emails, openingHours, foundingDate },
+  footerNav,
+  socialLinks,
+  address,
+  translations,
+} = Astro.props;
 
-const t: ITranslationFunc = function(key: string, params?: Record<string, string>): string {
+const t: ITranslationFunc = function (key: string, params?: Record<string, string>): string {
   return translate(key, translations, params);
 };
 ---
+
 <footer class={`w-full text-small ${theme.colors.text} ${theme.colors.bg}`}>
   <Container>
     <div class="grid gap-6 py-5 xl:py-6 xl:grid-cols-[1fr_1fr_2fr]">

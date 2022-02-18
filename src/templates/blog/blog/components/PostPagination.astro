@@ -18,7 +18,8 @@ const getBasePath = (pathname: string): string => {
   if (!pathname.endsWith('/')) {
     a.push('');
   }
-  if (isNaN(a[a.length - 2] as any)) { // as any - to bypass compiler check
+  if (isNaN(a[a.length - 2] as any)) {
+    // as any - to bypass compiler check
     return a.join('/');
   }
   a.splice(-2, 1);

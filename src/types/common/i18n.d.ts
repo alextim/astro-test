@@ -14,7 +14,7 @@ interface Locale extends Record<string, string> {
   siteShortName: string;
 }
 
-interface i18n extends Record<string, any> {
+interface I18n extends Record<string, string | Record<string, Locale>> {
   locales: Record<string, Locale>;
   defaultLocale: string;
 }

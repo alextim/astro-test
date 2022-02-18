@@ -62,8 +62,6 @@ export const getPurePathname = (pathname: string): string => {
   return a.join('/');
 };
 
-
-
 export const getLocaleFromPathname = (pathname: string): string => {
   if (!pathname || pathname === '/') {
     return i18n.defaultLocale;

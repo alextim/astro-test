@@ -1,4 +1,4 @@
-import { getPurePathname, getLocaleFromPathname, localizePath } from './i18n-utils';
+import { getPurePathname, getLocaleFromPathname, localizePath } from '@/lib/i18n-utils';
 
 const isRoot = (pathname: string): boolean => pathname === '/';
 
@@ -29,14 +29,13 @@ const getTitle = (pathname: string): string => {
 };
 
 const getBreadcrumbs = (pathname: string): Array<Link> | null => {
-
   const purePathname = getPurePathname(pathname);
   if (isRoot(purePathname)) {
     return null;
   }
   const locale = getLocaleFromPathname(pathname);
 
-  const a =  getAllAscendantsPathnames(purePathname);
+  const a = getAllAscendantsPathnames(purePathname);
 
   const result: Array<Link> = [];
 

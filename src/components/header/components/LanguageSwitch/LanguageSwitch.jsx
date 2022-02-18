@@ -1,5 +1,5 @@
-import i18n from '../../../../config/i18n';
-import { localizePath, getPurePathname } from '../../../../lib/i18n-utils';
+import i18n from '@/config/i18n';
+import { localizePath, getPurePathname } from '@/lib/i18n-utils';
 import { useLocale, usePathname } from '../../../ComponentContext';
 
 const LanguageSwitch = ({ onClick }) => {

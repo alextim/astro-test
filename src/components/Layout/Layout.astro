@@ -4,8 +4,8 @@ import PageHeader from '../PageHeader.astro';
 import Breadcrumbs from '../Breadcrumbs/Breadcrumbs.astro';
 
 const { title, headline, breadcrumbs, seo } = Astro.props;
-
 ---
+
 <BaseLayout {seo}>
   <Breadcrumbs {breadcrumbs} />
   <PageHeader {title} {headline} />

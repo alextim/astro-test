@@ -5,7 +5,8 @@ const { to, icon, title, extraStyle = '', ...rest } = Astro.props;
 
 const style = icon ? 'ml-2' : 'ml-4';
 ---
-<div class="inline-flex items-center" title={title}>
+
+<div class="inline-flex items-center" {title}>
   {icon && <Icon name={icon} class={`h-4 w-4 ${extraStyle}`} />}
   <a class={style} href={to} {...rest}>
     <slot />

@@ -1,0 +1,15 @@
+---
+export interface Props {
+  datePublished?: string;
+  dateModified?: string;
+  authors?: Array<Author>;
+  tags?: string[];
+}
+
+const { datePublished, dateModified, authors, tags } = Astro.props;
+---
+
+{datePublished && <meta property="article:published_time" content={datePublished} />}
+{dateModified && <meta property="article:modified_time" content={dateModified} />}
+{authors?.map(({ firstName, lastName }: Author) => <meta property="article:author" content={`${firstName} ${lastName}`} />)}
+{tags?.map((tag: string) => <meta property="article:tag" content={tag} />)}

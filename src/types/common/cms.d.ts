@@ -13,13 +13,15 @@ type Author = {
 interface IFrontmatterBase {
   title?: string;
   headline?: string;
+  cover?: Image;
+
   metaTitle?: string;
   metaDescription?: string;
-
-  cover?: Image;
+  keywords?: string;
 
   noindex?: boolean;
   nofollow?: boolean;
+
   slug?: string;
 }
 
@@ -28,16 +30,19 @@ interface IFrontmatterPost extends IFrontmatterBase {
   dateModified?: ISODate;
 
   authors?: string[];
+
+  tags?: string[];
+  categories?: string[];
+
   featured?: boolean;
 }
 
-interface IFrontmatterPage extends IFrontmatterBase {
-}
+interface IFrontmatterPage extends IFrontmatterBase {}
 
 interface IAstro {
-  url: any,
-  content: any,
-  Content: any,
+  url: any;
+  content: any;
+  Content: any;
   astro: {
     html: string;
   };
@@ -53,7 +58,7 @@ type AstroPost = IAstro & IFrontmatterPost;
 type AstroPage = IAstro & IFrontmatterPage;
 
 interface IPageAndPostCommon {
-  //TODO:
+  // TODO:
   html: string;
 
   slug: string;
@@ -61,12 +66,12 @@ interface IPageAndPostCommon {
   locale: string;
 }
 
-type Post =  Omit<IFrontmatterPost, 'authors' | 'slug'> &  IPageAndPostCommon & {
-  authors?: Array<Author>;
+type Post = Omit<IFrontmatterPost, 'authors' | 'slug'> &
+  IPageAndPostCommon & {
+    authors?: Array<Author>;
 
-  excerpt: string;
-  readingTime: number;
-}
+    excerpt: string;
+    readingTime: number;
+  };
 
-type Page =  Omit<IFrontmatterPage, 'slug'> &  IPageAndPostCommon & {
-}
+type Page = Omit<IFrontmatterPage, 'slug'> & IPageAndPostCommon;

@@ -11,9 +11,8 @@ export interface Props {
 const { emails } = Astro.props;
 ---
 
-{emails?.map(obfuscate)
-  .map((email: string, i: number) => (
-    <IconLink icon={i === 0 ? 'envelope' : ''} to={`mailto:${email}`}>
-      {email}
-    </IconLink>
+{emails?.map(obfuscate).map((email: string, i: number) => (
+  <IconLink icon={i === 0 ? 'envelope' : ''} to={`mailto:${email}`}>
+    {email}
+  </IconLink>
 ))}

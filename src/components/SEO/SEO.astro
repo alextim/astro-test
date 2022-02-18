@@ -3,11 +3,36 @@ export interface Props {
   seo: SEO;
 }
 
-const { title, description, canonical, noindex, nofollow } = Astro.props.seo;
+import i18n from '@/config/i18n';
+import seoConfig from '@/config/seoConfig';
+import config from '@/config/website';
+import SeoBase from './SeoBase.astro';
+
+const { seo } = Astro.props;
+
+const { siteUrl, siteLogo, themeColor } = config;
+
+if (themeColor) {
+  if (!seo.meta) {
+    seo.meta = [];
+  }
+  seo.meta.push({ name: 'theme-color', content: themeColor });
+}
+
+if (!seo.link) {
+  seo.link = [];
+}
+seo.link.push({ rel: 'author', type: 'text/plain', href: `${siteUrl}/humans.txt` });
+
+const pathname = Astro.request.url.pathname;
+const locale = Astro.request.params.locale || i18n.defaultLocale;
+
+//   const homeUrl = `${siteUrl}${localizePath('/', locale)}`;
+
+let imgUrl;
+if (seo.cover?.sm) {
+  imgUrl = `${siteUrl}${seo.cover?.sm}`;
+}
 ---
 
-{title ? <title>{title}</title> : null}
-{description ? <meta name="description" content={description} /> : null}
-<meta name="robots" content={`${noindex ? 'noindex' : 'index'}, ${nofollow ? 'nofollow' : 'follow'}`} />
-
-<link rel="canonical" href={canonical || Astro.request.canonicalURL.href} />
+<SeoBase {...{ siteUrl, siteLogo, i18n, pathname, locale, imgUrl, ...seo, ...seoConfig }} />

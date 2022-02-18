@@ -6,7 +6,6 @@ import { getPage } from '@/lib/cms';
 import Layout from '@/components/Layout/BaseLayout.astro';
 import Modal from '@/components/Modal.astro';
 
-
 const locale = Astro.request.params.locale || i18n.defaultLocale;
 const [page] = Astro.fetchContent('../../content/pages/home/home.??.md')
   .filter((p) => getLocaleFromPathname(p.file.pathname) === locale)
@@ -16,6 +15,7 @@ const { title, headline, metaTitle, metaDescription, noindex, nofollow } = page 
 const seo = {
   title: metaTitle,
   description: metaDescription,
+  headline,
   noindex,
   nofollow,
 };

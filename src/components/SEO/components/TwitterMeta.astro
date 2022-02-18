@@ -1,0 +1,50 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  imgUrl?: string;
+  twitter: {
+    image?: SeoImage;
+    creator?: string;
+    site?: string;
+  };
+}
+
+const {
+  title,
+  description,
+  imgUrl,
+  twitter: { card, image, creator, site },
+} = Astro.props;
+
+const hasImage = imgUrl || image?.src;
+
+let alt: string;
+let url: string;
+
+if (hasImage) {
+  if (imgUrl) {
+    alt = description;
+    url = imgUrl;
+  } else {
+    alt = image.alt || description;
+    url = image.src;
+  }
+}
+---
+
+{card && <meta name="twitter:card" content={card} />}
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+
+{hasImage && (
+  <meta name="twitter:image" content={url!} />
+  <meta name="twitter:image:alt" content={alt!} />
+)}
+{hasImage && image?.src && (
+  <meta name="twitter:image:width" content={image.width.toString()} />
+  <meta name="twitter:image:height" content={image.height.toString()} />
+)}
+
+{site && <meta name="twitter:site" content={site} />}
+{creator && <meta name="twitter:creator" content={creator} />}

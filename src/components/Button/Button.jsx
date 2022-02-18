@@ -1,6 +1,16 @@
 import Link from '../LocalizedLink';
 
-const Button = ({ to = '', target = '', overrideCSS = '', icon = '', children, as = 'button', secondary = false, variant = '', ...rest }) => {
+const Button = ({
+  to = '',
+  target = '',
+  overrideCSS = '',
+  icon = '',
+  children,
+  as = 'button',
+  secondary = false,
+  variant = '',
+  ...rest
+}) => {
   let styles = `
   shrink-0
   inline-flex items-center

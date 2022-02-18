@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import translate from '../../lib/translate';
+import translate from '@/lib/translate';
 
 export const ComponentContext = React.createContext();
 ComponentContext.displayName = 'ComponentContext';

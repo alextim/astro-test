@@ -1,7 +1,7 @@
 ---
 import utils from '@alextim/utils';
-import { localizePath } from '@/lib/i18n-utils';
 import i18n from '@/config/i18n';
+import { localizePath } from '@/lib/i18n-utils';
 import translate from '@/lib/translate';
 import { fetchContacts, fetchAddress, fetchTranslations } from '@/lib/api';
 import { getLocaleFromPathname } from '@/lib/pathname-utils';
@@ -15,19 +15,11 @@ const locale = Astro.request.params.locale || i18n.defaultLocale;
 const [page] = Astro.fetchContent('../../content/pages/contacts/contacts.??.md')
   .filter((p) => getLocaleFromPathname(p.file.pathname) === locale)
   .map(getPage);
-const { title, headline, metaTitle, metaDescription, noindex, nofollow } = page as Page;
-
+const { title, headline, metaTitle, metaDescription, noindex, nofollow, to } = page as Page;
 
 const translations = fetchTranslations(locale);
 const t: ITranslationFunc = function (key: string, params?: Record<string, string>): string {
   return translate(key, translations, params);
-};
-
-const seo = {
-  title: metaTitle,
-  description: metaDescription,
-  noindex,
-  nofollow,
 };
 
 const contacts = fetchContacts();
@@ -41,11 +33,25 @@ const {
   contactPoint,
 } = address;
 
-
 const styleItemsWrap = 'grid gap-3 xl:gap-0';
 
-const breadcrumbs = { lastItemTitle: title };
+const [home] = Astro.fetchContent('../../content/pages/home/home.??.md')
+  .filter((p) => getLocaleFromPathname(p.file.pathname) === locale)
+const breadcrumbs = [
+  { to: localizePath('/', locale), title: home.title },
+  { to, title },
+];
+
+const seo = {
+  title: metaTitle,
+  description: metaDescription,
+  headline,
+  noindex,
+  nofollow,
+  breadcrumbs,
+};
 ---
+
 <Layout {seo} {title} {headline} {breadcrumbs}>
   <Section>
     <div class="grid gap-8 xl:grid-cols-3">
@@ -55,26 +61,25 @@ const breadcrumbs = { lastItemTitle: title };
           <div class="mb-2">
             <div>{streetAddress}</div>
             <div>
-              {addressLocality} {postalCode}
+              {addressLocality}
+              {postalCode}
             </div>
             <div>{addressCountryName}</div>
           </div>
         </div>
 
         <div class="mb-2 font-bold">{t('contacts.opening_time')}</div>
-        {openingHours && <OrganizationOpeningHours {openingHours} {t} />}
+        {openingHours && <OrganizationOpeningHours openingHours={openingHours} t={t} />}
       </div>
 
       {contactPoint?.map(({ description, name, contactTypeName, emails, phones }) => (
-        <div class="flex flex-col mb-4 xl:pr-4 xl:last-of-type:pr-0">
+        <div class="mb-4 flex flex-col xl:pr-4 xl:last-of-type:pr-0">
           <div class="mb-2 font-bold">{description}</div>
           <div>{name}</div>
           <div class="mb-2">{contactTypeName}</div>
           <div class={styleItemsWrap}>
             {phones?.map((tel) => (
-              <a href={utils.phoneUrl(tel)}>
-                {utils.formatPhone(tel)}
-              </a>
+              <a href={utils.phoneUrl(tel)}>{utils.formatPhone(tel)}</a>
             ))}
             {emails?.map(utils.obfuscate).map((em: string) => (
               <a href={`mailto:${em}`}>{em}</a>
@@ -94,7 +99,6 @@ const breadcrumbs = { lastItemTitle: title };
       frameBorder="0"
       allowFullScreen=""
       aria-hidden="false"
-      loading="lazy"
-    />
+      loading="lazy"></iframe>
   </Section>
 </Layout>

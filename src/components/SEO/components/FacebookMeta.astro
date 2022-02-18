@@ -1,0 +1,89 @@
+---
+export interface Props {
+  i18n: I18n;
+  locale: string;
+
+  title: string;
+  description: string;
+  datePublished?: string;
+  dateModified?: string;
+  authors?: Array<Author>;
+  tags?: string[];
+
+  imgUrl: string;
+  pageUrl: string;
+  isArticle?: boolean;
+
+  facebook: {
+    image?: SeoImage;
+    fbAppID?: string;
+  };
+
+  socialLinks?: SocialLinks;
+}
+
+import FacebookArticleMeta from './FacebookArticleMeta.astro';
+
+const {
+  i18n,
+  locale,
+
+  title,
+  description,
+  datePublished,
+  dateModified,
+  authors,
+  tags,
+
+  imgUrl,
+  pageUrl,
+  isArticle,
+
+  facebook: { image, fbAppID },
+
+  socialLinks,
+} = Astro.props;
+
+const hasImage = imgUrl || image?.src;
+
+let alt: string;
+let url: string;
+
+if (hasImage) {
+  if (imgUrl) {
+    alt = description;
+    url = imgUrl;
+  } else {
+    alt = image.alt || description;
+    url = image.src;
+  }
+}
+---
+
+<meta property="og:locale" content={i18n.locales[locale]!.ogLocale} />
+
+{Object.keys(i18n.locales).filter((code) => code !== locale).map((code) => (
+  <meta property="og:locale:alternate" content={i18n.locales[code]!.ogLocale} />
+))}
+
+<meta property="og:site_name" content={i18n.locales[locale]!.siteShortName} />
+<meta property="og:url" content={pageUrl} />
+<meta property="og:type" content={isArticle ? 'article' : 'website'} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+
+{hasImage && (
+  <meta name="og:image" content={url!} />
+  <meta name="og:image:alt" content={alt!} />
+)}
+{hasImage && image?.src && (
+  <meta name="og:image:width" content={image.width.toString()} />
+  <meta name="og:image:height" content={image.height.toString()} />
+)}
+
+{isArticle && <FacebookArticleMeta {datePublished} {dateModified} {authors} {tags} />}
+
+{fbAppID && <meta property="fb:app_id" content={fbAppID} />
+
+{socialLinks?.facebook && (<meta property="article:publisher" content={socialLinks.facebook.to} />)}
+{socialLinks && (Object.keys(socialLinks).map((key) => (<meta property="og:see_also" content={socialLinks[key]!.to} />)))}

@@ -2,8 +2,8 @@ import readingTime from 'reading-time';
 import prune from 'underscore.string/prune';
 import sanitizeHTML from 'sanitize-html';
 
-import { localize } from './i18n-utils';
-import config from '../config/website';
+import { localize } from '@/lib/i18n-utils';
+import config from '@/config/website';
 import { getLocaleFromPathname, getSlugFromPathname } from './pathname-utils';
 import { fetchAuthors } from './api';
 

@@ -45,8 +45,8 @@ module.exports = {
     'airbnb',
     'airbnb/hooks',
     'eslint:recommended',
-    "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended",
+    'plugin:@typescript-eslint/eslint-recommended',
+    'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
     'plugin:jsx-a11y/recommended',
     'plugin:import/errors',
@@ -74,11 +74,13 @@ module.exports = {
     'react/jsx-uses-react': 'off',
     'react/react-in-jsx-scope': 'off',
 
-    'no-anonymous-exports-page-templates': 'warn',
-    'limited-exports-page-templates': 'warn',
-
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
-
+    '@typescript-eslint/no-empty-interface': [
+      'warn',
+      {
+        allowSingleExtends: false,
+      },
+    ],
     'prettier/prettier': 'error',
   },
 };

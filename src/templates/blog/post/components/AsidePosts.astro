@@ -13,7 +13,7 @@ const { title, posts } = Astro.props;
   <AsideWidget title={title}>
     <ul class="m-0 list-outside list-none">
       {posts.map(({ title: itemTitle, slug: to }: Post) => (
-        <li class="after:bg-[#b4d5e7] relative mb-3 bg-white py-1 px-4 after:absolute after:right-0 after:top-0 after:block after:h-full after:w-1 after:content-empty hover:after:w-full hover:after:transition-all">
+        <li class="relative mb-3 bg-white py-1 px-4 after:absolute after:right-0 after:top-0 after:block after:h-full after:w-1 after:bg-[#b4d5e7] after:content-empty hover:after:w-full hover:after:transition-all">
           <a
             href={to}
             class="relative z-10 mb-1 block border-b border-solid border-[#b4d5e7] pb-1 no-underline hover:text-white hover:no-underline hover:transition-all focus:no-underline active:no-underline"

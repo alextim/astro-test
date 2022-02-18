@@ -12,7 +12,7 @@ const formatDate = (d: any, locale: string, format: string): string => {
     dayjs.locale(ru);
   }
   if (!dayjs(d, 'YYYY-MM-DD', locale, true).isValid()) {
-    return d + '';
+    return d.toString();
   }
   return dayjs(d).format(format);
 };

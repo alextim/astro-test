@@ -11,15 +11,12 @@ declare namespace JSX {
   }
 }
 
-
 interface ILink {
   to: string;
   title: string;
 }
 
 type Link = ILink;
-
-
 
 type Phone = string;
 type Email = string;

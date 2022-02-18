@@ -26,6 +26,7 @@ const parseDow = (s: any): string => {
 
 const isDayOff = (timeStart: string, timeFinish: string) => timeStart === timeFinish && timeFinish === '00:00';
 ---
+
 <div class="grid grid-cols-[4rem_3rem_1rem_3rem] gap-[0.1rem]">
   {openingHours.map(([dow, timeStart, timeFinish]: OpeningHoursRow) => (
     <>

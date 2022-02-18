@@ -7,7 +7,6 @@ import SEO from '../SEO/SEO.astro';
 import Header from '../header/Header.astro';
 import Footer from '../footer/Footer.astro';
 
-const pathname = Astro.request.url.pathname;
 const locale: string = Astro.request.params.locale || i18n.defaultLocale;
 
 const contacts = fetchContacts();
@@ -17,17 +16,6 @@ const socialLinks = fetchSocialLinks(locale);
 const address = fetchAddress(locale);
 const translations = fetchTranslations(locale);
 
-const data = {
-  pathname,
-  locale,
-  contacts,
-  mainNav,
-  footerNav,
-  socialLinks,
-  address,
-  translations,
-};
-
 const { seo } = Astro.props;
 // const styleMain = `w-full flex-auto mt-${headerHeight.sm} pb-${headerHeight.sm} xl:mt-${headerHeight.xl} xl:pb-${headerHeight.xl}`
 
@@ -35,35 +23,33 @@ const { seo } = Astro.props;
 // @import "../styles/global.css";
 
 // to avoid tsc error
-const o = i18n.locales[locale];
-if (!o) {
+const currentLocale = i18n.locales[locale];
+if (!currentLocale) {
   throw new Error(`Unknown locale ${locale}`);
 }
-const htmlLang = o.htmlLang;
 ---
 
-<html lang={htmlLang}>
+<html lang={currentLocale.htmlLang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <SEO {seo} />
+    <SEO seo={{ ...seo, contacts, socialLinks, address }} />
 
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="preload" href="/assets/fonts/oswald-v36-cyrillic-700.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
 
     <link rel="stylesheet" href={Astro.resolve('../../styles/global.css')} />
-
     <style global>
 
     </style>
   </head>
   <body>
     <div class="flex flex-col min-h-screen">
-      <Header {data} />
+      <Header {contacts} {mainNav} {translations} />
       <main class="w-full flex-auto mt-14 pb-14 xl:mt-18 xl:pb-18">
         <slot />
       </main>
-      <Footer {data} />
+      <Footer {contacts} {footerNav} {socialLinks} {address} {translations} />
     </div>
   </body>
 </html>

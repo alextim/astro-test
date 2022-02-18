@@ -6,7 +6,7 @@ import { getPost, defaultSort } from '@/lib/cms';
 // import getPaths from '../../../lib/getPaths';
 import BlogIndex from '@/templates/blog/blog/blog.astro';
 
-export async function getStaticPaths({ paginate  } ) {
+export async function getStaticPaths({ paginate }) {
   const r = Object.keys(i18n.locales)
     .filter((locale) => locale !== i18n.defaultLocale)
     .map((locale) => {

@@ -19,10 +19,10 @@
  * @returns {Array}
  */
 
-import i18n from '../config/i18n';
-import { isDefaultLocale } from './i18n-utils';
-import { getLocaleFromPathname } from './pathname-utils';
-import { getPost } from './cms';
+import i18n from '@/config/i18n';
+import { isDefaultLocale } from '@/lib/i18n-utils';
+import { getLocaleFromPathname } from '@/lib/pathname-utils';
+import { getPost } from '@/lib/cms';
 
 function getPostsPaths(data: any[], isDefault = false) {
   let predicat: (locale: string) => boolean;

@@ -2,40 +2,27 @@ const getAuthor = (a: Array<Author> | undefined) => {
   if (!a || !a.length) {
     return null;
   }
-  return a.map(({ lastName, firstName }: Author) => ({
-    '@type': 'Person',
-    name: `${lastName} ${firstName}`.trim(),
-    // TODO: add Url of author profile
-    // url: 'http://example.com/profile/janedoe123'
+  return a.map(({ lastName = '', firstName = '' }: Author) => `${lastName} ${firstName}`.trim())
+    .filter(Boolean)
+    .map((name) => ({
+      '@type': 'Person',
+      name,
+      // TODO: add Url of author profile
+      // url: 'http://example.com/profile/janedoe123'
   }));
 };
 
-export interface Params {
-  organizationName: string;
-  siteUrl: string;
-  siteLogo: string;
-  publisher?: string;
-  htmlLang: string;
-
-  pageUrl: string;
-  pageType: string;
-
-  title: string;
-  headline?: string;
-  datePublished?: string;
-  dateModified?: string;
-  authors?: Array<Author>;
-  imgUrl?: string;
-}
-
 const getPageSchema = ({
+  htmlLang,
   organizationName,
+
   siteUrl,
   siteLogo,
+
   publisher,
-  htmlLang,
 
   pageUrl,
+
   pageType,
 
   title,
@@ -43,14 +30,16 @@ const getPageSchema = ({
   datePublished,
   dateModified,
   authors,
+
   imgUrl,
-}: Params) => {
-  const type = !pageType || !['Article', 'BlogPosting', 'Blog'].some((t) => pageType === t) ? 'WebPage' : pageType;
-  const isArticle = pageType === 'Article' || pageType === 'BlogPosting';
+}: PageSchemaParams) => {
+  if (!pageUrl) {
+    throw new Error('"pageUrl" is required');
+  }
 
   const o: Record<string, any> = {
     '@context': 'https://schema.org',
-    '@type': type,
+    '@type': !pageType || !['Article', 'BlogPosting', 'Blog'].some((t) => pageType === t) ? 'WebPage' : pageType,
     name: title,
     inLanguage: htmlLang,
     publisher: publisher || {
@@ -64,7 +53,7 @@ const getPageSchema = ({
     },
   };
 
-  if (isArticle) {
+  if (pageType === 'Article' || pageType === 'BlogPosting') {
     o.author = getAuthor(authors) || o.publisher;
     o.mainEntityOfPage = {
       '@type': 'WebPage',

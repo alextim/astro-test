@@ -1,5 +1,10 @@
 ---
-import getCardSchema from '@/lib/getCardSchema';
+import config from '@/config/website';
+import i18n from '@/config/i18n';
+
+import { fetchAddress } from '@/lib/api';
+import getPageSchema from '@/components/SEO/components/Schema/helpers/getPageSchema';
+
 import ReadMore from './ReadMore.astro';
 
 export interface Props {
@@ -11,31 +16,31 @@ const {
   readMore,
 } = Astro.props;
 
-const schema = JSON.stringify(
-  getCardSchema({
-    locale,
+const { siteUrl, siteLogo } = config;
+const address = fetchAddress(locale);
 
-    organizationName: 'test',
-    siteUrl: Astro.site.href,
+const schema = getPageSchema({
+  htmlLang: i18n.locales[locale]!.htmlLang,
+  organizationName: address.name,
+  siteUrl,
+  siteLogo,
 
-    publisher: '',
+  publisher: '',
 
-    to,
-    pageType: 'BlogPosting',
+  pageUrl: `${siteUrl}${to}`,
+  pageType: 'BlogPosting',
 
-    title,
-    headline: headline || metaDescription,
-    datePublished,
-    dateModified,
-    authors,
-    imgTo: cover && cover.sm ? cover.sm : '',
-  })
-);
-
+  title,
+  headline: headline || metaDescription,
+  datePublished,
+  dateModified,
+  authors,
+  imgUrl: cover && cover.sm ? `${siteUrl}${cover.sm}` : '',
+});
 ---
 
 <article class="bg-gray-50 rounded hover:shadow">
-  {`<script type="application/ld+json">${schema}</script>`}
+  {`<script type="application/ld+json">${JSON.stringify(schema)}</script>`}
   {cover ? (
     <a href={to}>
       <img class="h-auto w-full rounded-t" src={cover.sm} alt={cover.alt} title={cover.title} />

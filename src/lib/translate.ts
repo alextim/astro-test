@@ -1,8 +1,4 @@
-export default function translate(
-  key: string,
-  translations: Translations,
-  params?: Record<string, string>,
-): string {
+export default function translate(key: string, translations: Translations, params?: Record<string, string>): string {
   if (!key) {
     return 'Undefined translation key';
   }
@@ -20,7 +16,7 @@ export default function translate(
   }
   let s: string = e.value;
   ids.forEach((id) => {
-    s = s.replace(`{{${id}}}`, params[id] + '');
+    s = s.replace(`{{${id}}}`, String(params[id]));
   });
   return s;
 }

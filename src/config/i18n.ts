@@ -4,7 +4,7 @@
  * datePublished - PostInfo.jsx:     formatLocale
  * Site Title    - Logo.jsx:         siteShortName
  */
-const i18n: Required<i18n> = {
+const i18n: Required<I18n> = {
   locales: {
     uk: {
       htmlLang: 'uk', // uk-ua

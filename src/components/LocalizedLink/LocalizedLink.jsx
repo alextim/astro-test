@@ -1,4 +1,4 @@
-import { localizePath } from '../../lib/i18n-utils';
+import { localizePath } from '@/lib/i18n-utils';
 import { useLocale } from '../ComponentContext';
 
 const LocalizedLink = ({ to, children, ...rest }) => {

@@ -1,18 +1,11 @@
 ---
 import { Icon } from 'astro-icon';
-import i18n from '@/config/i18n';
-import { localizePath } from '@/lib/i18n-utils';
 
 export interface Props {
-  breadcrumbs?: {
-    items?: Array<Link>;
-    lastItemTitle: string;
-  };
+  breadcrumbs?: Array<Link>;
 }
 
-const locale: string = Astro.request.params.locale || i18n.defaultLocale;
 const { breadcrumbs } = Astro.props;
-const { items, lastItemTitle } = breadcrumbs || {};
 
 const styleItem = 'align-middle text-current';
 const styleLink = `
@@ -28,17 +21,21 @@ const styleLink = `
   after:rotate-45
   after:opacity-80
 `;
+
+const home = breadcrumbs[0];
+const tail = breadcrumbs[breadcrumbs.length -1];
 ---
+
 {breadcrumbs && (
-<nav aria-label="Breadcrumb" class="flex mb-0 whitespace-nowrap overflow-hidden text-ellipsis align-middle text-sm text-current">
-  <a class={`${styleItem} ${styleLink}`}  href={localizePath('/', locale)}>
-    <Icon name="home" class="w-4 h-4" />
-  </a>
-  {items?.map(({ to, title }: Link) => (
-    <a key={to} class={`${styleItem} ${styleLink}`} href={to}>
-      {title}
+  <nav aria-label="Breadcrumb" class="mb-0 flex overflow-hidden text-ellipsis whitespace-nowrap align-middle text-sm text-current">
+    <a class={`${styleItem} ${styleLink}`} href={home.to}>
+      <Icon name="home" class="h-4 w-4" />
     </a>
-  ))}
-  <span class={styleItem}>{lastItemTitle}</span>
-</nav>
+    {breadcrumbs.slice(1, -1).map(({ to, title }: Link) => (
+      <a key={to} class={`${styleItem} ${styleLink}`} href={to}>
+        {title}
+      </a>
+    ))}
+    <span class={styleItem}>{tail.title}</span>
+  </nav>
 )}

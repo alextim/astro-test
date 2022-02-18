@@ -1,0 +1,39 @@
+---
+export interface Props extends SEO {}
+
+import TwitterMeta from './components/TwitterMeta.astro';
+import FacebookMeta from './components/FacebookMeta.astro';
+import I18nMeta from './components/I18nMeta.astro';
+import AdditionalTags from './components/AdditionalTags.astro';
+import Schema from './components/Schema/Schema.astro';
+
+const { props } = Astro;
+
+const { title, description, keywords, canonical, noindex, nofollow, pageType, i18n, twitter, facebook } = props;
+
+const pageUrl = canonical || Astro.request.canonicalURL.href;
+
+const has_i18n = Object.keys(i18n.locales).length > 1;
+
+const propsBase: BaseSEO = {
+  ...props,
+  pageUrl,
+  isArticle: pageType === 'Article' || pageType === 'BlogPosting',
+};
+---
+
+<title>{title}</title>
+{description && <meta name="description" content={description} />}
+
+{keywords && <meta name="keywords" content={keywords} />}
+<meta name="robots" content={`${noindex ? 'no' : ''}index, ${nofollow ? 'no' : ''}follow`} />
+<link rel="canonical" href={pageUrl} />
+
+{has_i18n && <I18nMeta {...propsBase} />}
+
+{twitter && <TwitterMeta {...propsBase} />}
+
+{facebook && <FacebookMeta {...propsBase} />}
+
+<AdditionalTags {...propsBase} />
+<Schema {...propsBase} />

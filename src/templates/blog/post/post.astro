@@ -1,4 +1,5 @@
 ---
+import { localizePath } from '@/lib/i18n-utils';
 import { getPage } from '@/lib/cms';
 import translate from '@/lib/translate';
 import { fetchTranslations } from '@/lib/api';
@@ -19,7 +20,6 @@ export interface Props {
 
 const {
   locale,
-  to, // TODO:
 
   title,
   metaTitle,
@@ -33,6 +33,8 @@ const {
   readingTime,
   html,
   authors,
+
+  to,
 } = Astro.props.post;
 
 /* <AsideServices mainNav={mainNav} /> */
@@ -41,32 +43,37 @@ const t: ITranslationFunc = function (key: string, params?: Record<string, strin
   return translate(key, translations, params);
 };
 
+const [indexPage] = Astro.fetchContent('../../../../content/blog/pages/blog/blog.??.md')
+  .filter((p) => getLocaleFromPathname(p.file.pathname) === locale)
+  .map(getPage);
 
-const [indexPage] = Astro.fetchContent('../../../../content/blog/pages/blog/blog.??.md').filter((p) => getLocaleFromPathname(p.file.pathname) === locale).map(getPage);
+const [home] = Astro.fetchContent('../../../../content/pages/home/home.??.md')
+  .filter((p) => getLocaleFromPathname(p.file.pathname) === locale)
 
-const  breadcrumbs = {
-  lastItemTitle: title,
-  items: [{ to: indexPage?.to, title: indexPage?.title }],
-};
+const breadcrumbs = [
+  { to: localizePath('/', locale), title: home.title },
+  { to: indexPage?.to, title: indexPage?.title },
+  { to, title },
+];
 
 const seo = {
   title: metaTitle,
   description: metaDescription,
-  noindex,
-  nofollow,
-
-  locale,
   headline,
-  to,
-
-  breadcrumbs,
   datePublished,
   dateModified,
   authors,
+
+  noindex,
+  nofollow,
+
   pageType: 'BlogPosting',
-  imgPath: cover?.sm?.publicURL, // TODO:
+  cover, // TODO:
+
+  breadcrumbs,
 };
 ---
+
 <Layout {seo} {title} {headline} {breadcrumbs}>
   <PostInfo {authors} {datePublished} {readingTime} {t} />
   <InnerAsideLayout {cover} {html}>
