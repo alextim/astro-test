@@ -4,12 +4,13 @@ headline:
 metaTitle: Что такое коррозия? Защита металлоконструкций - СНЕЖНЫЙ БАРС
 metaDescription: Узнайте что такое коррозия и о методах ее предотвращения. Как защитить металлоконструкции от коррозии промышленными альпинистами
 cover:
-  sm: /assets/blog/posts/antikorrozionnyj-remont.jpg
-  xl:
+  src: /assets/blog/posts/antikorrozionnyj-remont.jpg
   alt: Фото покраска металлоконструкции от коррозии
 datePublished: 2019-04-25T17:38:00Z
 authors:
   - ak@example.com
+
+layout: ../../../layouts/blog/post/Post.astro
 ---
 
 Компания Снежный Барс предоставляет услуги по покраске металлических конструкций и другим работам на высоте.

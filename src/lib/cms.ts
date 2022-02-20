@@ -3,7 +3,7 @@ import i18n from '@/config/i18n';
 import { localize } from '@/lib/i18n-utils';
 import { getReadingTimeAndExcerpt, getAuthors } from './cms-utils';
 
-import { getSlugFromPathname } from './pathname-utils';
+import { getSlugFromFilePathname } from './file-pathname-utils';
 
 export function getPost({
   file,
@@ -16,7 +16,7 @@ export function getPost({
 }: Partial<AstroPost>,
   locale?: string,
 ): Post {
-  const slug = getSlugFromPathname(file?.pathname || '');
+  const slug = getSlugFromFilePathname(file?.pathname || '');
   if (!slug) {
     throw new Error(`Wrong pathname ${file?.pathname} in content`);
   }
@@ -79,7 +79,7 @@ export function getPage({
   }: Partial<AstroPage>,
   locale?: string,
 ): Page {
-  const slug = getSlugFromPathname(file?.pathname || '');
+  const slug = getSlugFromFilePathname(file?.pathname || '');
   if (!slug) {
     throw new Error(`Wrong pathname ${file?.pathname} in content`);
   }
@@ -91,7 +91,13 @@ export function getPageFromContent(
   pathname: string,
   locale?: string,
 ): Page {
-  const [slug] = pathname.split('/').slice(-2, -1);
+  let slug;
+  console.log(pathname, locale)
+  if (pathname === '/') {
+    slug = '/';
+  } else {
+    [slug] = pathname.split('/').slice(-2, -1);
+  }
   if (!slug) {
     throw new Error(`Wrong pathname ${pathname} in content`);
   }

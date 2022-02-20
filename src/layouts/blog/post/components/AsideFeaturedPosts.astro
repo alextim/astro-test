@@ -1,7 +1,8 @@
 ---
-import i18n from '@/config/i18n';
-import AsidePosts from './AsidePosts.astro';
+import { getLocaleFromUrlPathname} from '@/lib/url-pathname-utils';
 import { fetchPosts } from '@/lib/api';
+
+import AsidePosts from './AsidePosts.astro';
 
 export interface Props {
   t: ITranslationFunc;
@@ -10,7 +11,7 @@ export interface Props {
 const { t } = Astro.props;
 const title = t('post.widget.featured');
 
-const locale = Astro.request.params.locale || i18n.defaultLocale;
+const locale = getLocaleFromUrlPathname(Astro.request.url.pathname);
 
 const posts = await fetchPosts(locale, {
   filter: (p) => p.featured,

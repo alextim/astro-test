@@ -1,5 +1,5 @@
 ---
-import i18n from '@/config/i18n';
+import { getLocaleFromUrlPathname} from '@/lib/url-pathname-utils';
 import styleContainer from '../styleContainer';
 import NavbarWrap from './NavbarWrap';
 
@@ -12,7 +12,7 @@ export interface Props {
 //  TODO: contain: 'layout',
 //  TODO: boxShadow: shadows.raised,
 const pathname = Astro.request.url.pathname;
-const locale: string = Astro.request.params.locale || i18n.defaultLocale;
+const locale = getLocaleFromUrlPathname(Astro.request.url.pathname);
 
 const { contacts, mainNav, translations } = Astro.props;
 ---

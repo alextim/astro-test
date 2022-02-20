@@ -1,6 +1,6 @@
 ---
 import utils from '@alextim/utils';
-import i18n from '@/config/i18n';
+import { getLocaleFromUrlPathname} from '@/lib/url-pathname-utils';
 import translate from '@/lib/translate';
 import { fetchHome, fetchContacts, fetchAddress, fetchTranslations } from '@/lib/api';
 import { getPageFromContent } from '@/lib/cms';
@@ -9,8 +9,10 @@ import Layout from '@/components/Layout/Layout.astro';
 import Section from '@/components/Section.astro';
 import OrganizationOpeningHours from '@/components/organization/OrganizationOpeningHours.astro';
 
-const locale = Astro.request.params.locale || i18n.defaultLocale;
-const page = getPageFromContent(Astro.props.content, Astro.request.url.pathname, Astro.request.params.locale);
+const pathname = Astro.request.url.pathname;
+const locale = getLocaleFromUrlPathname(pathname);
+const page = getPageFromContent(Astro.props.content, pathname, locale);
+console.log(locale, pathname);
 
 const { title, headline, metaTitle, metaDescription, noindex, nofollow, to } = page;
 

@@ -1,6 +1,6 @@
 ---
 import config from '@/config/website';
-import i18n from '@/config/i18n';
+import { getLocaleFromUrlPathname} from '@/lib/url-pathname-utils';
 
 import { fetchHome, fetchBlogIndex, fetchTranslations } from '@/lib/api';
 
@@ -28,7 +28,7 @@ export interface Props {
   };
 }
 
-const locale = Astro.request.params.locale || i18n.defaultLocale;
+const locale = getLocaleFromUrlPathname(Astro.request.url.pathname);
 const home = await fetchHome(locale);
 const indexPage = await fetchBlogIndex(locale);
 

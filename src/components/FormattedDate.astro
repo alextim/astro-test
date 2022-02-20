@@ -1,12 +1,12 @@
 ---
-import i18n from '@/config/i18n';
 import formatDate from '@/lib/formatDate';
+import { getLocaleFromUrlPathname} from '@/lib/url-pathname-utils';
 
 export interface Props {
   date: string;
 }
 
-const locale = Astro.request.params.locale || i18n.defaultLocale;
+const locale = getLocaleFromUrlPathname(Astro.request.url.pathname);
 const DATE_FORMAT = 'MMM D, YYYY';
 const { date } = Astro.props;
 ---

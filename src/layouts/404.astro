@@ -1,8 +1,10 @@
 ---
 import { getPageFromContent } from '@/lib/cms';
+import { getLocaleFromUrlPathname} from '@/lib/url-pathname-utils';
 import Layout from '@/components/Layout/Layout.astro';
 
-const { title, headline, metaTitle, metaDescription, noindex, nofollow, html } = getPageFromContent(Astro.props.content, Astro.request.url.pathname, Astro.request.params.locale);
+const locale = getLocaleFromUrlPathname(Astro.request.url.pathname);
+const { title, headline, metaTitle, metaDescription, noindex, nofollow, html } = getPageFromContent(Astro.props.content, Astro.request.url.pathname, locale);
 
 const seo = {
   title: metaTitle,

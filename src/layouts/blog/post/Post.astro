@@ -1,5 +1,5 @@
 ---
-import i18n from '@/config/i18n';
+import { getLocaleFromUrlPathname} from '@/lib/url-pathname-utils';
 import { getPostFromContent } from '@/lib/cms';
 import translate from '@/lib/translate';
 import { fetchTranslations, fetchHome, fetchBlogIndex } from '@/lib/api';
@@ -12,7 +12,7 @@ import AsideRecentPosts from './components/AsideRecentPosts.astro';
 import PostInfo from './components/PostInfo.astro';
 import LastUpdated from './components/LastUpdated.astro';
 
-const locale = Astro.request.params.locale || i18n.defaultLocale;
+const locale = getLocaleFromUrlPathname(Astro.request.url.pathname);
 const {
   title,
   metaTitle,
