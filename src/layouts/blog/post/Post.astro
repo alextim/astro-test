@@ -2,7 +2,7 @@
 import { getLocaleFromUrlPathname} from '@/lib/url-pathname-utils';
 import { getPostFromContent } from '@/lib/cms';
 import translate from '@/lib/translate';
-import { fetchTranslations, fetchHome, fetchBlogIndex } from '@/lib/api';
+import { fetchTranslations, fetchBlogIndex } from '@/lib/api';
 import Layout from '@/components/Layout/Layout.astro';
 
 import InnerAsideLayout from '@/components/InnerAsideLayout.astro';
@@ -26,8 +26,6 @@ const {
   readingTime,
   html,
   authors,
-
-  to,
 } = getPostFromContent(Astro.props.content, Astro.request.canonicalURL.pathname, locale);
 
 /* <AsideServices mainNav={mainNav} /> */
@@ -36,14 +34,12 @@ const t: ITranslationFunc = function (key: string, params?: Record<string, strin
   return translate(key, translations, params);
 };
 
-const home = await fetchHome(locale);
-const indexPage = await fetchBlogIndex(locale);
-
-const breadcrumbs = [
-  { to: home?.to, title: home?.title },
-  { to: indexPage?.to, title: indexPage?.title },
-  { to, title },
-];
+const breadcrumbs = {
+  items: {
+    'blog-index': fetchBlogIndex,
+  },
+  tailTitle: title,
+};
 
 const seo = {
   title: metaTitle,
@@ -58,8 +54,6 @@ const seo = {
 
   pageType: 'BlogPosting',
   cover, // TODO:
-
-  breadcrumbs,
 };
 ---
 

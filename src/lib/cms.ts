@@ -92,7 +92,7 @@ export function getPageFromContent(
   locale?: string,
 ): Page {
   let slug;
-  console.log(pathname, locale)
+
   if (pathname === '/') {
     slug = '/';
   } else {

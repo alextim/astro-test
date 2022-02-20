@@ -54,6 +54,9 @@
   .at-menu-item-xl {
     @apply xl:h-full xl:justify-start xl:border-b-0 xl:p-4 xl:first-of-type:border-t-0;
   }
+  .at-breadcrumb-link {
+    @apply inline-flex items-center text-current after:content-empty after:block after:w-2 after:h-2 after:mx-2 after:border-t-2 after:border-r-2 after:border-solid after:border-current after:rotate-45 after:opacity-80
+  }
 }
 *,
 *::before,

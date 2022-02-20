@@ -2,7 +2,7 @@
 import config from '@/config/website';
 import { getLocaleFromUrlPathname} from '@/lib/url-pathname-utils';
 
-import { fetchHome, fetchBlogIndex, fetchTranslations } from '@/lib/api';
+import { fetchBlogIndex, fetchTranslations } from '@/lib/api';
 
 import translate from '@/lib/translate';
 
@@ -29,10 +29,9 @@ export interface Props {
 }
 
 const locale = getLocaleFromUrlPathname(Astro.request.url.pathname);
-const home = await fetchHome(locale);
 const indexPage = await fetchBlogIndex(locale);
 
-const  { html, title: defaultTitle, metaTitle, headline, metaDescription, noindex, nofollow, to } = indexPage as Page;
+const  { html, title: defaultTitle, metaTitle, headline, metaDescription, noindex, nofollow } = indexPage as Page;
 
 const {
   title,
@@ -62,10 +61,9 @@ if (total > 1) {
   }
 }
 
-const breadcrumbs = [
-  { to: home?.to, title: home?.title },
-  { to, title: title || defaultTitle },
-];
+const breadcrumbs = {
+  tailTitle: title || defaultTitle,
+};
 
 const seo = {
   title: metaTitle,
@@ -76,7 +74,6 @@ const seo = {
 
   pageType: 'Blog',
   link,
-  breadcrumbs,
 };
 ---
 

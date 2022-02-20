@@ -7,10 +7,9 @@ export interface Props {
 import getWebPageSchema from './helpers/getWebPageSchema';
 import getWebSiteSchema from './helpers/getWebSiteSchema';
 import getOrganizationSchema from './helpers/getOrganizationSchema';
-import getBreadcrumbsSchema from './helpers/getBreadcrumbsSchema';
 
 const { props } = Astro;
-const { pathname, breadcrumbs } = props as BaseSEO;
+const { pathname } = props as BaseSEO;
 
 const schemaWeSite = getWebSiteSchema(props);
 
@@ -19,11 +18,9 @@ const schemaWebPage = getWebPageSchema({ ...props, headline: props.headline || p
 const isRoot = pathname === '/';
 
 const schemaOrg = isRoot ? getOrganizationSchema(props) : null;
-
-const schemaBreadcrumbs = !isRoot && breadcrumbs ? getBreadcrumbsSchema(props) : null;
 ---
 
 <script type="application/ld+json" set:html={JSON.stringify(schemaWeSite)} />
 <script type="application/ld+json" set:html={JSON.stringify(schemaWebPage)} />
 {isRoot && <script type="application/ld+json" set:html={JSON.stringify(schemaOrg)} />}
-{schemaBreadcrumbs && <script type="application/ld+json" set:html={JSON.stringify(schemaBreadcrumbs)} />}
+

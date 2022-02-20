@@ -50,8 +50,6 @@ type SEO = PostSeo & {
 
   pageType: string;
 
-  breadcrumbs?: Array<Link>;
-
   meta?: Partial<SeoMeta>[];
   link?: Partial<SeoLink>[];
 };

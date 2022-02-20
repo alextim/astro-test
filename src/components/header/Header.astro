@@ -12,7 +12,7 @@ export interface Props {
 //  TODO: contain: 'layout',
 //  TODO: boxShadow: shadows.raised,
 const pathname = Astro.request.url.pathname;
-const locale = getLocaleFromUrlPathname(Astro.request.url.pathname);
+const locale = getLocaleFromUrlPathname(pathname);
 
 const { contacts, mainNav, translations } = Astro.props;
 ---

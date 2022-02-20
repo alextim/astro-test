@@ -2,7 +2,7 @@
 import utils from '@alextim/utils';
 import { getLocaleFromUrlPathname} from '@/lib/url-pathname-utils';
 import translate from '@/lib/translate';
-import { fetchHome, fetchContacts, fetchAddress, fetchTranslations } from '@/lib/api';
+import { fetchContacts, fetchAddress, fetchTranslations } from '@/lib/api';
 import { getPageFromContent } from '@/lib/cms';
 
 import Layout from '@/components/Layout/Layout.astro';
@@ -14,7 +14,7 @@ const locale = getLocaleFromUrlPathname(pathname);
 const page = getPageFromContent(Astro.props.content, pathname, locale);
 console.log(locale, pathname);
 
-const { title, headline, metaTitle, metaDescription, noindex, nofollow, to } = page;
+const { title, headline, metaTitle, metaDescription, noindex, nofollow } = page;
 
 const translations = fetchTranslations(locale);
 const t: ITranslationFunc = function (key: string, params?: Record<string, string>): string {
@@ -34,11 +34,9 @@ const {
 
 const styleItemsWrap = 'grid gap-3 xl:gap-0';
 
-const home = await fetchHome(locale);
-const breadcrumbs = [
-  { to: home?.to, title: home?.title },
-  { to, title },
-];
+const breadcrumbs = {
+  tailTitle: title,
+};
 
 const seo = {
   title: metaTitle,
@@ -46,7 +44,6 @@ const seo = {
   headline,
   noindex,
   nofollow,
-  breadcrumbs,
 };
 ---
 
