@@ -1,5 +1,5 @@
 type Image = {
-  sm: string;
+  src: string;
   xl?: string;
   alt?: string;
 };

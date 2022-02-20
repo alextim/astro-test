@@ -30,8 +30,8 @@ const locale = Astro.request.params.locale || i18n.defaultLocale;
 //   const homeUrl = `${siteUrl}${localizePath('/', locale)}`;
 
 let imgUrl;
-if (seo.cover?.sm) {
-  imgUrl = `${siteUrl}${seo.cover?.sm}`;
+if (seo.cover?.src) {
+  imgUrl = `${siteUrl}${seo.cover?.src}`;
 }
 ---
 

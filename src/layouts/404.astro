@@ -1,0 +1,16 @@
+---
+import { getPageFromContent } from '@/lib/cms';
+import Layout from '@/components/Layout/Layout.astro';
+
+const { title, headline, metaTitle, metaDescription, noindex, nofollow, html } = getPageFromContent(Astro.props.content, Astro.request.url.pathname, Astro.request.params.locale);
+
+const seo = {
+  title: metaTitle,
+  description: metaDescription,
+  headline,
+  noindex,
+  nofollow,
+};
+---
+
+<Layout {seo} {title}><div set:html={html} /></Layout>

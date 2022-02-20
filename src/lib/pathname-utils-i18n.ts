@@ -7,15 +7,17 @@ export const getDirFromPathname = (pathname: string): string => {
 };
 
 export const getSlugFromPathname = (pathname: string): string => {
-  const [name] = pathname.split('/').slice(-1);
+  const [dir, name] = pathname.split('/').slice(-2);
   if (!name) {
     throw new Error(`Wrong pathname ${pathname}.`);
   }
   const [fileName] = name.split('.');
-  if (!fileName) {
-    throw new Error(`Wrong pathname ${pathname}.`);
+
+  const result = fileName === 'index' ? dir : fileName;
+  if (!result) {
+    throw new Error(`Wrong pathname ${pathname}`);
   }
-  return fileName;
+  return result;
 };
 
 export const getLocaleFromPathname = (pathname: string, warnings = false): string => {

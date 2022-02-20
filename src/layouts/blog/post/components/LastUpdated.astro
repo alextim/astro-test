@@ -1,0 +1,16 @@
+---
+import FormattedDate from '@/components/FormattedDate.astro';
+
+export interface Props {
+  dateModified: string;
+  t: ITranslationFunc;
+}
+
+const { dateModified, t } = Astro.props;
+---
+{dateModified && (
+<div class="mt-5 text-xs">
+  <span class="inline-block first-letter:uppercase after:content-[':'] mr-1">{t('post.lastUpdated')}</span>
+  <FormattedDate date={dateModified} />
+</div>
+)}

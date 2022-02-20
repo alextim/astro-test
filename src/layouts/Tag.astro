@@ -1,0 +1,16 @@
+---
+import getPaths from '@/lib/getPaths';
+
+
+
+const {
+  title, headline, metaTitle, metaDescription, noindex, nofollow, astro: { html }
+} = Astro.props.content;
+
+
+---
+Hello
+
+<div set:html={html} />
+
+

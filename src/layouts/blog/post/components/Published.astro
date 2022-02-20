@@ -1,0 +1,15 @@
+---
+import FormattedDate from '@/components/FormattedDate.astro';
+
+export interface Props {
+  date: string;
+}
+
+const { date } = Astro.props;
+---
+
+{date && (
+  <div class="mb-2 text-xs">
+    <FormattedDate date={date} />
+  </div>
+)}

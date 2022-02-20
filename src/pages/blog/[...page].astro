@@ -1,0 +1,17 @@
+---
+import config from '@/config/website';
+import { getPost, defaultSort } from '@/lib/cms';
+import PostList from '../../layouts/blog/blog-index/components/PostList.astro';
+
+export async function getStaticPaths({ paginate }) {
+  const posts = Astro.fetchContent('./*.md')
+    .sort(defaultSort)
+    .map((p) => getPost(p));
+
+  return paginate(posts, { pageSize: config.pageSize });
+}
+
+const { page } = Astro.props;
+---
+<PostList {page} />
+

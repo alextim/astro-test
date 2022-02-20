@@ -1,0 +1,75 @@
+---
+import i18n from '@/config/i18n';
+import { getPostFromContent } from '@/lib/cms';
+import translate from '@/lib/translate';
+import { fetchTranslations, fetchHome, fetchBlogIndex } from '@/lib/api';
+import Layout from '@/components/Layout/Layout.astro';
+
+import InnerAsideLayout from '@/components/InnerAsideLayout.astro';
+// import AsideServices from '../../service/components/AsideServices.astro';
+import AsideFeaturedPosts from './components/AsideFeaturedPosts.astro';
+import AsideRecentPosts from './components/AsideRecentPosts.astro';
+import PostInfo from './components/PostInfo.astro';
+import LastUpdated from './components/LastUpdated.astro';
+
+const locale = Astro.request.params.locale || i18n.defaultLocale;
+const {
+  title,
+  metaTitle,
+  headline,
+  metaDescription,
+  cover,
+  noindex,
+  nofollow,
+  datePublished,
+  dateModified,
+  readingTime,
+  html,
+  authors,
+
+  to,
+} = getPostFromContent(Astro.props.content, Astro.request.canonicalURL.pathname, locale);
+
+/* <AsideServices mainNav={mainNav} /> */
+const translations = fetchTranslations(locale);
+const t: ITranslationFunc = function (key: string, params?: Record<string, string>): string {
+  return translate(key, translations, params);
+};
+
+const home = await fetchHome(locale);
+const indexPage = await fetchBlogIndex(locale);
+
+const breadcrumbs = [
+  { to: home?.to, title: home?.title },
+  { to: indexPage?.to, title: indexPage?.title },
+  { to, title },
+];
+
+const seo = {
+  title: metaTitle,
+  description: metaDescription,
+  headline,
+  datePublished,
+  dateModified,
+  authors,
+
+  noindex,
+  nofollow,
+
+  pageType: 'BlogPosting',
+  cover, // TODO:
+
+  breadcrumbs,
+};
+---
+
+<Layout {seo} {title} {headline} {breadcrumbs}>
+  <PostInfo {authors} {datePublished} {readingTime} {t} />
+  <InnerAsideLayout cover={cover} html={html}>
+    <aside slot="aside" class="flex flex-col">
+      <AsideFeaturedPosts t={t} />
+      <AsideRecentPosts t={t} />
+    </aside>
+  </InnerAsideLayout>
+  {dateModified && ((datePublished && dateModified !== datePublished) || !datePublished) ? <LastUpdated dateModified={dateModified} t={t} /> : null}
+</Layout>

@@ -1,52 +1,55 @@
-import readingTime from 'reading-time';
-import prune from 'underscore.string/prune';
-import sanitizeHTML from 'sanitize-html';
-
-import { localize } from '@/lib/i18n-utils';
 import config from '@/config/website';
-import { getLocaleFromPathname, getSlugFromPathname } from './pathname-utils';
-import { fetchAuthors } from './api';
+import i18n from '@/config/i18n';
+import { localize } from '@/lib/i18n-utils';
+import { getReadingTimeAndExcerpt, getAuthors } from './cms-utils';
 
-const getReadingTime = (pureText: string): number => {
-  const stats = readingTime(pureText);
-  if (!stats.minutes) {
-    return 0;
-  }
-  return stats.minutes > 1 ? Math.ceil(stats.minutes) : 1;
-};
-
-const getExcerpt = (pureText: string): string => prune(pureText, config.pruneLength, '…');
-
-const getAuthors = (authors: undefined | string[], locale: string): Array<Author> | undefined => {
-  if (!authors) {
-    return undefined;
-  }
-  const allAuthors = fetchAuthors(locale);
-  return allAuthors.filter((el: { email: string }) => authors.some((email) => email === el.email));
-};
+import { getSlugFromPathname } from './pathname-utils';
 
 export function getPost({
-  astro: { html },
-  file: { pathname },
+  file,
   // Strip Astro
   url,
   content,
   Content,
 
-  title,
-  headline,
-  metaTitle,
-  metaDescription,
-
-  authors,
-
-  slug: sourceSlug,
   ...rest
-}: AstroPost): Post {
-  const locale = getLocaleFromPathname(pathname);
-  const pureText = sanitizeHTML(html, { allowedTags: [], allowedAttributes: {} });
+}: Partial<AstroPost>,
+  locale?: string,
+): Post {
+  const slug = getSlugFromPathname(file?.pathname || '');
+  if (!slug) {
+    throw new Error(`Wrong pathname ${file?.pathname} in content`);
+  }
+  return _getPost({ ...rest }, slug, locale);
+}
 
-  const slug: string = sourceSlug || getSlugFromPathname(pathname);
+export function getPostFromContent(
+  astroPost: AstroPost,
+  pathname: string,
+  locale?: string,
+): Post {
+  const [slug] = pathname.split('/').slice(-2, -1);
+  if (!slug) {
+    throw new Error(`Wrong pathname ${pathname} in content`);
+  }
+  return _getPost(astroPost, slug, locale);
+}
+
+export function _getPost({
+    astro,
+
+    title,
+    headline,
+    metaTitle,
+    metaDescription,
+
+    authors,
+    ...rest
+  }: Partial<AstroPost>,
+  slug: string,
+  locale: string = i18n.defaultLocale,
+): Post {
+  const html = astro?.html || '';
 
   return {
     ...rest,
@@ -56,8 +59,7 @@ export function getPost({
     metaDescription: metaDescription || headline,
 
     html,
-    readingTime: getReadingTime(pureText),
-    excerpt: getExcerpt(pureText),
+    ...getReadingTimeAndExcerpt(html, config.pruneLength),
 
     authors: getAuthors(authors, locale),
 
@@ -68,24 +70,48 @@ export function getPost({
 }
 
 export function getPage({
-  astro: { html },
-  file: { pathname },
-  // Strip Astro
-  url,
-  content,
-  Content,
+    file,
+    // Strip Astro
+    url,
+    content,
+    Content,
+    ...rest
+  }: Partial<AstroPage>,
+  locale?: string,
+): Page {
+  const slug = getSlugFromPathname(file?.pathname || '');
+  if (!slug) {
+    throw new Error(`Wrong pathname ${file?.pathname} in content`);
+  }
+  return _getPage({ ...rest }, slug, locale);
+}
 
-  title,
-  headline,
-  metaTitle,
-  metaDescription,
+export function getPageFromContent(
+  astroPage: AstroPage,
+  pathname: string,
+  locale?: string,
+): Page {
+  const [slug] = pathname.split('/').slice(-2, -1);
+  if (!slug) {
+    throw new Error(`Wrong pathname ${pathname} in content`);
+  }
+  return _getPage(astroPage, slug, locale);
+}
 
-  slug: sourceSlug,
-  ...rest
-}: AstroPage): Page {
-  const locale = getLocaleFromPathname(pathname);
 
-  const slug: string = sourceSlug || getSlugFromPathname(pathname);
+function _getPage({
+    astro,
+
+    title,
+    headline,
+    metaTitle,
+    metaDescription,
+
+    ...rest
+  }: Partial<AstroPage>,
+  slug: string,
+  locale: string = i18n.defaultLocale,
+): Page {
 
   return {
     ...rest,
@@ -94,13 +120,14 @@ export function getPage({
     metaTitle: metaTitle || title,
     metaDescription: metaDescription || headline,
 
-    html,
+    html: astro?.html || '',
 
     slug,
-    to: localize(slug, locale),
-    locale,
+    to: localize(slug, locale || i18n.defaultLocale),
+    locale: locale || i18n.defaultLocale,
   };
 }
+
 
 export function defaultSort(a: any, b: any): number {
   return new Date(b.datePublished).valueOf() - new Date(a.datePublished).valueOf();
