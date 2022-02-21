@@ -45,7 +45,10 @@ const styleLink = 'transition-shadow hover:shadow hover:no-underline';
         return <span class="style">{page}</span>;
       }
       return (
-        <a href={page === 1 ? basePath : `${basePath}${page}/`} class={`${style} ${styleLink}${page === currentPage ? 'text-black shadow-md' : ''}`}>
+        <a
+          href={page === 1 ? basePath : `${basePath}${page}/`}
+          class={`${style} ${styleLink}${page === currentPage ? 'text-black shadow-md' : ''}`}
+        >
           {page}
         </a>
       );

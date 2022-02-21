@@ -1,5 +1,5 @@
 ---
-import { getLocaleFromUrlPathname} from '@/lib/url-pathname-utils';
+import getLocaleFromUrlPathname from '@/helpers/getLocaleFromUrlPathname';
 import styleContainer from '../styleContainer';
 import NavbarWrap from './NavbarWrap';
 
@@ -17,7 +17,7 @@ const locale = getLocaleFromUrlPathname(pathname);
 const { contacts, mainNav, translations } = Astro.props;
 ---
 
-<header role="navigation" class="w-full h-14 xl:h-18 fixed top-0 left-0 text-sm shadow-sm z-30">
+<header role="navigation" class="w-full h-header xl:h-header-xl fixed top-0 left-0 text-sm shadow-sm z-30">
   <div class={`flex items-center h-full ${styleContainer}`}>
     <NavbarWrap client:load context={{ pathname, locale, contacts, mainNav, translations }} />
   </div>

@@ -15,6 +15,6 @@ const { title, headline, breadcrumbs, seo } = Astro.props as Props;
 
 <BaseLayout {seo}>
   {breadcrumbs && <Breadcrumbs breadcrumbs={breadcrumbs} />}
-  <PageHeader title={title} headline={headline} />
+  <PageHeader {title} {headline} />
   <slot />
 </BaseLayout>

@@ -4,7 +4,7 @@ headline:
 metaTitle: 'Гідроізоляція рідкої гумою: за чи проти? - СНІЖНИЙ БАРС'
 metaDescription: 'Дізнайтеся про гідроізоляції рідкою гумою: плюси, мінуси, специфіка нанесення покриття професійними промисловими альпіністами \" Сніговий Барс \ "'
 cover:
-  src: "/assets/blog/posts/gidroizolyacziya-zhidkoj-rezinoj.jpg"
+  src: '/assets/blog/posts/gidroizolyacziya-zhidkoj-rezinoj.jpg'
   alt: 'Фото Гідроізоляція рідкої гумою промальп "Сніговий Барс"'
 datePublished: 2019-05-02T16:38:00Z
 authors:

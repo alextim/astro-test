@@ -9,6 +9,9 @@ cover:
 datePublished: 2019-04-25T17:38:00Z
 authors:
   - ak@example.com
+tags:
+  - вася
+  - инна
 
 layout: ../../layouts/blog/post/Post.astro
 ---

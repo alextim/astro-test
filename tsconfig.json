@@ -1,19 +1,24 @@
 {
   "compilerOptions": {
-    "target": "ES2021",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "target": "ESNext",
     "removeComments": true,
 
     "baseUrl": ".",
     "paths": {
       "@/components/*": ["src/components/*"],
-      "@/templates/*": ["src/templates/*"],
+      "@/config/*": ["src/config/*"],
+      "@/api/*": ["src/api/*"],
+      "@/cms/*": ["src/cms/*"],
       "@/lib/*": ["src/lib/*"],
-      "@/config/*": ["src/config/*"]
+      "@/helpers/*": ["src/helpers/*"],
+      "@/layouts/*": ["src/layouts/*"]
     },
 
     "typeRoots": [ "./types", "./node_modules/@types"],
     "esModuleInterop": true,
-    "moduleResolution": "node",
+    "types": ["vite/client", "node"],
 
     "sourceMap": true,
 
@@ -30,11 +35,12 @@
     "allowJs": true,
     "jsx": "react"
   },
-  "include": ["./**/*.ts"],
+  "include": ["./**/*.ts", "astro.config.mjs"],
   "exclude": [
     "node_modules/**/*",
     "dist",
     "scripts",
-    "types"
+    "types",
+    ".vscode"
   ]
 }

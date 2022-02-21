@@ -20,7 +20,6 @@ const isRoot = pathname === '/';
 const schemaOrg = isRoot ? getOrganizationSchema(props) : null;
 ---
 
-<script type="application/ld+json" set:html={JSON.stringify(schemaWeSite)} />
-<script type="application/ld+json" set:html={JSON.stringify(schemaWebPage)} />
+<script type="application/ld+json" set:html={JSON.stringify(schemaWeSite)}></script>
+<script type="application/ld+json" set:html={JSON.stringify(schemaWebPage)}></script>
 {isRoot && <script type="application/ld+json" set:html={JSON.stringify(schemaOrg)} />}
-

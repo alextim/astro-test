@@ -2,14 +2,15 @@ const getAuthor = (a: Array<Author> | undefined) => {
   if (!a || !a.length) {
     return null;
   }
-  return a.map(({ lastName = '', firstName = '' }: Author) => `${lastName} ${firstName}`.trim())
+  return a
+    .map(({ lastName = '', firstName = '' }: Author) => `${lastName} ${firstName}`.trim())
     .filter(Boolean)
     .map((name) => ({
       '@type': 'Person',
       name,
       // TODO: add Url of author profile
       // url: 'http://example.com/profile/janedoe123'
-  }));
+    }));
 };
 
 const getWebPageSchema = ({

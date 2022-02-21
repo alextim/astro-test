@@ -20,8 +20,9 @@ const pathname = Astro.request.url.pathname;
 const links = await getLinks(pathname, tailTitle, items || []);
 const schema = getBreadcrumbsSchema(links);
 ---
+
 <nav aria-label="Breadcrumb" class="mb-0 flex overflow-hidden text-ellipsis whitespace-nowrap align-middle text-sm text-current">
-  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(schema)}></script>
   <a class="at-breadcrumb-link" href={links[0]!.to}>
     <Icon name="home" class="h-4 w-4" />
   </a>

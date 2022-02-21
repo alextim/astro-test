@@ -14,7 +14,7 @@ const styleWrapDefault = `
   bg-white
 
   absolute
-  top-14
+  top-header
   h-main-menu
 
   overflow-y-scroll

@@ -2,7 +2,7 @@
 import config from '@/config/website';
 import i18n from '@/config/i18n';
 
-import { fetchAddress } from '@/lib/api';
+import { fetchAddress } from '@/api/yamls';
 import getWebPageSchema from '@/components/SEO/components/Schema/helpers/getWebPageSchema';
 
 import ReadMore from './ReadMore.astro';
@@ -40,7 +40,7 @@ const schema = getWebPageSchema({
 ---
 
 <article class="bg-gray-50 rounded hover:shadow">
-  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(schema)}></script>
   {cover ? (
     <a href={to}>
       <img class="h-auto w-full rounded-t" src={cover.src} alt={cover.alt} title={cover.title} />

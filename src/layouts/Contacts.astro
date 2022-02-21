@@ -1,9 +1,9 @@
 ---
 import utils from '@alextim/utils';
-import { getLocaleFromUrlPathname} from '@/lib/url-pathname-utils';
+import getLocaleFromUrlPathname from '@/helpers/getLocaleFromUrlPathname';
 import translate from '@/lib/translate';
-import { fetchContacts, fetchAddress, fetchTranslations } from '@/lib/api';
-import { getPageFromContent } from '@/lib/cms';
+import { fetchContacts, fetchAddress, fetchTranslations } from '@/api/yamls';
+import { getPageFromContent } from '@/cms/page';
 
 import Layout from '@/components/Layout/Layout.astro';
 import Section from '@/components/Section.astro';

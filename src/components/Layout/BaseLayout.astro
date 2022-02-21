@@ -1,8 +1,8 @@
 ---
 import i18n from '@/config/i18n';
-import { getLocaleFromUrlPathname} from '@/lib/url-pathname-utils';
+import getLocaleFromUrlPathname from '@/helpers/getLocaleFromUrlPathname';
 
-import { fetchContacts, fetchMainNav, fetchFooterNav, fetchSocialLinks, fetchAddress, fetchTranslations } from '@/lib/api';
+import { fetchContacts, fetchMainNav, fetchFooterNav, fetchSocialLinks, fetchAddress, fetchTranslations } from '@/api/yamls';
 
 import SEO from '../SEO/SEO.astro';
 import Header from '../header/Header.astro';
@@ -47,7 +47,7 @@ if (!currentLocale) {
   <body>
     <div class="flex flex-col min-h-screen">
       <Header {contacts} {mainNav} {translations} />
-      <main class="w-full flex-auto mt-14 pb-14 xl:mt-18 xl:pb-18">
+      <main class="w-full flex-auto mt-header pb-header xl:mt-header-xl xl:pb-header-xl">
         <slot />
       </main>
       <Footer {contacts} {footerNav} {socialLinks} {address} {translations} />

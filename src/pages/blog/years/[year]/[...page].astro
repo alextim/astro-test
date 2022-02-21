@@ -1,0 +1,26 @@
+---
+import config from '@/config/website';
+import { getPost } from '@/cms/post';
+import { defaultSort } from '@/cms/shared';
+import PostList from '@/layouts/blog/blog-index/components/PostList.astro';
+
+export async function getStaticPaths({ paginate }) {
+  const posts = await Astro.fetchContent('../../*.md')
+    .filter((p) => p.datePublished)
+    .sort(defaultSort)
+    .map((p) => getPost(p));
+
+  const years = posts.map((p) => new Date(p.datePublished!).getFullYear());
+  const uniqueYears = [...new Set<number>(years)];
+
+  return uniqueYears.map((year) => {
+    const filteredPosts = posts.filter((p) => new Date(p.datePublished!).getFullYear() === year);
+    return paginate(filteredPosts, { params: { year: year.toString() }, pageSize: config.pageSize });
+  });
+}
+
+const { page } = Astro.props;
+const year = Astro.request.params.year;
+---
+
+<PostList {page} title={"Articles from " + year}/>

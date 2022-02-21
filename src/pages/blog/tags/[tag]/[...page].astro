@@ -1,0 +1,26 @@
+---
+import config from '@/config/website';
+import { getPost } from '@/cms/post';
+import { defaultSort } from '@/cms/shared';
+import PostList from '@/layouts/blog/blog-index/components/PostList.astro';
+
+export async function getStaticPaths({ paginate }) {
+  const posts = await Astro.fetchContent('../../*.md')
+    .filter((p) => p.tags)
+    .sort(defaultSort)
+    .map((p) => getPost(p));
+
+  const tags = posts.flatMap((p) => [...p.tags!])
+  const uniqueTags = [...new Set<string>(tags)]
+
+  return uniqueTags.map((tag) => {
+    const filteredPosts = posts.filter((p) => p.tags!.includes(tag));
+    return paginate(filteredPosts, { params: { tag }, pageSize: config.pageSize });
+  });
+}
+
+const { page } = Astro.props;
+const tag = Astro.request.params.tag;
+---
+
+<PostList {page} title={"Articles tagged " + tag}/>

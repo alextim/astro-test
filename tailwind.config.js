@@ -1,6 +1,32 @@
 // tailwind.config.cjs
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const plugin = require('tailwindcss/plugin');
+
 module.exports = {
   content: ['./public/**/*.html', './src/**/*.{astro,js,jsx,svelte,ts,tsx,vue}'],
+
+  corePlugins: {
+    // preflight: false,
+
+    // We disable those because they add stuff to the CSS file even when unused
+    filter: false,
+    backdropFilter: false,
+    ringWidth: false,
+    ringColor: false,
+    ringOffsetWidth: false,
+    ringOffsetColor: false,
+    // boxShadow: false,
+    // transform: false,
+    touchAction: false,
+    scrollSnapType: false,
+    // borderColor: false, // If we don't disable this, Tailwind will apply a default border color to all the elements
+    // borderOpacity: false,
+    // textOpacity: false,
+
+    // Things we might need in the future but disable for now as they also add stuff
+    fontVariantNumeric: false,
+  },
+
   theme: {
     container: {
       center: true,
@@ -33,10 +59,44 @@ module.exports = {
       },
       spacing: {
         18: '4.5rem',
+        'header': '3.5rem',
+        'header-xl': '4.5rem',
       },
       content: {
         empty: '""',
       },
     },
   },
+  plugins: [
+    /*
+    plugin(({ addComponents, theme }) => {
+      addComponents({
+
+
+      })
+    }),
+*/
+    plugin(({ addBase, theme }) => {
+      addBase({
+        // Small reset, preflight include a lot of stuff we don't use so let's make our own
+        '*, ::before, ::after': {
+          boxSizing: 'border-box',
+        },
+
+        'html,body': {
+          '-moz-osx-font-smoothing': 'grayscale',
+          '-webkit-font-smoothing': 'antialiased',
+          textRendering: 'optimizeSpeed',
+          margin: 0,
+          padding: 0,
+          overflowWrap: 'break-word',
+          wordWrap: 'break-word',
+        },
+
+        html: {
+          scrollPaddingTop: `calc(${theme('spacing.header')} + 1.5rem)`,
+        },
+      })
+    }),
+  ],
 };

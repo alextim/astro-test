@@ -38,7 +38,7 @@ const SubMenu = ({ title, to, items, path, onClick }) => {
         <div
           type="button"
           className={
-            `absolute right-0 h-full w-16 cursor-pointer 
+            `absolute right-0 h-full w-16 cursor-pointer
         after:absolute
         after:top-0
         after:bottom-0
@@ -64,7 +64,7 @@ const SubMenu = ({ title, to, items, path, onClick }) => {
       <ul
         className={
           visible
-            ? 'm-0 flex list-none flex-col bg-slate-50 p-0 xl:absolute xl:top-18 xl:left-0 xl:z-50 xl:bg-white xl:shadow-sm'
+            ? 'm-0 flex list-none flex-col bg-slate-50 p-0 xl:absolute xl:top-header-xl xl:left-0 xl:z-50 xl:bg-white xl:shadow-sm'
             : 'hidden'
         }
       >

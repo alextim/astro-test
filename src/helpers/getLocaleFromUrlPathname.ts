@@ -1,7 +1,7 @@
 import i18n from '@/config/i18n';
-import { isValidLocale } from './i18n-utils';
+import { isValidLocale } from '../lib/i18n-utils';
 
-export const getLocaleFromUrlPathname = (pathname: string): string => {
+const getLocaleFromUrlPathname = (pathname: string): string => {
   if (!pathname) {
     throw new Error('pathname reqired!');
   }
@@ -19,3 +19,5 @@ export const getLocaleFromUrlPathname = (pathname: string): string => {
 
   return i18n.defaultLocale;
 };
+
+export default getLocaleFromUrlPathname;

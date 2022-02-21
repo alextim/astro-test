@@ -1,6 +1,6 @@
 ---
-import { getLocaleFromUrlPathname} from '@/lib/url-pathname-utils';
-import { fetchPosts } from '@/lib/api';
+import getLocaleFromUrlPathname from '@/helpers/getLocaleFromUrlPathname';
+import { fetchPosts } from '@/api/posts';
 
 import AsidePosts from './AsidePosts.astro';
 
@@ -16,6 +16,6 @@ const locale = getLocaleFromUrlPathname(Astro.request.url.pathname);
 const posts = await fetchPosts(locale, {
   filter: (p) => p.featured,
 });
-
 ---
+
 {posts && posts.length > 0 && <AsidePosts title={title} posts={posts} />}

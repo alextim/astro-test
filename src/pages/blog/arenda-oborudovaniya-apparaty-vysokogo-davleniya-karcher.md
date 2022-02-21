@@ -15,6 +15,9 @@ authors:
   - email-only@example.com
   - not-exist@example.com-
 featured: true
+tags:
+  - петя
+  - вася
 
 layout: ../../layouts/blog/post/Post.astro
 ---

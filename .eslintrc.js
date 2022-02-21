@@ -1,3 +1,4 @@
+/** @type {import("@types/eslint").Linter.Config */
 module.exports = {
   root: true,
   globals: {
@@ -16,11 +17,23 @@ module.exports = {
     babelOptions: {
       presets: ['@babel/preset-react'],
     },
+    project: './tsconfig.json',
   },
   settings: {
     react: {
       version: 'detect',
     },
+    'import/parsers': {
+      '@typescript-eslint/parser': ['.ts', '.tsx']
+    },
+    'import/resolver': {
+      typescript: {
+        project: ['./tsconfig.json']
+      },
+      node: {
+        project: ['./tsconfig.json']
+      }
+    }
     /*
     'import/resolver': {
       'eslint-import-resolver-custom-alias': {
@@ -33,19 +46,13 @@ module.exports = {
     */
   },
   env: {
-    browser: true,
-    commonjs: true,
-    es6: true,
-    jest: true,
     node: true,
-    es2021: true,
   },
-
   extends: [
     'airbnb',
+    'airbnb-typescript',
     'airbnb/hooks',
     'eslint:recommended',
-    'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
     'plugin:jsx-a11y/recommended',
@@ -75,6 +82,7 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
 
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+    'import/no-unresolved': 'error',
     '@typescript-eslint/no-empty-interface': [
       'warn',
       {

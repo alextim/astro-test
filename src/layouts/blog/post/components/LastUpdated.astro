@@ -8,9 +8,10 @@ export interface Props {
 
 const { dateModified, t } = Astro.props;
 ---
+
 {dateModified && (
-<div class="mt-5 text-xs">
-  <span class="inline-block first-letter:uppercase after:content-[':'] mr-1">{t('post.lastUpdated')}</span>
-  <FormattedDate date={dateModified} />
-</div>
+  <div class="mt-5 text-xs">
+    <span class="mr-1 inline-block first-letter:uppercase after:content-[':']">{t('post.lastUpdated')}</span>
+    <FormattedDate date={dateModified} />
+  </div>
 )}

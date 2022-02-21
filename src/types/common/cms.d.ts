@@ -10,8 +10,27 @@ type Author = {
   firstName?: string;
 };
 
-interface IFrontmatterBase {
-  title?: string;
+type FooterNav = Array<Link>;
+
+type MainNavItem = Link & {
+  submenu?: Array<Link>;
+};
+
+type MainNav = Array<MainNavItem>;
+
+type SocialNetwork = 'facebook' | 'instagram';
+
+interface SocialLinks extends Record<string, Link> {}
+
+type TranslationItem = {
+  key: string;
+  value: string;
+};
+
+type Translations = Array<TranslationItem>;
+
+interface FrontmatterBase {
+  title: string;
   headline?: string;
   cover?: Image;
 
@@ -21,15 +40,20 @@ interface IFrontmatterBase {
 
   noindex?: boolean;
   nofollow?: boolean;
-
-  slug?: string;
 }
 
-interface IFrontmatterPost extends IFrontmatterBase {
+interface BaseObject extends FrontmatterBase {
+  html: string;
+
+  to: string;
+  locale: string;
+}
+
+interface FrontmatterPost extends FrontmatterBase {
   datePublished?: ISODate;
   dateModified?: ISODate;
 
-  authors?: string[];
+  authors?: Array<Author>;
 
   tags?: string[];
   categories?: string[];
@@ -37,41 +61,10 @@ interface IFrontmatterPost extends IFrontmatterBase {
   featured?: boolean;
 }
 
-interface IFrontmatterPage extends IFrontmatterBase {}
-
-interface IAstro {
-  url: any;
-  content: any;
-  Content: any;
-  astro: {
-    html: string;
-  };
-  file: {
-    pathname: string;
-  };
-  // content: any;
-  // Content: any;
-  // url: any;
+interface Post extends FrontmatterPost, BaseObject {
+  excerpt: string;
+  readingTime: number;
 }
 
-type AstroPost = IAstro & IFrontmatterPost;
-type AstroPage = IAstro & IFrontmatterPage;
-
-interface IPageAndPostCommon {
-  // TODO:
-  html: string;
-
-  slug: string;
-  to: string;
-  locale: string;
-}
-
-type Post = Omit<IFrontmatterPost, 'authors' | 'slug'> &
-  IPageAndPostCommon & {
-    authors?: Array<Author>;
-
-    excerpt: string;
-    readingTime: number;
-  };
-
-type Page = Omit<IFrontmatterPage, 'slug'> & IPageAndPostCommon;
+interface FrontmatterPage extends FrontmatterBase {}
+interface Page extends FrontmatterPage, BaseObject {}

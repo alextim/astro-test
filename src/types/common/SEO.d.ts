@@ -37,9 +37,7 @@ type SeoConfig = {
   googleAnalyticsID?: string;
 };
 
-type PostSeo = Omit<IFrontmatterPost, 'excerpt' | 'readingTime' | 'html' | 'featured' | 'authors'> & {
-  authors?: Array<Author>;
-};
+type PostSeo = Omit<FrontmatterPost, 'featured'>;
 
 type SEO = PostSeo & {
   contacts: Contacts;

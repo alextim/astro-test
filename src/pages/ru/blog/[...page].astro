@@ -1,6 +1,7 @@
 ---
 import config from '@/config/website';
-import { getPost, defaultSort } from '@/lib/cms';
+import { getPost } from '@/cms/post';
+import { defaultSort } from '@/cms/shared';
 import PostList from '../../../layouts/blog/blog-index/components/PostList.astro';
 
 export async function getStaticPaths({ paginate }) {
@@ -13,5 +14,5 @@ export async function getStaticPaths({ paginate }) {
 
 const { page } = Astro.props;
 ---
-<PostList {page} />
 
+<PostList {page} />

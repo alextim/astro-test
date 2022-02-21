@@ -1,8 +1,9 @@
 ---
-import { getLocaleFromUrlPathname} from '@/lib/url-pathname-utils';
-import { getPostFromContent } from '@/lib/cms';
+import getLocaleFromUrlPathname from '@/helpers/getLocaleFromUrlPathname';
+import { getPostFromContent } from '@/cms/post';
 import translate from '@/lib/translate';
-import { fetchTranslations, fetchBlogIndex } from '@/lib/api';
+import { fetchTranslations } from '@/api/yamls';
+import { fetchBlogIndex } from '@/api/pages';
 import Layout from '@/components/Layout/Layout.astro';
 
 import InnerAsideLayout from '@/components/InnerAsideLayout.astro';
@@ -13,20 +14,8 @@ import PostInfo from './components/PostInfo.astro';
 import LastUpdated from './components/LastUpdated.astro';
 
 const locale = getLocaleFromUrlPathname(Astro.request.url.pathname);
-const {
-  title,
-  metaTitle,
-  headline,
-  metaDescription,
-  cover,
-  noindex,
-  nofollow,
-  datePublished,
-  dateModified,
-  readingTime,
-  html,
-  authors,
-} = getPostFromContent(Astro.props.content, Astro.request.canonicalURL.pathname, locale);
+const { title, metaTitle, headline, metaDescription, cover, noindex, nofollow, datePublished, dateModified, readingTime, html, authors } =
+  getPostFromContent(Astro.props.content, Astro.request.canonicalURL.pathname, locale);
 
 /* <AsideServices mainNav={mainNav} /> */
 const translations = fetchTranslations(locale);
@@ -59,11 +48,13 @@ const seo = {
 
 <Layout {seo} {title} {headline} {breadcrumbs}>
   <PostInfo {authors} {datePublished} {readingTime} {t} />
-  <InnerAsideLayout cover={cover} html={html}>
+  <InnerAsideLayout {cover} {html}>
     <aside slot="aside" class="flex flex-col">
-      <AsideFeaturedPosts t={t} />
-      <AsideRecentPosts t={t} />
+      <AsideFeaturedPosts {t} />
+      <AsideRecentPosts {t} />
     </aside>
   </InnerAsideLayout>
-  {dateModified && ((datePublished && dateModified !== datePublished) || !datePublished) ? <LastUpdated dateModified={dateModified} t={t} /> : null}
+  {dateModified && ((datePublished && dateModified !== datePublished) || !datePublished) ? (
+    <LastUpdated dateModified={dateModified} t={t} />
+  ) : null}
 </Layout>
