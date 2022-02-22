@@ -1,0 +1,14 @@
+---
+import translate from '@/lib/translate';
+import getLocaleFromUrlPathname from '@/helpers/getLocaleFromUrlPathname';
+
+import { fetchTranslations } from '@/api/yamls';
+
+const locale = getLocaleFromUrlPathname(Astro.request.url.pathname);
+
+const translations = fetchTranslations(locale);
+const t: ITranslationFunc = function (key: string, params?: Record<string, string>): string {
+  return translate(key, translations, params);
+};
+---
+<div>{t('no.posts')}</div>

@@ -8,7 +8,7 @@ export async function getStaticPaths({ paginate }) {
   const posts = await Astro.fetchContent('../../*.md')
     .filter((p) => p.tags)
     .sort(defaultSort)
-    .map((p) => getPost(p));
+    .map((p) => getPost(p, 'ru'));
 
   const tags = posts.flatMap((p) => [...p.tags!]);
   const uniqueTags = [...new Set<string>(tags)];

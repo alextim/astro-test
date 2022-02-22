@@ -14,9 +14,11 @@ module.exports = {
       globalReturn: false,
       jsx: true,
     },
+    /*
     babelOptions: {
       presets: ['@babel/preset-react'],
     },
+    */
     project: './tsconfig.json',
   },
   settings: {

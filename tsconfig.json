@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "module": "es2022",
+    "module": "ESNext",
     "moduleResolution": "node",
-    "target": "es2021",
+    "target": "ESNext",
     "removeComments": true,
 
     "baseUrl": ".",
@@ -19,6 +19,7 @@
     "typeRoots": [ "./types", "./node_modules/@types"],
     "esModuleInterop": true,
     "types": ["vite/client", "node", "react", "react-dom"],
+    "lib": ["ES2021", "ESNext"],
     "sourceMap": true,
 
     "alwaysStrict": true,

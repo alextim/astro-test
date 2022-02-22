@@ -8,7 +8,7 @@ export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
   const posts = await Astro.fetchContent('../../*.md')
     .filter((p) => p.datePublished)
     .sort(defaultSort)
-    .map((p) => getPost(p));
+    .map((p) => getPost(p, 'ru'));
 
   const years = posts.map((p) => new Date(p.datePublished!).getFullYear());
   const uniqueYears = [...new Set<number>(years)];

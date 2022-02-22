@@ -1,20 +1,15 @@
-import dayjs from 'dayjs';
-import ru from 'dayjs/locale/ru';
-import uk from 'dayjs/locale/uk';
-
-const formatDate = (d: any, locale: string, format: string): string => {
+const formatDate = (d: any, locale: string, format = ''): string => {
   if (!d) {
     return '';
   }
-  if (locale === 'uk') {
-    dayjs.locale(uk);
-  } else if (locale === 'ru') {
-    dayjs.locale(ru);
-  }
-  if (!dayjs(d, 'YYYY-MM-DD', locale, true).isValid()) {
-    return d.toString();
-  }
-  return dayjs(d).format(format);
+  const options: Intl.DateTimeFormatOptions = {
+    timeZone: 'UTC',
+    year: 'numeric',
+    month: 'short',
+    day: '2-digit',
+  };
+
+  return new Date(d).toLocaleDateString(locale, options);
 };
 
 export default formatDate;

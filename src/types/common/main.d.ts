@@ -1,10 +1,11 @@
+import type { GetStaticPathsOptions as imported } from 'astro';
+
 declare namespace JSX {
   interface IntrinsicElements {
     [elemName: string]: any;
   }
 }
 
-import type { GetStaticPathsOptions as imported} from 'astro';
 type GetStaticPathsOptions = imported;
 
 interface ILink {

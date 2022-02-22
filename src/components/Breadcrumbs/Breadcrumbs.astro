@@ -6,17 +6,24 @@ import getBreadcrumbsSchema from './helpers/getBreadcrumbsSchema';
 export interface Props {
   breadcrumbs: {
     tailTitle: string;
-    items?: string[];
+    items?: string[] | string;
   };
 }
 
-const { items, tailTitle } = Astro.props.breadcrumbs;
+const { tailTitle } = (Astro.props as Props).breadcrumbs;
 if (!tailTitle) {
   throw new Error('tailTitle required!');
 }
 
-const pathname = Astro.request.url.pathname;
+let { items } = (Astro.props as Props).breadcrumbs;
+if (typeof items === 'string') {
+  items = items
+    .split(',')
+    .filter(Boolean)
+    .map((s: string) => s.trim());
+}
 
+const pathname = Astro.request.url.pathname;
 const links = await getLinks(pathname, tailTitle, items || []);
 const schema = getBreadcrumbsSchema(links);
 ---

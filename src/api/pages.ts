@@ -18,7 +18,7 @@ async function fetchExternalPageBySlug(slug: string, subpath: string, locale: st
   return getPage(result[0] as AstroFetchedContentPage, locale);
 }
 
-async function fetchPageBySlug(slug: string, locale: string) {
+async function _fetchPageBySlug(slug: string, locale: string) {
   if (!slug) {
     throw new Error('slug is required parameter');
   }
@@ -31,13 +31,40 @@ async function fetchPageBySlug(slug: string, locale: string) {
 }
 
 export async function fetchHome(locale: string) {
-  return fetchPageBySlug('index', locale);
+  return await _fetchPageBySlug('index', locale);
 }
 
 export async function fetchBlogIndex(locale: string) {
-  return fetchExternalPageBySlug('blog', 'blog/pages/blog', locale);
+  return await fetchExternalPageBySlug('blog', 'blog/pages/blog', locale);
 }
 
-export async function fetchYears(locale: string) {
-  return fetchPageBySlug('blog/years/index', locale);
+export async function _fetchYears(locale: string) {
+  return await _fetchPageBySlug('blog/years/index', locale);
+}
+
+export async function _fetchYearsYear(locale: string) {
+  return await fetchExternalPageBySlug('years', 'blog/pages/blog', locale);
+}
+
+export async function _fetchTagsTag(locale: string) {
+  return await fetchExternalPageBySlug('tags', 'blog/pages/blog', locale);
+}
+
+const pageNames: Record<string, any> = {
+  blog: fetchBlogIndex,
+  years: _fetchYears,
+  'years[year]': _fetchYearsYear,
+  'tags[tag]': _fetchTagsTag,
+};
+
+export async function fetchPageBySlug(slug: string, locale: string) {
+  if (!slug) {
+    throw new Error('slug is required parameter');
+  }
+  const f = pageNames[slug];
+  if (!f) {
+    throw new Error(`${slug} is not in list`);
+  }
+  const result = await f(locale);
+  return result;
 }

@@ -1,9 +1,8 @@
 ---
 import config from '@/config/website';
 import getLocaleFromUrlPathname from '@/helpers/getLocaleFromUrlPathname';
-
+import { fetchPageBySlug } from '@/api/pages';
 import { fetchTranslations } from '@/api/yamls';
-import { fetchBlogIndex } from '@/api/pages';
 
 import translate from '@/lib/translate';
 
@@ -17,7 +16,8 @@ import PostPagination from './PostPagination.astro';
 export interface Props {
   title?: string;
   readMoreKey?: string;
-  breadcrumbsItems?: string[] | string,
+  breadcrumbsItems?: string[] | string;
+  indexPageSlug: string;
   page: {
     data: Array<Post>;
     currentPage: number;
@@ -30,17 +30,17 @@ export interface Props {
   };
 }
 
-const locale = getLocaleFromUrlPathname(Astro.request.url.pathname);
-const indexPage = await fetchBlogIndex(locale);
-
-const { html, title: defaultTitle, metaTitle, headline, metaDescription, noindex, nofollow } = indexPage as Page;
-
 const {
-  title,
+  title: optionalTitle,
   readMoreKey,
   breadcrumbsItems,
+  indexPageSlug = 'blog',
   page: { data: posts, currentPage, total, url },
-} = Astro.props;
+} = Astro.props as Props;
+
+const locale = getLocaleFromUrlPathname(Astro.request.url.pathname);
+const indexPage = await fetchPageBySlug(indexPageSlug, locale);
+const { html, title: defaultTitle, metaTitle, headline, metaDescription, noindex, nofollow } = indexPage as Page;
 
 const siteUrl = Astro.site.href; //Astro.site.origin - without trailing slash
 
@@ -54,7 +54,6 @@ const readMore = t(readMoreKey || config.readMore);
 const isFirst = currentPage === 1;
 
 const link = [];
-
 if (total > 1) {
   if (url.prev) {
     link.push({ rel: 'prev', href: `${siteUrl}${url.prev}` });
@@ -64,9 +63,17 @@ if (total > 1) {
   }
 }
 
+let title: string;
+if (optionalTitle) {
+  title = `${defaultTitle} ${optionalTitle}`;
+} else {
+  title = defaultTitle;
+}
+title = title.trim();
+
 const breadcrumbs = {
-  items: Array.isArray(breadcrumbsItems) ? breadcrumbsItems : breadcrumbsItems?.split(',').filter(Boolean).map((s: string) => s.trim()),
-  tailTitle: title || defaultTitle,
+  items: breadcrumbsItems,
+  tailTitle: title,
 };
 
 const seo = {
@@ -81,7 +88,7 @@ const seo = {
 };
 ---
 
-<Layout {seo} title={title || defaultTitle} {headline} {breadcrumbs}>
+<Layout {seo} {title} {headline} {breadcrumbs}>
   {isFirst && html && <div class="mt-6 mb-10" set:html={html} />}
 
   <div class="grid gap-7 lg:grid-cols-2 xl:grid-cols-3">

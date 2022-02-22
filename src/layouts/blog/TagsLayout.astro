@@ -28,23 +28,25 @@ const seo = {
 
 const posts =
   (await fetchPosts(locale, {
-    filter: (p) => p.datePublished,
+    filter: (p) => p.tags,
   })) || [];
 
-const years: Array<[string, number]> = [
-  ...posts.map((p) => new Date(p.datePublished!).getFullYear()).reduce((acc, e) => acc.set(e, (acc.get(e) || 0) + 1), new Map()),
+const tags = [
+  ...posts
+    .flatMap((p) => [...p.tags!])
+    .reduce((acc, e) => acc.set(e, (acc.get(e) || 0) + 1), new Map()),
 ].sort((a, b) => {
-  return b[0] - a[0];
+  return b[1] - a[1];
 });
 ---
 
 <Layout {seo} {title} {headline} {breadcrumbs}>
   <section>
-    {years.length > 0 ? (
+    {tags.length > 0 ? (
       <ul>
-        {years.map(([year, count]) => (
+        {tags.map(([tag, count]) => (
           <li>
-            <a href={localizePath(`/blog/years/${year}/`, locale)}>{year}</a> ({count})
+            <a href={localizePath(`/blog/tags/${tag}/`, locale)}>{tag}</a> ({count})
           </li>
         ))}
       </ul>
