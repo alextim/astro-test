@@ -6,6 +6,9 @@ https://rodneylab.com/sveltekit-image-plugin/
 https://github.com/warpsio
 https://github.com/warpsio/astro-localization
 
+best!!!
+https://github.com/Princesseuh/princesseuh.dev
+
 // Astro.site.href
 // Astro.site.hostname
 

@@ -1,0 +1,50 @@
+---
+import Layout from '@/components/Layout/Layout.astro';
+import { localizePath } from '@/lib/i18n-utils';
+import getLocaleFromUrlPathname from '@/helpers/getLocaleFromUrlPathname';
+import { getPageFromContent } from '@/cms/page';
+import { fetchPosts } from '@/api/posts'
+
+const pathname = Astro.request.url.pathname;
+const locale = getLocaleFromUrlPathname(pathname);
+const page = getPageFromContent(Astro.props.content, pathname, locale);
+
+const { title, headline, metaTitle, metaDescription, noindex, nofollow } = page;
+
+const breadcrumbs = {
+  items: ['blog-index'],
+  tailTitle: title,
+};
+
+const seo = {
+  title: metaTitle,
+  description: metaDescription,
+  headline,
+  noindex,
+  nofollow,
+};
+
+const posts = await fetchPosts(locale, {
+  filter: (p) => p.datePublished,
+}) || [];
+
+const years: Array<[string, number]> = [
+  ...posts
+    .map((p) => new Date(p.datePublished!).getFullYear())
+    .reduce((acc, e) => acc.set(e, (acc.get(e) || 0) + 1), new Map()),
+].sort((a, b) => {
+  return b[0] - a[0]
+});
+---
+<Layout {seo} {title} {headline} {breadcrumbs}>
+  <section>
+    <h2 class="mb-3">Year</h2>
+    <ul>
+      {years.map(([year, count]) => (
+        <li>
+          <a href={localizePath(`/blog/years/${year}/`, locale)}>{year}</a> ({count})
+        </li>
+      ))}
+    </ul>
+  </section>
+</Layout>

@@ -10,7 +10,7 @@ datePublished: 2019-04-25T17:38:00Z
 authors:
   - ak@example.com
 
-layout: ../../../layouts/blog/post/Post.astro
+layout: ../../../layouts/blog/post/LayoutPost.astro
 ---
 
 Компания Снежный Барс предоставляет услуги по покраске металлических конструкций и другим работам на высоте.

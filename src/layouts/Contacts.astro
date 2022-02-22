@@ -12,7 +12,6 @@ import OrganizationOpeningHours from '@/components/organization/OrganizationOpen
 const pathname = Astro.request.url.pathname;
 const locale = getLocaleFromUrlPathname(pathname);
 const page = getPageFromContent(Astro.props.content, pathname, locale);
-console.log(locale, pathname);
 
 const { title, headline, metaTitle, metaDescription, noindex, nofollow } = page;
 

@@ -1,0 +1,15 @@
+---
+const {
+  title,
+  headline,
+  metaTitle,
+  metaDescription,
+  noindex,
+  nofollow,
+  astro: { html },
+} = Astro.props.content;
+---
+
+Hello
+
+<div set:html={html}></div>

@@ -17,6 +17,7 @@ import PostPagination from './PostPagination.astro';
 export interface Props {
   title?: string;
   readMoreKey?: string;
+  breadcrumbsItems?: string[] | string,
   page: {
     data: Array<Post>;
     currentPage: number;
@@ -37,6 +38,7 @@ const { html, title: defaultTitle, metaTitle, headline, metaDescription, noindex
 const {
   title,
   readMoreKey,
+  breadcrumbsItems,
   page: { data: posts, currentPage, total, url },
 } = Astro.props;
 
@@ -63,6 +65,7 @@ if (total > 1) {
 }
 
 const breadcrumbs = {
+  items: Array.isArray(breadcrumbsItems) ? breadcrumbsItems : breadcrumbsItems?.split(',').filter(Boolean).map((s: string) => s.trim()),
   tailTitle: title || defaultTitle,
 };
 

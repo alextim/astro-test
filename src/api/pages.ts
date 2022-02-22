@@ -37,3 +37,7 @@ export async function fetchHome(locale: string) {
 export async function fetchBlogIndex(locale: string) {
   return fetchExternalPageBySlug('blog', 'blog/pages/blog', locale);
 }
+
+export async function fetchYears(locale: string) {
+  return fetchPageBySlug('blog/years/index', locale);
+}

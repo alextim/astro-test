@@ -4,6 +4,9 @@ declare namespace JSX {
   }
 }
 
+import type { GetStaticPathsOptions as imported} from 'astro';
+type GetStaticPathsOptions = imported;
+
 interface ILink {
   to: string;
   title: string;

@@ -11,23 +11,27 @@ export interface Props {
   };
 }
 
-const { url, currentPage, total } = Astro.props;
+const { url, currentPage, total } = Astro.props as Props;
 
-const getBasePath = (pathname: string): string => {
+const getBasePath = (pathname: string, currentPage: number): string => {
+  if (currentPage === 1) {
+    return pathname;
+  }
   const a = pathname.split('/');
-  if (!pathname.endsWith('/')) {
+  let n: number;
+  if (pathname.endsWith('/')) {
+    n = 2;
+  } else {
+    n = 1;
     a.push('');
   }
-  if (isNaN(a[a.length - 2] as any)) {
-    // as any - to bypass compiler check
-    return a.join('/');
-  }
-  a.splice(-2, 1);
+  a.splice(-n, 1);
   return a.join('/');
 };
 
 const pages = pagination(currentPage, total);
-const basePath = getBasePath(url.current);
+
+const basePath = getBasePath(url.current, currentPage);
 
 const style = 'h-10 mx-1 min-w-[2.5rem] text-center';
 const styleLink = 'transition-shadow hover:shadow hover:no-underline';

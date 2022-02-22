@@ -1,8 +1,9 @@
 import getLocaleFromUrlPathname from '@/helpers/getLocaleFromUrlPathname';
-import { fetchHome, fetchBlogIndex } from '@/api/pages';
+import { fetchHome, fetchBlogIndex, fetchYears } from '@/api/pages';
 
 const pageNames: Record<string, any> = {
   'blog-index': fetchBlogIndex,
+  'years': fetchYears,
 };
 
 const getLinks = async (pathname: string, tailTitle: string, items: string[]) => {
@@ -14,10 +15,10 @@ const getLinks = async (pathname: string, tailTitle: string, items: string[]) =>
   }
 
   const a = await Promise.all(
-    Object.keys(items).map(async (name: string) => {
+    items.map(async (name: string) => {
       const f = pageNames[name];
       if (!f) {
-        throw new Error(`${name} is not in allowed list`);
+        throw new Error(`${name} is not in list`);
       }
       const p = await f(locale);
       if (!p) {

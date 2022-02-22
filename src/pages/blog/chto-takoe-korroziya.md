@@ -13,7 +13,7 @@ tags:
   - вася
   - инна
 
-layout: ../../layouts/blog/post/Post.astro
+layout: ../../layouts/blog/post/LayoutPost.astro
 ---
 
 Компанія Сніжний Барс надає послуги фарбування металоконструкцій та інших робіт на висоті.

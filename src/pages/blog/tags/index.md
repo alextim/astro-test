@@ -1,6 +1,6 @@
 ---
 title: Tags
-layout: ../../layouts/Tags.astro
+layout: ../../../layouts/blog/LayoutTags.astro
 ---
 
 Hello All Tags
