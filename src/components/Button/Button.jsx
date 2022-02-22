@@ -37,11 +37,7 @@ const Button = ({
   hover:bg-blue-500 focus:bg-blue-500
   hover:border-blue-900 focus:border-blue-900
 
-  active:no-underline active:outline-none
-
-  focus:no-underline focus:outline-none
-
-  hover:no-underline hover:outline-none
+  at-a at-a-undecorated
 
   focus:shadow
   `;

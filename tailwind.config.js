@@ -43,6 +43,10 @@ module.exports = {
           DEFAULT: '#0fa9e6',
           dark: '#0c87b8',
         },
+        action: {
+          primary: 'cyan',
+          highlite: 'white',
+        },
         brands: {
           skype: 'rgb(0, 175, 240)',
           viber: '#bcaec7',
@@ -68,14 +72,20 @@ module.exports = {
     },
   },
   plugins: [
-    /*
     plugin(({ addComponents, theme }) => {
       addComponents({
-
-
+        '.at-a': {
+          cursor: 'pointer',
+          textDecoration: 'none',
+        },
+        '.at-a-undecorated': {
+          ':active, :hover, :focus': {
+            outline: 0,
+            textDecoration: 'none',
+          },
+        },
       })
     }),
-*/
     plugin(({ addBase, theme }) => {
       addBase({
         // Small reset, preflight include a lot of stuff we don't use so let's make our own

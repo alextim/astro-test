@@ -6,6 +6,7 @@ import { fetchAddress } from '@/api/yamls';
 import getWebPageSchema from '@/components/SEO/components/Schema/helpers/getWebPageSchema';
 
 import ReadMore from './ReadMore.astro';
+import TagList from '../../post/components/TagList.astro';
 
 export interface Props {
   post: Post;
@@ -14,7 +15,12 @@ export interface Props {
 const {
   post: { locale, cover, title, excerpt, headline, metaDescription, datePublished, dateModified, authors, to },
   readMore,
-} = Astro.props;
+} = Astro.props as Props;
+
+let {
+  post: { tags },
+} = Astro.props as Props;
+tags = tags?.map((tag) => ({ to: '#', title: tag }));
 
 const { siteUrl, siteLogo } = config;
 const address = fetchAddress(locale);
@@ -41,16 +47,17 @@ const schema = getWebPageSchema({
 
 <article class="bg-gray-50 rounded hover:shadow">
   <script type="application/ld+json" set:html={JSON.stringify(schema)}></script>
-  {cover ? (
+  {cover && (
     <a href={to}>
       <img class="h-auto w-full rounded-t" src={cover.src} alt={cover.alt} title={cover.title} />
     </a>
-  ) : null}
+  )}
   <div class="p-4">
     <a href={to} class="color-text focus:no-underline hover:no-underline active:no-underline">
       <h2 class="m-0 text-lg font-body font-semibold normal-case text-left">{title}</h2>
     </a>
     <p class="pt-2">{excerpt}</p>
-    <ReadMore {to} title={readMore} />
+    {tags && <TagList tags={tags} extraStyle="my-4"/>}
+    <ReadMore to={to} title={readMore} />
   </div>
 </article>

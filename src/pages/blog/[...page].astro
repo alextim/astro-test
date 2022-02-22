@@ -6,6 +6,7 @@ import PostList from '@/layouts/blog/blog-index/components/PostList.astro';
 
 export async function getStaticPaths({ paginate }) {
   const posts = Astro.fetchContent('./*.md')
+    .filter((p) => !p.draft)
     .sort(defaultSort)
     .map((p) => getPost(p));
 

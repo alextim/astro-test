@@ -1,0 +1,14 @@
+---
+export interface Props {
+  to: string;
+  title: string;
+}
+const { to, title } = Astro.props;
+---
+
+<a
+  href={to}
+  class="inline-block align-middle text-xs py-1 px-2 rounded-lg border border-solid appearance-none text-sm at-a at-a-undecorated hover:text-action-highlite hover:bg-action-primary hover:border-action-primary"
+>
+  {title}
+</a>

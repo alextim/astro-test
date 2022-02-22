@@ -8,8 +8,8 @@ import fetchContent from './utils/fetchContent';
 export async function fetchPosts(
   locale = i18n.defaultLocale,
   options?: {
-    filter?: (p: any) => boolean;
-    sort?: (a: any, b: any) => number;
+    filter?(p: any): boolean;
+    sort?(a: any, b: any): number;
     limit?: number;
   },
 ) {
@@ -18,8 +18,10 @@ export async function fetchPosts(
   if (!result) {
     return null;
   }
-  if (options?.filter) {
-    result = result.filter(options.filter);
+  if (options && options.filter && typeof options.filter === 'function') {
+    result = result.filter((p) => !(p as any).draft && options.filter!(p));
+  } else {
+    result = result.filter((p) => !(p as any).draft);
   }
   if (options?.sort) {
     result = result.sort(options.sort);

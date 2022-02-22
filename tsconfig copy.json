@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "paths": {
+      "@/components/*": ["src/components/*"],
+      "@/config/*": ["src/config/*"],
+      "@/api/*": ["src/api/*"],
+      "@/cms/*": ["src/cms/*"],
+      "@/lib/*": ["src/lib/*"],
+      "@/helpers/*": ["src/helpers/*"],
+      "@/layouts/*": ["src/layouts/*"]
+    }
+  },
+  "include": ["./**/*.ts"],
+  "exclude": [
+    "node_modules/**/*",
+    "dist",
+    "scripts",
+    "types",
+    ".vscode"
+  ]
+}

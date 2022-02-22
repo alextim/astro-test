@@ -9,7 +9,7 @@ cover:
 datePublished: 2019-04-25T17:09:00Z
 authors:
   - ak@example.com
-tags: 
+tags:
   - петя
   - вася
 layout: '@/layouts/blog/post/LayoutPost.astro'

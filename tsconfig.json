@@ -16,10 +16,9 @@
       "@/layouts/*": ["src/layouts/*"]
     },
 
-    "typeRoots": [ "./types", "./node_modules/@types"],
     "esModuleInterop": true,
-    "types": ["vite/client", "node", "react", "react-dom"],
-    "lib": ["ES2021", "ESNext"],
+
+    "lib": ["ES2021", "ESNext", "DOM"],
     "sourceMap": true,
 
     "alwaysStrict": true,

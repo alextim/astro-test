@@ -31,11 +31,7 @@ const posts =
     filter: (p) => p.tags,
   })) || [];
 
-const tags = [
-  ...posts
-    .flatMap((p) => [...p.tags!])
-    .reduce((acc, e) => acc.set(e, (acc.get(e) || 0) + 1), new Map()),
-].sort((a, b) => {
+const tags = [...posts.flatMap((p) => [...p.tags!]).reduce((acc, e) => acc.set(e, (acc.get(e) || 0) + 1), new Map())].sort((a, b) => {
   return b[1] - a[1];
 });
 ---
@@ -50,7 +46,7 @@ const tags = [
           </li>
         ))}
       </ul>
-      ) : (
+    ) : (
       <NoPosts />
     )}
   </section>

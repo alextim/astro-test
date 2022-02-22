@@ -40,6 +40,8 @@ interface FrontmatterBase {
 
   noindex?: boolean;
   nofollow?: boolean;
+
+  draft?: boolean;
 }
 
 interface BaseObject extends FrontmatterBase {

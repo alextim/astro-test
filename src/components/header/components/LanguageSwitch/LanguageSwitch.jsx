@@ -13,7 +13,7 @@ const LanguageSwitch = ({ onClick }) => {
         return (
           <div key={code} className="after:mx-2 after:content-['|'] last:after:m-0 last:after:content-empty">
             <a
-              className={`uppercase text-gray-900 hover:no-underline hover:outline-none focus:no-underline focus:outline-none active:no-underline active:outline-none hover:text-blue-600${
+              className={`uppercase text-gray-900 at-a at-a-undecorated hover:text-blue-600${
                 isCurrentPage ? 'text-blue-800' : ''
               }`}
               href={isCurrentPage ? pathname : localizePath(getPurePathname(pathname), code)}

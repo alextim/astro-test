@@ -9,17 +9,20 @@ const getLinks = async (pathname: string, tailTitle: string, items?: string[]) =
     throw new Error('Error fetchHome');
   }
 
-  const a = items
-    ? await Promise.all(
-        items.map(async (name: string) => {
-          const p = await fetchPageBySlug(name, locale);
-          if (!p) {
-            throw new Error(`Error fetch ${name}`);
-          }
-          return { to: p.to, title: p.title };
-        }),
-      )
-    : [];
+  let a: Link[];
+  if (items) {
+    a = await Promise.all(
+      items.map(async (name: string) => {
+        const p = await fetchPageBySlug(name, locale);
+        if (!p) {
+          throw new Error(`Error fetch ${name}`);
+        }
+        return { to: p.to, title: p.title };
+      }),
+    );
+  } else {
+    a = [];
+  }
 
   const links = [{ to: home.to, title: home.title }, ...a, { to: pathname, title: tailTitle }];
 

@@ -3,7 +3,7 @@ import getLocaleFromUrlPathname from '@/helpers/getLocaleFromUrlPathname';
 import { getPostFromContent } from '@/cms/post';
 import translate from '@/lib/translate';
 import { fetchTranslations } from '@/api/yamls';
-import { fetchBlogIndex } from '@/api/pages';
+
 import Layout from '@/components/Layout/Layout.astro';
 
 import InnerAsideLayout from '@/components/InnerAsideLayout.astro';
@@ -12,10 +12,11 @@ import AsideFeaturedPosts from './components/AsideFeaturedPosts.astro';
 import AsideRecentPosts from './components/AsideRecentPosts.astro';
 import PostInfo from './components/PostInfo.astro';
 import LastUpdated from './components/LastUpdated.astro';
-
+import TagsList from './components/TagList.astro';
 const locale = getLocaleFromUrlPathname(Astro.request.url.pathname);
+const post = getPostFromContent(Astro.props.content, Astro.request.canonicalURL.pathname, locale);
 const { title, metaTitle, headline, metaDescription, cover, noindex, nofollow, datePublished, dateModified, readingTime, html, authors } =
-  getPostFromContent(Astro.props.content, Astro.request.canonicalURL.pathname, locale);
+  post;
 
 /* <AsideServices mainNav={mainNav} /> */
 const translations = fetchTranslations(locale);
@@ -42,17 +43,21 @@ const seo = {
   pageType: 'BlogPosting',
   cover, // TODO:
 };
+let { tags } = post;
+tags = tags?.map((tag) => ({ to: '#', title: tag }));
 ---
 
 <Layout {seo} {title} {headline} {breadcrumbs}>
   <PostInfo {authors} {datePublished} {readingTime} {t} />
-  <InnerAsideLayout {cover} {html}>
+  <InnerAsideLayout {cover}>
+    <div slot="html">
+      <div set:html={html} />
+      {tags && <TagsList tags={tags} extraStyle="mt-12" />}
+    </div>
     <aside slot="aside" class="flex flex-col">
       <AsideFeaturedPosts {t} />
       <AsideRecentPosts {t} />
     </aside>
   </InnerAsideLayout>
-  {dateModified && ((datePublished && dateModified !== datePublished) || !datePublished) ? (
-    <LastUpdated dateModified={dateModified} t={t} />
-  ) : null}
+  {dateModified && ((datePublished && dateModified !== datePublished) || !datePublished) && <LastUpdated dateModified={dateModified} t={t} />}
 </Layout>
