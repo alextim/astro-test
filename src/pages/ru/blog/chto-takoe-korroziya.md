@@ -12,7 +12,7 @@ authors:
 tags:
   - вася
   - инна
-layout: '@/layouts/blog/post/LayoutPost.astro'
+layout: '@/layouts/blog/LayoutPost.astro'
 ---
 
 Компания Снежный Барс предоставляет услуги по покраске металлических конструкций и другим работам на высоте.

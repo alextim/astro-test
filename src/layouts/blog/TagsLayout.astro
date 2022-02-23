@@ -5,7 +5,7 @@ import { getPageFromContent } from '@/cms/page';
 import { fetchPosts } from '@/api/posts';
 
 import Layout from '@/components/Layout/Layout.astro';
-import NoPosts from './NoPosts.astro';
+import NoPosts from './components/NoPosts.astro';
 
 const pathname = Astro.request.url.pathname;
 const locale = getLocaleFromUrlPathname(pathname);

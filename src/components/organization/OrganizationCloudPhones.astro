@@ -6,7 +6,7 @@ export interface Props {
   voice: Voice;
 }
 
-const { voice } = Astro.props;
+const { voice } = Astro.props as Props;
 ---
 
 {voice && voice.whatsapp && (

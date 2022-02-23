@@ -8,7 +8,7 @@ export interface Props {
   hideIcon: boolean;
 }
 
-const { emails } = Astro.props;
+const { emails } = Astro.props as Props;
 ---
 
 {emails?.map(obfuscate).map((email: string, i: number) => (

@@ -7,7 +7,7 @@ export interface Props {
   phones: Array<Phone>;
 }
 
-const { phones } = Astro.props;
+const { phones } = Astro.props as Props;
 ---
 
 {phones?.map((phone: string, i: number) => (

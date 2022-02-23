@@ -3,7 +3,7 @@ export interface Props {
   id: string;
 }
 
-const { id } = Astro.props;
+const { id } = Astro.props as Props;
 
 const gtagUrl = `https://www.googletagmanager.com/gtag/js?id=${id}`;
 ---

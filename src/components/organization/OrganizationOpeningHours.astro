@@ -4,7 +4,7 @@ export interface Props {
   t: ITranslationFunc;
 }
 
-const { openingHours, t } = Astro.props;
+const { openingHours, t } = Astro.props as Props;
 
 const parseDow = (s: any): string => {
   if (!s) {

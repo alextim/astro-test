@@ -1,9 +1,6 @@
 ---
-export interface Props {
-  to: string;
-  title: string;
-}
-const { to, title } = Astro.props;
+export interface Props extends Link {}
+const { to, title } = Astro.props as Props;
 ---
 
 <a

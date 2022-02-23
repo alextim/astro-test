@@ -9,7 +9,7 @@ import config from '@/config/website';
 import getLocaleFromUrlPathname from '@/helpers/getLocaleFromUrlPathname';
 import SeoBase from './SeoBase.astro';
 
-const { seo } = Astro.props;
+const { seo } = Astro.props as Props;
 
 const { siteUrl, siteLogo, themeColor } = config;
 

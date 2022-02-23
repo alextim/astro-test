@@ -19,7 +19,7 @@ tags:
   - петя
   - вася
 
-layout: '@/layouts/blog/post/LayoutPost.astro'
+layout: '@/layouts/blog/LayoutPost.astro'
 
 draft: true
 ---

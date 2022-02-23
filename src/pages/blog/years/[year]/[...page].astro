@@ -2,7 +2,7 @@
 import config from '@/config/website';
 import { getPost } from '@/cms/post';
 import { defaultSort } from '@/cms/shared';
-import PostList from '@/layouts/blog/blog-index/components/PostList.astro';
+import PostList from '@/layouts/blog/components/PostList.astro';
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
   const posts = await Astro.fetchContent('../../*.md')

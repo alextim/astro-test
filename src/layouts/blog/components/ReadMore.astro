@@ -1,0 +1,9 @@
+---
+export interface Props extends Link {}
+
+const { to, title } = Astro.props as Props;
+---
+
+<a href={to} class="pt-5 text-xs">
+  {title}
+</a>

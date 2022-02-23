@@ -2,7 +2,8 @@ import config from '@/config/website';
 
 import { getAuthors } from './author';
 import getReadingTimeAndExcerpt from './utils/getReadingTimeAndExcerpt';
-import getSlugFromFilePathname from './utils/getSlugFromFilePathname';
+import getValidatedSlug from './utils/getValidatedSlug';
+import getValidatedSlugFromContent from './utils/getValidatedSlugFromContent';
 
 import type { AstroFetchedContent } from './base';
 import { getBaseObject } from './base';
@@ -22,17 +23,11 @@ function getPostBase(source: AstroFetchedContentPost, slug: string, locale?: str
 }
 
 export function getPost({ file, ...rest }: AstroFetchedContentPost, locale?: string): Post {
-  const slug = getSlugFromFilePathname(file?.pathname || '');
-  if (!slug) {
-    throw new Error(`Wrong pathname ${file?.pathname} in content`);
-  }
+  const slug = getValidatedSlug(file?.pathname);
   return getPostBase({ ...rest }, slug, locale);
 }
 
 export function getPostFromContent(source: AstroFetchedContentPost, pathname: string, locale?: string): Post {
-  const [slug] = pathname.split('/').slice(-2, -1);
-  if (!slug) {
-    throw new Error(`Wrong pathname ${pathname} in content`);
-  }
+  const slug = getValidatedSlugFromContent(pathname);
   return getPostBase(source, slug, locale);
 }

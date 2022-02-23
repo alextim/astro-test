@@ -8,7 +8,7 @@ const {
     legalName,
     postalAddress: { streetAddress, addressLocality, postalCode = '', addressCountryName },
   },
-} = Astro.props;
+} = Astro.props as Props;
 ---
 
 <div>{legalName}</div>
