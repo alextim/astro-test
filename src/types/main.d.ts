@@ -1,10 +1,5 @@
 import type { GetStaticPathsOptions as imported } from 'astro';
 
-/// <reference path="./address.d.ts" />
-/// <reference path="./cms.d.ts" />
-/// <reference path="./contacts.d.ts" />
-/// <reference path="./i18n.d.ts" />
-/// <reference path="./SEO.d.ts" />
 declare namespace JSX {
   interface IntrinsicElements {
     [elemName: string]: any;
@@ -13,12 +8,10 @@ declare namespace JSX {
 
 type GetStaticPathsOptions = imported;
 
-interface ILink {
+interface Link {
   to: string;
   title: string;
 }
-
-export type Link = ILink;
 
 type Phone = string;
 type Email = string;

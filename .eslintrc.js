@@ -1,9 +1,6 @@
 /** @type {import("@types/eslint").Linter.Config */
 module.exports = {
   root: true,
-  globals: {
-    graphql: true,
-  },
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 2021,
@@ -36,16 +33,6 @@ module.exports = {
         project: ['./tsconfig.json']
       }
     }
-    /*
-    'import/resolver': {
-      'eslint-import-resolver-custom-alias': {
-        alias: {
-          '@': './src',
-        },
-        extensions: ['.js', '.jsx', '.astro', '.ts', '.tsx'],
-      },
-    },
-    */
   },
   env: {
     node: true,

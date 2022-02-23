@@ -4,6 +4,7 @@
     "moduleResolution": "node",
     "target": "ESNext",
     "removeComments": true,
+    "forceConsistentCasingInFileNames": true,
 
     "baseUrl": ".",
     "paths": {
@@ -17,15 +18,16 @@
     },
 
     "esModuleInterop": true,
-
+    "typeRoots": ["./types", "./node_modules/@types"],
     "lib": ["ES2021", "ESNext", "DOM"],
     "sourceMap": true,
 
-    "alwaysStrict": true,
     "allowUnreachableCode": false,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
 
+    "strictNullChecks": true,
+    "alwaysStrict": true,
+
+    "noImplicitAny": true,
     "noImplicitReturns": true,
     "noUncheckedIndexedAccess": true,
     "noUnusedLocals": true,
@@ -34,14 +36,12 @@
     "allowSyntheticDefaultImports": true,
 
     "allowJs": true,
-    "jsx": "react"
+    "jsx": "react",
+
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
   },
-  "include": ["./**/*.ts"],
-  "exclude": [
-    "node_modules/**/*",
-    "dist",
-    "scripts",
-    "types",
-    ".vscode"
+  "include": [
+    "src/**/*"
   ]
 }

@@ -1,11 +1,11 @@
 ---
 import theme from '../theme';
 
-export interface Props extends ILink {
+export interface Props extends Link {
   name: string;
 }
 
-const { name, title, to } = Astro.props;
+const { name, title, to } = Astro.props as Props;
 
 // Google Does Not Use rel=me Microformats
 // rel="me noreferrer"

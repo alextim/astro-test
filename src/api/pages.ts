@@ -15,9 +15,7 @@ async function fetchPageByPath(path: string, locale: string) {
   return getPage(result[0] as AstroFetchedContentPage, locale);
 }
 
-export async function fetchHome(locale: string) {
-  return await fetchPageByPath('index', locale);
-}
+export const fetchHome = (locale: string) => fetchPageByPath('index', locale);
 
 const pageNames: Record<string, (locale: string) => any> = {
   blog: (locale: string) => fetchPageByPath('blog/list/blog', locale),
