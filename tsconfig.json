@@ -14,7 +14,8 @@
       "@/cms/*": ["src/cms/*"],
       "@/lib/*": ["src/lib/*"],
       "@/helpers/*": ["src/helpers/*"],
-      "@/layouts/*": ["src/layouts/*"]
+      "@/layouts/*": ["src/layouts/*"],
+      "*": ["types/*.d.ts"]
     },
 
     "esModuleInterop": true,
@@ -35,13 +36,9 @@
 
     "allowSyntheticDefaultImports": true,
 
-    "allowJs": true,
-    "jsx": "react",
-
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true
   },
-  "include": [
-    "src/**/*"
-  ]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "**/node_modules/*"]
 }

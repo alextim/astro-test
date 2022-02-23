@@ -1,0 +1,36 @@
+---
+import utils from '@alextim/utils';
+import i18n from '@/config/i18n';
+import { localizePath } from '@/lib/i18n-utils';
+import getLocaleFromUrlPathname from '@/helpers/getLocaleFromUrlPathname';
+import { fetchContacts } from '@/api/yamls';
+
+const locale = getLocaleFromUrlPathname(Astro.request.url.pathname);
+
+const contacts = fetchContacts(locale);
+const phone = String(contacts?.phones[0]);
+
+const { siteTitle, siteShortName } = i18n.locales[locale]!;
+
+const localizedRoot = localizePath('/', locale);
+
+const SITE_LOGO = '/assets/images/logo.svg';
+// TODO onClick <a href={to} onClick={onClick} class="bold text-lg text-gray-800 at-a at-a-undecorated">
+// TODO:   <a href={to} class="mr-4 inline-flex items-center text-gray-800 at-a at-a-undecorated" onClick={onClick}>
+
+---
+
+<div class="inline-flex h-full items-center xl:mr-12">
+  <a href={localizedRoot} class="mr-4 inline-flex items-center text-gray-800 at-a at-a-undecorated">
+    <img src={SITE_LOGO} alt={siteTitle} height="48" width="48" class="h-12 w-12 xl:h-14 xl:w-14" />
+  </a>
+
+  <div class="flex flex-col text-left">
+    <a href={localizedRoot} class="bold text-lg text-gray-800 at-a at-a-undecorated">
+      {siteShortName}
+    </a>
+    <a href={utils.phoneUrl(phone)}>
+      {utils.formatPhone(phone)}
+    </a>
+  </div>
+</div>

@@ -31,25 +31,21 @@
   }
 
   .at-menu-item {
-    @apply inline-flex w-full cursor-pointer
+    @apply inline-flex w-full
     items-center justify-between
     whitespace-nowrap
     border-b
     border-solid
     py-4 px-8 font-semibold uppercase text-gray-900
-    no-underline opacity-100
+    opacity-100
 
     first-of-type:border-t first-of-type:border-t-gray-900
 
-    hover:bg-slate-50 hover:text-black
-    hover:no-underline hover:outline-none
-    focus:bg-gray-600 focus:no-underline
-
-    focus:outline-none
-
-    active:bg-slate-100 active:no-underline
-
-    active:outline-none;
+    hover:text-black
+    hover:bg-slate-50
+    focus:bg-gray-600
+    active:bg-slate-100
+    at-a at-a-undecorated
   }
 
   .at-menu-item-xl {
@@ -59,7 +55,29 @@
   .at-breadcrumb-link {
     @apply inline-flex items-center text-current after:mx-2 after:block after:h-2 after:w-2 after:rotate-45 after:border-t-2 after:border-r-2 after:border-solid after:border-current after:opacity-80 after:content-empty;
   }
+
+  #menu-toggle {
+    @apply relative m-0 flex h-12 w-12 flex-col items-center justify-center border-none bg-transparent xl:pointer-events-none xl:hidden;
+  }
+  #menu-toggle .at-toggle-line {
+    @apply h-1 w-6 my-1 rounded-full bg-black transition transform duration-300 opacity-50 group-hover:opacity-100;
+  }
+  #main-menu.open {
+   @apply pointer-events-auto visible transform-none;
+  }
 }
+#menu-toggle.open .at-toggle-line:nth-child(1) {
+  transform: translateY(0.75rem) rotate(45deg);
+}
+
+#menu-toggle.open .at-toggle-line:nth-child(2) {
+  opacity: 0;
+}
+
+#menu-toggle.open .at-toggle-line:nth-child(3) {
+  transform: translateY(-0.75rem) rotate(-45deg);
+}
+
 
 @media (min-width: theme('screens.xl')) {
   html {

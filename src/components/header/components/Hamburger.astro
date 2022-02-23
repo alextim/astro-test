@@ -1,0 +1,32 @@
+---
+const genericHamburgerLine = '';
+/* TODO: onClick const Hamburger = ({ open, onClick }) => (
+ <button
+  class=""
+  type="button"
+
+  onClick={onClick}
+>
+  <div
+    class={`${genericHamburgerLine} ${
+      open ? 'translate-y-3 rotate-45 ' : ''
+    }`}
+  />
+  <div class={`${genericHamburgerLine} ${open ? 'opacity-0' : 'opacity-50 group-hover:opacity-100'}`} />
+  <div
+    class={`${genericHamburgerLine} ${
+      open ? '-translate-y-3 -rotate-45' : 'opacity-50 '
+    }`}
+  />
+</button>
+*/
+---
+<button id="menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" >
+  <div class="at-toggle-line" />
+  <div class="at-toggle-line" />
+  <div class="at-toggle-line" />
+</button>
+
+<style>
+
+</style>

@@ -1,24 +1,12 @@
 ---
-import getLocaleFromUrlPathname from '@/helpers/getLocaleFromUrlPathname';
 import styleContainer from '../styleContainer';
-import NavbarWrap from './NavbarWrap';
-
-export interface Props {
-  contacts: Contacts;
-  mainNav: MainNav;
-  translations: Translations;
-}
-
+import Navbar from './components/Navbar.astro';
 //  TODO: contain: 'layout',
 //  TODO: boxShadow: shadows.raised,
-const pathname = Astro.request.url.pathname;
-const locale = getLocaleFromUrlPathname(pathname);
-
-const { contacts, mainNav, translations } = Astro.props;
 ---
 
 <header role="navigation" class="w-full h-header xl:h-header-xl fixed top-0 left-0 text-sm shadow-sm z-30">
   <div class={`flex items-center h-full ${styleContainer}`}>
-    <NavbarWrap client:load context={{ pathname, locale, contacts, mainNav, translations }} />
+    <Navbar />
   </div>
 </header>

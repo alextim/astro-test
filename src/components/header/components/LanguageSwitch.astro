@@ -1,0 +1,28 @@
+---
+import i18n from '@/config/i18n';
+import { localizePath, getPurePathname } from '@/lib/i18n-utils';
+
+import getLocaleFromUrlPathname from '@/helpers/getLocaleFromUrlPathname';
+
+const pathname = Astro.request.url.pathname;
+const locale = getLocaleFromUrlPathname(pathname);
+// TODO: onClick
+---
+<div class="inline-flex items-center justify-center">
+  {Object.keys(i18n.locales).map((code) => {
+    const { shortName } = i18n.locales[code];
+    const isCurrentPage = locale === code;
+    return (
+      <div key={code} class="after:mx-2 after:content-['|'] last:after:m-0 last:after:content-empty">
+        <a
+          class={`uppercase text-gray-900 at-a at-a-undecorated hover:text-blue-600${
+            isCurrentPage ? 'text-blue-800' : ''
+          }`}
+          href={isCurrentPage ? pathname : localizePath(getPurePathname(pathname), code)}
+        >
+          {shortName}
+        </a>
+      </div>
+    );
+  })}
+</div>

@@ -1,0 +1,12 @@
+---
+// boxShadow: `0 -2px 0 ${colors.header.nav.item.boxShadowColor} inset`
+export interface Props {
+  to: string;
+  isActive: boolean;
+  extraStyle?: string;
+}
+const { to, isActive, extraStyle = '' } = Astro.props as Props;
+---
+<a href={to} class={`at-menu-item at-menu-item-xl ${extraStyle} ${isActive ? ' shadow-inner' : ''}`}  role="menuitem">
+  <slot />
+</a>

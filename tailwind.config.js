@@ -4,8 +4,9 @@ const plugin = require('tailwindcss/plugin');
 
 module.exports = {
   content: ['./public/**/*.html', './src/**/*.{astro,js,jsx,svelte,ts,tsx,vue}'],
-
+/*
   corePlugins: {
+
     // preflight: false,
 
     // We disable those because they add stuff to the CSS file even when unused
@@ -26,7 +27,7 @@ module.exports = {
     // Things we might need in the future but disable for now as they also add stuff
     fontVariantNumeric: false,
   },
-
+*/
   theme: {
     container: {
       center: true,

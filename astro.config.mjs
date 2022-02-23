@@ -14,7 +14,7 @@ export default /** @type {import('astro').AstroUserConfig} */ ({
     tailwindConfig: './tailwind.config.js', // Path to tailwind.config.js if used, e.g. './tailwind.config.js'
     // trailingSlash: 'always',
   },
-  renderers: ['@astrojs/renderer-react'],
+  renderers: [],
   vite: {
     ssr: {
       external: ['svgo'],

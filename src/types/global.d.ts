@@ -8,7 +8,7 @@ declare namespace JSX {
 
 type GetStaticPathsOptions = imported;
 
-interface Link {
+declare interface Link {
   to: string;
   title: string;
 }

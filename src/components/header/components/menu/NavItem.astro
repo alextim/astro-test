@@ -1,0 +1,19 @@
+---
+import MenuItem from './MenuItem.astro';
+import SubMenu from './SubMenu.astro';
+export interface Props extends Link {
+  submenuId?: string;
+  submenu?: Link[];
+}
+
+const pathname = Astro.request.url.pathname;
+
+const { title, to, submenu, submenuId = '' } = Astro.props;
+---
+{submenu ? <SubMenu submenuId={submenuId} to={to} title={title} items={submenu} pathname={pathname} /> : null}
+{!submenu ? <li class="m-0 xl:inline-flex xl:h-full xl:items-center">
+    <MenuItem to={to} isActive={to === pathname}>
+      {title}
+    </MenuItem>
+  </li>
+: null}
