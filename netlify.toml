@@ -1,4 +1,8 @@
+[build.environment]
+  NODE_VERSION = "16"
+  NPM_FLAGS = "--version" # prevent Netlify npm install
+
 [build]
-  command = "npm build"
+  command = "npx pnpm i --store=node_modules/.pnpm-store && npm run ci-docs"
   publish = "dist"
 
