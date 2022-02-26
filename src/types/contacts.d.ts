@@ -19,7 +19,7 @@ interface Contacts extends Record<string, any> {
 
   emails: Array<Email>;
 
-  /* 
+  /*
   - ['mo-sa', '09:00', '18:00']
   - ["mo", "10:00", "18:00"]
   - ["tu", "10:00", "18:00"]
@@ -37,5 +37,5 @@ interface Contacts extends Record<string, any> {
   currenciesAccepted?: string;
   paymentAccepted?: string;
 
-  foundingDate?: ISODate;
+  foundingDate?: Date;
 }

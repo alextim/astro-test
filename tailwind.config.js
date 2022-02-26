@@ -104,9 +104,8 @@ module.exports = {
           wordWrap: 'break-word',
         },
 
-        html: {
-          scrollPaddingTop: `calc(${theme('spacing.header')} + 1.5rem)`,
-        },
+
+
       })
     }),
   ],

@@ -1,0 +1,40 @@
+---
+import getLocaleFromUrlPathname from '@/helpers/getLocaleFromUrlPathname';
+import { getPageFromContent } from '@/cms/page';
+
+import Layout from '@/components/Layout/Layout.astro';
+import InnerAsideLayout from '@/components/InnerAsideLayout.astro';
+// import AsideServices from '../../service/components/AsideServices.astro';
+
+const locale = getLocaleFromUrlPathname(Astro.request.url.pathname);
+const page = getPageFromContent(Astro.props.content, Astro.request.canonicalURL.pathname, locale);
+const { title, metaTitle, headline, metaDescription, cover, noindex, nofollow, html } = page;
+/* <AsideServices mainNav={mainNav} /> */
+
+const breadcrumbs = {
+  items: ['services'],
+  tailTitle: title,
+};
+
+const seo = {
+  title: metaTitle,
+  description: metaDescription,
+  headline,
+
+  noindex,
+  nofollow,
+
+  cover, // TODO:
+};
+---
+
+<Layout {seo} {title} {headline} {breadcrumbs}>
+  <InnerAsideLayout cover={cover}>
+    <div slot="html">
+      <div set:html={html} />
+    </div>
+    <aside slot="aside" class="flex flex-col">
+      test
+    </aside>
+  </InnerAsideLayout>
+</Layout>

@@ -5,6 +5,7 @@ import i18n from '@/config/i18n';
 import { fetchAddress } from '@/api/yamls';
 import getWebPageSchema from '@/components/SEO/components/Schema/helpers/getWebPageSchema';
 
+// import Image from '@/components/Image.astro';
 import ReadMore from './ReadMore.astro';
 import TagList from './TagList.astro';
 
@@ -13,14 +14,9 @@ export interface Props {
   readMore?: string;
 }
 const {
-  post: { locale, cover, title, excerpt, headline, metaDescription, datePublished, dateModified, authors, to },
+  post: { locale, cover, title, excerpt, headline, metaDescription, datePublished, dateModified, authors, tags, to },
   readMore,
 } = Astro.props as Props;
-
-let {
-  post: { tags },
-} = Astro.props as Props;
-tags = tags?.map((tag) => ({ to: '#', title: tag }));
 
 const { siteUrl, siteLogo } = config;
 const address = fetchAddress(locale);
@@ -41,13 +37,13 @@ const schema = getWebPageSchema({
   datePublished,
   dateModified,
   authors,
-  imgUrl: cover && cover.src ? `${siteUrl}${cover.src}` : '',
+  imgUrl: cover?.src ? `${siteUrl}${cover.src}` : '',
 });
 ---
 
 <article class="bg-gray-50 rounded hover:shadow">
   <script type="application/ld+json" set:html={JSON.stringify(schema)}></script>
-  {cover && (
+  {cover?.src && (
     <a href={to}>
       <img class="h-auto w-full rounded-t" src={cover.src} alt={cover.alt} title={cover.title} />
     </a>
@@ -56,8 +52,8 @@ const schema = getWebPageSchema({
     <a href={to} class="color-text focus:no-underline hover:no-underline active:no-underline">
       <h2 class="m-0 text-lg font-body font-semibold normal-case text-left">{title}</h2>
     </a>
-    <p class="pt-2">{excerpt}</p>
+    {excerpt && <p class="pt-2">{excerpt}</p>}
     {tags && <TagList tags={tags} extraStyle="my-4"/>}
-    <ReadMore to={to} title={readMore} />
+    {readMore && <ReadMore to={to} title={readMore} />}
   </div>
 </article>

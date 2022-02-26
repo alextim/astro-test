@@ -12,18 +12,50 @@ export interface Props {
 // const styleMenuItemExtra = 'xl:after:inline-block xl:after:content-empty xl:after:border-solid xl:after:border-gray-900 xl:after:border-t-0 xl:after:border-r xl:after:border-b xl:after:border-l-0 xl:after:p-0.5 xl:after:ml-2 xl:after:rotate-45';
 
 const { submenuId, title, to, items, pathname } = Astro.props as Props;
-const visible = true;
+
 /* '2px 2px 15px 0 rgba(0,0,0,.8)' */
 ---
-<li class="submenu xl:relative xl:flex xl:h-full xl:items-center">
+<li class="submenu menu-item-has-submenu">
   <div class="relative inline-flex w-full items-center xl:h-full">
-    <MenuItem id={submenuId} isActive={pathname === to} to={to} extraStyle="menu-item-extra">
+    <MenuItem id={submenuId} isActive={pathname === to} to={to} hasSubmenu={true}>
       {title}
     </MenuItem>
-    <div
-      type="button" aria-haspopup="menu"
-      class={
-        `absolute right-0 h-full w-16 cursor-pointer
+    <div type="button" aria-haspopup="menu" class="submenu-toggle" />
+  </div>
+  <ul role="menu" aria-labelledby={submenuId} class="submenu-items">
+    {items.map((item) => (
+      <li class="m-0" role="none">
+        <MenuItem isActive={pathname === item.to} to={item.to}>
+          {item.title}
+        </MenuItem>
+      </li>
+    ))}
+  </ul>
+</li>
+
+<style>
+.submenu {
+  @apply xl:relative xl:flex xl:h-full xl:items-center;
+
+}
+
+@media (min-width: theme('screens.xl')) {
+  .submenu::after {
+    display: inline-block;
+    content: '';
+    border-style: solid;
+    border-color: theme('colors.gray.500');
+    border-width: 0 1px 1px 0;
+    padding: 3px;
+    margin-left: -9px;
+    transform: rotate(45deg);
+  }
+  .submenu:hover::after {
+    transform: rotate(225deg);
+  }
+}
+.submenu-toggle {
+  @apply absolute right-0 h-full w-16 cursor-pointer
     after:absolute
     after:top-0
     after:bottom-0
@@ -40,26 +72,14 @@ const visible = true;
     after:border-solid
     after:border-gray-900
     after:content-empty
-    xl:hidden
     after:rotate-45
-    hover:after:rotate-225`
-      }
-    />
-  </div>
-  <ul role="menu" aria-labelledby={submenuId}
-    class="submenu-items m-0 list-none flex-col bg-slate-50 p-0 xl:absolute xl:top-header-xl xl:left-0 xl:z-50 xl:bg-white xl:shadow-sm hidden"
-  >
-    {items.map((item) => (
-      <li class="m-0" role="none">
-        <MenuItem isActive={pathname === item.to} to={item.to}>
-          {item.title}
-        </MenuItem>
-      </li>
-    ))}
-  </ul>
-</li>
+    hover:after:rotate-225
+    xl:hidden;
+}
 
-<style>
+.submenu-items {
+  @apply m-0 list-none flex-col bg-slate-50 p-0 xl:absolute xl:top-header-xl xl:left-0 xl:z-50 xl:bg-white xl:shadow-sm hidden;
+}
 .submenu:hover .submenu-items {
   display: flex;
 }

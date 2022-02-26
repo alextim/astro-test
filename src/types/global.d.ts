@@ -5,19 +5,21 @@ declare namespace JSX {
     [elemName: string]: any;
   }
 }
+declare global {
+  type GetStaticPathsOptions = imported;
 
-type GetStaticPathsOptions = imported;
+  interface Link {
+    to: string;
+    title: string;
+  }
 
-declare interface Link {
-  to: string;
-  title: string;
+  type Phone = string;
+  type Email = string;
+  type Time = string;
+
+  interface ITranslationFunc {
+    (key: string, params?: Record<string, string>): string;
+  }
 }
 
-type Phone = string;
-type Email = string;
-type Time = string;
-type ISODate = string;
-
-interface ITranslationFunc {
-  (key: string, params?: Record<string, string>): string;
-}
+export { };

@@ -3,6 +3,18 @@ import { isDefaultLocale } from '../lib/i18n-utils';
 import { AstroFetchedContentPage, getPage } from '../cms/page';
 import fetchContent from './utils/fetchContent';
 
+export async function fetchPages(path: string, locale: string) {
+  if (path) {
+    path = `${path}/`;
+  }
+  const localePath = isDefaultLocale(locale) ? '' : `${locale}/`;
+  const result = await fetchContent(`./src/pages/${localePath}${path}*.md`);
+  if (!result || result.length === 0) {
+    return null;
+  }
+  return result.map((p) => getPage(p as AstroFetchedContentPage, locale));
+}
+
 async function fetchPageByPath(path: string, locale: string) {
   if (!path) {
     throw new Error('path is required parameter');
@@ -22,6 +34,7 @@ const pageNames: Record<string, (locale: string) => any> = {
   'tags[tag]': (locale: string) => fetchPageByPath('blog/list/tags', locale),
   'years[year]': (locale: string) => fetchPageByPath('blog/list/years', locale),
   years: (locale: string) => fetchPageByPath('blog/years/index', locale),
+  services: (locale: string) => fetchPageByPath('services/index', locale),
 };
 
 export async function fetchPageBySlug(slug: string, locale: string) {

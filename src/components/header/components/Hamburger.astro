@@ -1,5 +1,27 @@
-<button id="menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" >
-  <div class="at-toggle-line" />
-  <div class="at-toggle-line" />
-  <div class="at-toggle-line" />
+<button id="menu-toggle" class="menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" >
+  <div class="toggle-line" />
+  <div class="toggle-line" />
+  <div class="toggle-line" />
 </button>
+
+<style>
+.menu-toggle {
+  @apply relative m-0 flex h-12 w-12 flex-col items-center justify-center border-none bg-transparent xl:pointer-events-none xl:hidden;
+}
+
+.menu-toggle .toggle-line {
+  @apply h-1 w-6 my-1 rounded-full bg-black transition transform duration-300 opacity-50 group-hover:opacity-100;
+}
+
+.menu-toggle.open .toggle-line:nth-child(1) {
+  transform: translateY(0.75rem) rotate(45deg);
+}
+
+.menu-toggle.open .toggle-line:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.open .toggle-line:nth-child(3) {
+  transform: translateY(-0.75rem) rotate(-45deg);
+}
+</style>

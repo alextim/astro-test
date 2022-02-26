@@ -43,12 +43,14 @@ module.exports = {
     'airbnb/hooks',
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
-    'plugin:react/recommended',
+    // 'plugin:react/recommended',
     'plugin:jsx-a11y/recommended',
     'plugin:import/errors',
     'prettier',
   ],
-  plugins: ['@typescript-eslint', 'import', 'jsx-a11y', 'react', 'react-hooks', 'prettier'],
+  plugins: ['@typescript-eslint', 'import', 'jsx-a11y',
+    // 'react', 'react-hooks',
+    'prettier'],
 
   rules: {
     indent: ['error', 2, { SwitchCase: 1 }],
@@ -59,17 +61,17 @@ module.exports = {
     'no-console': ['error', { allow: ['warn', 'error'] }],
     'no-plusplus': 'off',
     'no-restricted-exports': 'off',
-
+/*
     'react/no-array-index-key': 'warn',
     'react/no-danger': 0,
     'react/jsx-props-no-spreading': 0,
     'react/prop-types': 'off',
     'react/function-component-definition': [2, { namedComponents: 'arrow-function' }],
     'react/jsx-fragments': 0,
-    /* No React import */
+    // No React import
     'react/jsx-uses-react': 'off',
     'react/react-in-jsx-scope': 'off',
-
+*/
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
     'import/no-unresolved': 'error',
     '@typescript-eslint/no-empty-interface': [

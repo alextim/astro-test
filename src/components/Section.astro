@@ -7,6 +7,7 @@ export interface Props {
   textLast?: boolean;
   textAlign?: string;
 }
+import Image from '@/components/Image.astro';
 
 const { title, subtitle, text, image, textLast, textAlign = 'match-parent' } = Astro.props as Props;
 
@@ -16,7 +17,7 @@ const styleText = `mt-7 ${textAlign}`;
 <section class="mb-10 last-of-type:mb-0">
   {title && <h2 class="mb-4 text-center font-heading text-2xl font-bold xl:text-2xl">{title}</h2>}
   {subtitle && <div class="mt-2 text-center">{subtitle}</div>}
-  {image && image.src && <img class="mt-2" src={image.src} alt={image.alt} title={image.title} />}
+  {image?.src && <Image class="mt-2" src={image.src} alt={image.alt} title={image.title} />}
   {!textLast && text && <div class={styleText}>{text}</div>}
   <div class="mt-2"><slot /></div>
   {textLast && text && <div class={styleText}>{text}</div>}

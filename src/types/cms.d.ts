@@ -2,6 +2,7 @@ type Image = {
   src: string;
   xl?: string;
   alt?: string;
+  title?: string;
 };
 
 type Author = {
@@ -10,10 +11,10 @@ type Author = {
   firstName?: string;
 };
 
-type FooterNav = Array<Link>;
+type FooterNav = Link[];
 
 type MainNavItem = Link & {
-  submenu?: Array<Link>;
+  submenu?: Link[];
 };
 
 type MainNav = Array<MainNavItem>;
@@ -27,7 +28,7 @@ type TranslationItem = {
   value: string;
 };
 
-type Translations = Array<TranslationItem>;
+type Translations = TranslationItem[];
 
 interface FrontmatterBase {
   title: string;
@@ -42,23 +43,25 @@ interface FrontmatterBase {
   nofollow?: boolean;
 
   draft?: boolean;
+  sortOrder?: number;
 }
 
 interface BaseObject extends FrontmatterBase {
   html: string;
 
+  slug: string;
   to: string;
   locale: string;
 }
 
 interface FrontmatterPost extends FrontmatterBase {
-  datePublished?: ISODate;
-  dateModified?: ISODate;
+  datePublished?: Date;
+  dateModified?: Date;
 
-  authors?: Array<Author>;
+  authors?: Author[];
 
-  tags?: string[];
-  categories?: string[];
+  tags?: Link[];
+  categories?: Link[];
 
   featured?: boolean;
 }

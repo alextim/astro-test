@@ -24,7 +24,11 @@ const getLinks = async (pathname: string, tailTitle: string, items?: string[]) =
     a = [];
   }
 
-  const links = [{ to: home.to, title: home.title }, ...a, { to: pathname, title: tailTitle }];
+  const links = [
+    { to: home.to, title: home.title },
+    ...a,
+    { to: pathname, title: tailTitle }
+  ];
 
   return links;
 };

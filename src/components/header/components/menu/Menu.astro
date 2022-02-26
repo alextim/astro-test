@@ -6,8 +6,29 @@ import LanguageSwitch from '../LanguageSwitch.astro';
 import CTAButton from './CTAButton.astro';
 import NavItem from './NavItem.astro';
 
-const styleWrap = `
-  flex-1
+const pathname = Astro.request.url.pathname;
+const locale = getLocaleFromUrlPathname(pathname);
+const navItems = fetchMainNav(locale);
+
+---
+<div id="main-menu" class="main-menu">
+  <nav aria-label="Main menu" class="xl:h-full">
+    <ul class="flex flex-col m-0 p-0 list-none xl:inline-flex xl:flex-row xl:items-center xl:h-full">
+      {navItems.map(({ title, to, submenu }, index) => <NavItem submenuId={`submenu-${index}`} to={to} title={title} submenu={submenu} />)}
+    </ul>
+  </nav>
+  <div class="flex flex-col justify-center gap-x-6 py-4 xl:inline-flex xl:flex-row xl:items-center">
+    <CTAButton />
+    <LanguageSwitch />
+  </div>
+</div>
+
+<style>
+.h-main-menu {
+  height: calc(100vh - theme('spacing.header'));
+}
+.main-menu {
+  @apply flex-1
   min-w-[50%]
 
   flex
@@ -46,22 +67,10 @@ const styleWrap = `
   xl:!visible
   xl:!transform-none
 
-  pointer-events-none invisible -translate-x-[110%]
-`;
+  pointer-events-none invisible -translate-x-[110%];
 
-const pathname = Astro.request.url.pathname;
-const locale = getLocaleFromUrlPathname(pathname);
-const navItems = fetchMainNav(locale);
-
----
-<div id="main-menu" class={styleWrap}>
-  <nav aria-label="Main menu" class="xl:h-full">
-    <ul class="flex flex-col m-0 p-0 list-none xl:inline-flex xl:flex-row xl:items-center xl:h-full">
-      {navItems.map(({ title, to, submenu }, index) => <NavItem submenuId={`submenu-${index}`} to={to} title={title} submenu={submenu} />)}
-    </ul>
-  </nav>
-  <div class="flex flex-col justify-center gap-x-6 py-4 xl:inline-flex xl:flex-row xl:items-center">
-    <CTAButton />
-    <LanguageSwitch />
-  </div>
-</div>
+}
+.main-menu.open {
+  @apply pointer-events-auto visible transform-none;
+}
+</style>

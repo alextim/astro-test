@@ -2,7 +2,8 @@
 import { localizePath } from '@/lib/i18n-utils';
 import getLocaleFromUrlPathname from '@/helpers/getLocaleFromUrlPathname';
 import { getPageFromContent } from '@/cms/page';
-import { fetchPosts } from '@/api/posts';
+// TODO:
+import { fetchPostsBase } from '@/api/posts';
 
 import Layout from '@/components/Layout/Layout.astro';
 import NoPosts from './components/NoPosts.astro';
@@ -26,12 +27,9 @@ const seo = {
   nofollow,
 };
 
-const posts =
-  (await fetchPosts(locale, {
-    filter: (p) => p.tags,
-  })) || [];
+const posts = (await fetchPostsBase(locale) || []).filter((p: any) => p.tags);
 
-const tags = [...posts.flatMap((p) => [...p.tags!]).reduce((acc, e) => acc.set(e, (acc.get(e) || 0) + 1), new Map())].sort((a, b) => {
+const tags = [...posts.flatMap((p: any) => [...p.tags!]).reduce((acc, e) => acc.set(e, (acc.get(e) || 0) + 1), new Map())].sort((a, b) => {
   return b[1] - a[1];
 });
 ---

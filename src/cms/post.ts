@@ -1,15 +1,17 @@
 import config from '@/config/website';
 
-import { getAuthors } from './author';
+import { getAuthors } from './utils/getAuthors';
 import getReadingTimeAndExcerpt from './utils/getReadingTimeAndExcerpt';
 import getValidatedSlug from './utils/getValidatedSlug';
 import getValidatedSlugFromContent from './utils/getValidatedSlugFromContent';
+import getTags from './utils/getTags';
 
 import type { AstroFetchedContent } from './base';
 import { getBaseObject } from './base';
 
 export interface AstroFetchedContentPost extends AstroFetchedContent {
   authors?: string[];
+  tags?: string[];
 }
 
 function getPostBase(source: AstroFetchedContentPost, slug: string, locale?: string): Post {
@@ -19,6 +21,7 @@ function getPostBase(source: AstroFetchedContentPost, slug: string, locale?: str
     ...getReadingTimeAndExcerpt(o.html, config.pruneLength),
 
     authors: getAuthors(source?.authors, locale),
+    tags: getTags(source?.tags, locale),
   } as Post;
 }
 

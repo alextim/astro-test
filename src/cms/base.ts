@@ -42,6 +42,7 @@ export function getBaseObject(
 
     html,
 
+    slug: typeof slug === 'string' ? slug : slug.join('/'),
     to: localize(slug, locale),
     locale,
   };

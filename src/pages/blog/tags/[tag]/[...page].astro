@@ -7,14 +7,13 @@ import PostList from '@/layouts/blog/components/PostList.astro';
 export async function getStaticPaths({ paginate }) {
   const posts = await Astro.fetchContent('../../*.md')
     .filter((p) => !p.draft && p.tags)
-    .sort(defaultSort)
-    .map((p) => getPost(p));
+    .sort(defaultSort);
 
   const tags = posts.flatMap((p) => [...p.tags!]);
   const uniqueTags = [...new Set<string>(tags)];
 
   return uniqueTags.map((tag) => {
-    const filteredPosts = posts.filter((p) => p.tags!.includes(tag));
+    const filteredPosts = posts.filter((p) => p.tags!.includes(tag)).map((p) => getPost(p));;
     return paginate(filteredPosts, { params: { tag }, pageSize: config.pageSize });
   });
 }

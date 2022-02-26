@@ -5,6 +5,16 @@ import { AstroFetchedContentPost, getPost } from '../cms/post';
 import { defaultSort } from '../cms/shared';
 import fetchContent from './utils/fetchContent';
 
+//  TODO:
+export async function fetchPostsBase(locale = i18n.defaultLocale) {
+  const localePath = isDefaultLocale(locale) ? '' : `${locale}/`;
+  let result = await fetchContent(`./src/pages/${localePath}blog/*.md`);
+  if (!result) {
+    return null;
+  }
+  return result;
+}
+
 export async function fetchPosts(
   locale = i18n.defaultLocale,
   options?: {
@@ -13,8 +23,7 @@ export async function fetchPosts(
     limit?: number;
   },
 ) {
-  const localePath = isDefaultLocale(locale) ? '' : `${locale}/`;
-  let result = await fetchContent(`./src/pages/${localePath}blog/*.md`);
+  let result = await fetchPostsBase(locale);
   if (!result) {
     return null;
   }

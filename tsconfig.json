@@ -1,10 +1,8 @@
 {
   "compilerOptions": {
-    "module": "ESNext",
+    "module": "ES2022",
     "moduleResolution": "node",
-    "target": "ESNext",
-    "removeComments": true,
-    "forceConsistentCasingInFileNames": true,
+    "target": "ES2021",
 
     "baseUrl": ".",
     "paths": {
@@ -15,13 +13,19 @@
       "@/lib/*": ["src/lib/*"],
       "@/helpers/*": ["src/helpers/*"],
       "@/layouts/*": ["src/layouts/*"],
-      "*": ["types/*.d.ts"]
+      "*": ["src/types/*.d.ts"]
     },
 
+    "isolatedModules": true,
+    "removeComments": true,
+    "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
     "typeRoots": ["./types", "./node_modules/@types"],
-    "lib": ["ES2021", "ESNext", "DOM"],
+    "lib": ["ES2021"],
     "sourceMap": true,
+    "importsNotUsedAsValues": "error",
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
 
     "allowUnreachableCode": false,
 
@@ -36,9 +40,12 @@
 
     "allowSyntheticDefaultImports": true,
 
+    "allowJs": true,
+    "checkJs": true,
+
     "emitDecoratorMetadata": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "noImplicitThis": false
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "**/node_modules/*"]
+  "include": ["src/**/*.d.ts", "src/**/*.ts"]
 }

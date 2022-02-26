@@ -30,13 +30,19 @@ const schema = getBreadcrumbsSchema(links);
 
 <nav aria-label="Breadcrumb" class="mb-0 flex overflow-hidden text-ellipsis whitespace-nowrap align-middle text-sm text-current">
   <script type="application/ld+json" set:html={JSON.stringify(schema)}></script>
-  <a class="at-breadcrumb-link" href={links[0]!.to}>
+  <a class="breadcrumb-link" href={links[0]!.to}>
     <Icon name="home" class="h-4 w-4" />
   </a>
   {links?.slice(1, -1).map(({ to, title }: Link) => (
-    <a key={to} class="at-breadcrumb-link" href={to}>
+    <a key={to} class="breadcrumb-link" href={to}>
       {title}
     </a>
   ))}
   <span>{tailTitle}</span>
 </nav>
+
+<style>
+  .breadcrumb-link {
+    @apply inline-flex items-center text-current after:mx-2 after:block after:h-2 after:w-2 after:rotate-45 after:border-t-2 after:border-r-2 after:border-solid after:border-current after:opacity-80 after:content-empty;
+  }
+</style>
