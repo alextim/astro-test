@@ -1,11 +1,11 @@
 ---
 import config from '@/config/website';
 import i18n from '@/config/i18n';
-
+import getImagePath from '@/lib/getImagePath';
 import { fetchAddress } from '@/api/yamls';
 import getWebPageSchema from '@/components/SEO/components/Schema/helpers/getWebPageSchema';
 
-// import Image from '@/components/Image.astro';
+import Image from '@/components/Image.astro';
 import ReadMore from './ReadMore.astro';
 import TagList from './TagList.astro';
 
@@ -45,7 +45,7 @@ const schema = getWebPageSchema({
   <script type="application/ld+json" set:html={JSON.stringify(schema)}></script>
   {cover?.src && (
     <a href={to}>
-      <img class="h-auto w-full rounded-t" src={cover.src} alt={cover.alt} title={cover.title} />
+      <Image src={getImagePath(cover.src)} alt={cover.alt} classes="h-auto w-full rounded-t" caption={cover.caption} />
     </a>
   )}
   <div class="p-4">

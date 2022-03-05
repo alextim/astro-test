@@ -1,4 +1,4 @@
-import {localizePath} from '@/lib/i18n-utils';
+import { localizePath } from '@/lib/i18n-utils';
 import i18n from '@/config/i18n';
 
 const slugify = (s: string) => s;
@@ -15,6 +15,5 @@ const getTags = (tags: string[] | undefined, locale: string = i18n.defaultLocale
 
   return result;
 };
-
 
 export default getTags;

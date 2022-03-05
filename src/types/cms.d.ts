@@ -1,8 +1,8 @@
 type Image = {
   src: string;
   xl?: string;
-  alt?: string;
-  title?: string;
+  alt: string;
+  caption?: string;
 };
 
 type Author = {

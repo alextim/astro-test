@@ -4,7 +4,7 @@ headline:
 metaTitle: 'Фарбувальні апарати високого тиску: Оренда | СНІЖНИЙ БАРС'
 metaDescription: 'Компанія “Сніжний Барс”, надає в оренду обладнання для фарбування. З питань оренди звертайтеся +38 (063) 604 29 05'
 cover:
-  src: /assets/blog/posts/DSC03360.jpg
+  src: assets/blog/posts/DSC03360.jpg
   alt: Фото аппарат высокого давления Karcher - Снежный Барс
 datePublished: 2020-04-25T17:09:00Z
 dateModified: 2021-13-32T17:09:00Z

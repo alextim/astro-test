@@ -5,7 +5,6 @@ metaTitle: Покраска металла и металлоконструкци
 metaDescription: Покраска металла и металлоконструкции, лучшая цена в Киеве, Украине ☎+38 (096) 555-30-92 от промышленных альпинистов компании Снежный Барс.
 cover:
   src: /assets/services/pokraska-metalla.jpg
-  xl: 
   alt: Фарбування металоконструкцій
 layout: '@/layouts/ServiceLayout.astro'
 sortOrder: 1

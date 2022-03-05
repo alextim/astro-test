@@ -4,11 +4,8 @@ import { AstroFetchedContentPage, getPage } from '../cms/page';
 import fetchContent from './utils/fetchContent';
 
 export async function fetchPages(path: string, locale: string) {
-  if (path) {
-    path = `${path}/`;
-  }
   const localePath = isDefaultLocale(locale) ? '' : `${locale}/`;
-  const result = await fetchContent(`./src/pages/${localePath}${path}*.md`);
+  const result = await fetchContent(`./src/pages/${localePath}${path}${path ? '/' : ''}*.md`);
   if (!result || result.length === 0) {
     return null;
   }

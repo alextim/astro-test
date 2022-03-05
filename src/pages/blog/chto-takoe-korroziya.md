@@ -4,7 +4,7 @@ headline:
 metaTitle: Що таке корозія? Роботи із захисту металоконструкцій - СНІЖНИЙ БАРС
 metaDescription: Дізнайтеся що таке корозія і про методи її запобігання. Як захистити металоконструкції від корозії промисловими альпіністами
 cover:
-  src: /assets/blog/posts/antikorrozionnyj-remont.jpg
+  src: assets/blog/posts/antikorrozionnyj-remont.jpg
   alt: Фото фарбування металоконструкції від корозії
 datePublished: 2019-04-25T17:38:00Z
 authors:

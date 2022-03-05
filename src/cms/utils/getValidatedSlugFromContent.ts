@@ -21,4 +21,3 @@ const getValidatedSlugFromContent = (pathname: string): string => {
 };
 
 export default getValidatedSlugFromContent;
-

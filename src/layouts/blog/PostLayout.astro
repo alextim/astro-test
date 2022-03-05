@@ -46,8 +46,8 @@ const seo = {
 ---
 
 <Layout {seo} {title} {headline} {breadcrumbs}>
-  <PostInfo {authors} {datePublished} {readingTime} {t} />
-  <InnerAsideLayout {cover}>
+  <PostInfo authors={authors} datePublished={datePublished} readingTime={readingTime} t={t} />
+  <InnerAsideLayout cover={cover}>
     <div slot="html">
       <div set:html={html} />
       {tags && <TagsList tags={tags} extraStyle="mt-12" />}

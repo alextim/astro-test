@@ -12,12 +12,12 @@ const navItems = fetchMainNav(locale);
 
 ---
 <div id="main-menu" class="main-menu">
-  <nav aria-label="Main menu" class="xl:h-full">
-    <ul class="flex flex-col m-0 p-0 list-none xl:inline-flex xl:flex-row xl:items-center xl:h-full">
+  <nav aria-label="Main menu" class="lg:h-full">
+    <ul class="flex flex-col m-0 p-0 list-none lg:inline-flex lg:flex-row lg:items-center lg:h-full">
       {navItems.map(({ title, to, submenu }, index) => <NavItem submenuId={`submenu-${index}`} to={to} title={title} submenu={submenu} />)}
     </ul>
   </nav>
-  <div class="flex flex-col justify-center gap-x-6 py-4 xl:inline-flex xl:flex-row xl:items-center">
+  <div class="flex flex-col justify-center gap-x-6 py-4 lg:inline-flex lg:flex-row lg:items-center">
     <CTAButton />
     <LanguageSwitch />
   </div>
@@ -49,23 +49,23 @@ const navItems = fetchMainNav(locale);
   left-0
   z-40
 
-  xl:inline-flex
-  xl:flex-row
-  xl:items-center
-  xl:justify-between
+  lg:inline-flex
+  lg:flex-row
+  lg:items-center
+  lg:justify-between
 
-  xl:static
-  xl:top-0
-  xl:h-full
+  lg:static
+  lg:top-0
+  lg:h-full
 
-  xl:overflow-visible
+  lg:overflow-visible
 
-  xl:!transition-none
-  xl:!will-change-[unset]
+  lg:!transition-none
+  lg:!will-change-[unset]
 
-  xl:!pointer-events-auto
-  xl:!visible
-  xl:!transform-none
+  lg:!pointer-events-auto
+  lg:!visible
+  lg:!transform-none
 
   pointer-events-none invisible -translate-x-[110%];
 

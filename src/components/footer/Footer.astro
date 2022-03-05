@@ -42,10 +42,10 @@ const t: ITranslationFunc = function (key: string, params?: Record<string, strin
 
 <footer class={`w-full text-small ${theme.colors.text} ${theme.colors.bg}`}>
   <Container>
-    <div class="grid gap-6 py-5 xl:py-6 xl:grid-cols-[1fr_1fr_2fr]">
+    <div class="grid gap-6 py-5 lg:py-6 lg:grid-cols-[1fr_1fr_2fr]">
       <WidgetWrapper>
         <FooterWidget title={t('footer.contacts')}>
-          <div class="grid gap-3 xl:gap-0">
+          <div class="grid gap-3 lg:gap-0">
             <OrganizationEmail {emails} />
             <OrganizationPhones {phones} />
           </div>
@@ -61,7 +61,7 @@ const t: ITranslationFunc = function (key: string, params?: Record<string, strin
       <WidgetWrapper>
         <FooterWidget title={t('footer.inquiry.title')}>
           <div class="mb-3">{t('footer.inquiry.text')}</div>
-          <Button as="link" overrideCSS="justify-center xl:self-start" to="/inquiry/">
+          <Button as="link" overrideCSS="justify-center lg:self-start" to="/inquiry/">
             {t('footer.inquiry.button_title')}
           </Button>
         </FooterWidget>
@@ -78,7 +78,7 @@ const t: ITranslationFunc = function (key: string, params?: Record<string, strin
 
   <div class="w-full py-2 px-0 bg-slate-900 text-xs">
     <Container>
-      <div class="flex justify-between xl:justify-center">
+      <div class="flex justify-between lg:justify-center">
         <LegalInfo {foundingDate} name={address?.name} />
         <LocalizedLink to="/privacy/">{t('footer.privacyPolicy')}</LocalizedLink>
       </div>

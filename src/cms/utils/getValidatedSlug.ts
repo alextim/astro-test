@@ -9,8 +9,6 @@ const getValidatedSlug = (pathname: string | undefined): string => {
     throw new Error(`Wrong pathname ${pathname} in content`);
   }
   return slug;
-
-}
+};
 
 export default getValidatedSlug;
-
