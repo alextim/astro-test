@@ -12,7 +12,8 @@
       "@/cms/*": ["src/cms/*"],
       "@/lib/*": ["src/lib/*"],
       "@/helpers/*": ["src/helpers/*"],
-      "@/layouts/*": ["src/layouts/*"]
+      "@/layouts/*": ["src/layouts/*"],
+      "@/astro-eleventy-img/*": ["src/astro-eleventy-img/index.ts"]
     }
   }
 }

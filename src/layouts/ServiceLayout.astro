@@ -28,13 +28,11 @@ const seo = {
 };
 ---
 
-<Layout {seo} {title} {headline} {breadcrumbs}>
+<Layout seo={seo} title={title} headline={headline} breadcrumbs={breadcrumbs}>
   <InnerAsideLayout cover={cover}>
     <div slot="html">
-      <div set:html={html} />
+      <div set:html={html}></div>
     </div>
-    <aside slot="aside" class="flex flex-col">
-      test
-    </aside>
+    <aside slot="aside" class="flex flex-col">test</aside>
   </InnerAsideLayout>
 </Layout>

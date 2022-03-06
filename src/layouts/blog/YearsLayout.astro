@@ -38,7 +38,7 @@ const years: Array<[string, number]> = [
 });
 ---
 
-<Layout {seo} {title} {headline} {breadcrumbs}>
+<Layout seo={seo} title={title} headline={headline} breadcrumbs={breadcrumbs}>
   <section>
     {years.length > 0 ? (
       <ul>

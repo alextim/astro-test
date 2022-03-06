@@ -6,15 +6,20 @@ export interface Props {
   seo?: any;
 }
 
-import BaseLayout from './BaseLayout.astro';
+
 import PageHeader from '../PageHeader.astro';
 import Breadcrumbs from '../Breadcrumbs/Breadcrumbs.astro';
+import Container from '../Container.astro';
+
+import BaseLayout from './BaseLayout.astro';
 
 const { title, headline, breadcrumbs, seo } = Astro.props as Props;
 ---
 
-<BaseLayout {seo}>
-  {breadcrumbs && <Breadcrumbs breadcrumbs={breadcrumbs} />}
-  <PageHeader {title} {headline} />
-  <slot />
+<BaseLayout seo={seo}>
+  <Container>
+    {breadcrumbs && <Breadcrumbs breadcrumbs={breadcrumbs} />}
+    <PageHeader title={title} headline={headline} />
+    <slot />
+  </Container>
 </BaseLayout>

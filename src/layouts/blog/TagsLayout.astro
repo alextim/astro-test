@@ -27,14 +27,14 @@ const seo = {
   nofollow,
 };
 
-const posts = (await fetchPostsBase(locale) || []).filter((p: any) => p.tags);
+const posts = ((await fetchPostsBase(locale)) || []).filter((p: any) => p.tags);
 
 const tags = [...posts.flatMap((p: any) => [...p.tags!]).reduce((acc, e) => acc.set(e, (acc.get(e) || 0) + 1), new Map())].sort((a, b) => {
   return b[1] - a[1];
 });
 ---
 
-<Layout {seo} {title} {headline} {breadcrumbs}>
+<Layout seo={seo} title={title} headline={headline} breadcrumbs={breadcrumbs}>
   <section>
     {tags.length > 0 ? (
       <ul>

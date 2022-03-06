@@ -1,32 +1,34 @@
 ---
 // boxShadow: `0 -2px 0 ${colors.header.nav.item.boxShadowColor} inset`
 export interface Props {
+  id?: string;
   to: string;
   isActive: boolean;
 }
-const { to, isActive } = Astro.props as Props;
+const { id = '', to, isActive } = Astro.props as Props;
 ---
-<a href={to} class={`menu-item ${isActive ? ' shadow-inner' : ''}`}  role="menuitem">
+
+<a id={id} href={to} class={`menu-item ${isActive ? ' shadow-inner' : ''}`} role="menuitem">
   <slot />
 </a>
 
 <style>
   .menu-item {
-    @apply inline-flex w-full
-    items-center justify-between
+    @apply at-a at-a-undecorated
+    inline-flex w-full
+    items-center
+    justify-between
     whitespace-nowrap
-    border-b
-    border-solid
-    py-4 px-8 font-semibold uppercase text-gray-900
-    opacity-100
+    border-b border-solid py-4 px-8 font-semibold
+    uppercase
 
-    first-of-type:border-t first-of-type:border-t-gray-900
+    text-gray-900 opacity-100
 
-    hover:text-black
+    first-of-type:border-t
+    first-of-type:border-t-gray-900
     hover:bg-slate-50
-    focus:bg-gray-600
-    active:bg-slate-100
-    at-a at-a-undecorated
+    hover:text-black
+    focus:bg-gray-600 active:bg-slate-100
 
     lg:h-full lg:justify-start lg:border-b-0 lg:p-4 lg:first-of-type:border-t-0;
   }

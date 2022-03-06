@@ -53,7 +53,7 @@ const schema = getWebPageSchema({
       <h2 class="m-0 text-lg font-body font-semibold normal-case text-left">{title}</h2>
     </a>
     {excerpt && <p class="pt-2">{excerpt}</p>}
-    {tags && <TagList tags={tags} extraStyle="my-4"/>}
+    {tags && <TagList tags={tags} extraStyle="my-4" />}
     {readMore && <ReadMore to={to} title={readMore} />}
   </div>
 </article>

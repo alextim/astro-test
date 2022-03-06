@@ -4,13 +4,13 @@ import { fetchTranslations } from '@/api/yamls';
 import translate from '@/lib/translate';
 import getLocaleFromUrlPathname from '@/helpers/getLocaleFromUrlPathname';
 
-
 const locale = getLocaleFromUrlPathname(Astro.request.url.pathname);
 const translations = fetchTranslations(locale);
 const t: ITranslationFunc = function (key: string, params?: Record<string, string>): string {
   return translate(key, translations, params);
 };
 ---
-<Button as="link" overrideCSS="h-12 my-8 mr-auto ml-auto lg:h-8 lg:m-0"  to="/inquiry/">
+
+<Button as="link" overrideCSS="h-12 my-8 mr-auto ml-auto lg:h-8 lg:m-0" to="/inquiry/">
   {t('nav.inquiry')}
 </Button>

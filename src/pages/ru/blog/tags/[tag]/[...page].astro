@@ -9,12 +9,11 @@ export async function getStaticPaths({ paginate }) {
     .filter((p) => !p.draft && p.tags)
     .sort(defaultSort);
 
-
   const tags = posts.flatMap((p) => [...p.tags!]);
   const uniqueTags = [...new Set<string>(tags)];
 
   return uniqueTags.map((tag) => {
-    const filteredPosts = posts.filter((p) => p.tags!.includes(tag)).map((p) => getPost(p, 'ru'));;
+    const filteredPosts = posts.filter((p) => p.tags!.includes(tag)).map((p) => getPost(p, 'ru'));
     return paginate(filteredPosts, { params: { tag }, pageSize: config.pageSize });
   });
 }
@@ -23,4 +22,4 @@ const { page } = Astro.props;
 const tag = Astro.request.params.tag;
 ---
 
-<PostList {page} title={tag} breadcrumbsItems="blog" indexPageSlug="tags[tag]" />
+<PostList page={page} title={tag} breadcrumbsItems="blog" indexPageSlug="tags[tag]" />

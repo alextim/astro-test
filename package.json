@@ -11,7 +11,6 @@
     "format": "yarn prettier -w --plugin-search-dir=. ./src",
     "lint:ts": "eslint . --ext .ts",
     "lint:js": "eslint . --ext .js",
-    "lint:jsx": "eslint . --ext .jsx",
     "critical": "node critical.js",
     "prod": "astro build && pnpm run critical"
   },

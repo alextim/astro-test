@@ -39,17 +39,19 @@ if (!currentLocale) {
     <link rel="preload" href="/assets/fonts/oswald-v36-cyrillic-700.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
 
     <link rel="stylesheet" href={Astro.resolve('../../styles/global.css')} />
-    <style global></style>
+    <style global>
+
+    </style>
     <link rel="stylesheet" href={Astro.resolve('../../styles/global.css')} />
-    <script defer src="/assets/scripts/main.js" />
+    <script defer src="/assets/scripts/main.js"></script>
   </head>
   <body>
     <div class="flex flex-col min-h-screen">
-      <Header {contacts} {mainNav} {translations} />
+      <Header contacts={contacts} mainNav={mainNav} translations={translations} />
       <main class="w-full flex-auto mt-header pb-header lg:mt-header-xl lg:pb-header-xl">
         <slot />
       </main>
-      <Footer {contacts} {footerNav} {socialLinks} {address} {translations} />
+      <Footer contacts={contacts} footerNav={footerNav} socialLinks={socialLinks} address={address} translations={translations} />
     </div>
   </body>
 </html>

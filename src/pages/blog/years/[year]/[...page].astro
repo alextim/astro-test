@@ -23,4 +23,4 @@ const { page } = Astro.props;
 const year = Astro.request.params.year;
 ---
 
-<PostList {page} title={year} breadcrumbsItems="blog" indexPageSlug="years[year]" />
+<PostList page={page} title={year} breadcrumbsItems="blog" indexPageSlug="years[year]" />

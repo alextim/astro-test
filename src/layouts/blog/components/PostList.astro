@@ -88,7 +88,7 @@ const seo = {
 };
 ---
 
-<Layout {seo} {title} {headline} {breadcrumbs}>
+<Layout seo={seo} title={title} headline={headline} breadcrumbs={breadcrumbs}>
   {isFirst && html && <div class="mt-6 mb-10" set:html={html} />}
 
   <div class="grid gap-7 lg:grid-cols-2 lg:grid-cols-3">

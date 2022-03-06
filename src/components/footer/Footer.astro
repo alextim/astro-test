@@ -46,15 +46,15 @@ const t: ITranslationFunc = function (key: string, params?: Record<string, strin
       <WidgetWrapper>
         <FooterWidget title={t('footer.contacts')}>
           <div class="grid gap-3 lg:gap-0">
-            <OrganizationEmail {emails} />
-            <OrganizationPhones {phones} />
+            <OrganizationEmail emails={emails} />
+            <OrganizationPhones phones={phones} />
           </div>
         </FooterWidget>
       </WidgetWrapper>
 
       <WidgetWrapper>
         <FooterWidget title={t('footer.opening_time')}>
-          <OrganizationOpeningHours {openingHours} {t} />
+          <OrganizationOpeningHours openingHours={openingHours} t={t} />
         </FooterWidget>
       </WidgetWrapper>
 
@@ -72,14 +72,14 @@ const t: ITranslationFunc = function (key: string, params?: Record<string, strin
   <div class="w-full py-6 px-0 bg-slate-500">
     <Container>
       {socialLinks ? <SocialLinks {socialLinks} /> : null}
-      <FooterNavigation {footerNav} />
+      <FooterNavigation footerNav={footerNav} />
     </Container>
   </div>
 
   <div class="w-full py-2 px-0 bg-slate-900 text-xs">
     <Container>
       <div class="flex justify-between lg:justify-center">
-        <LegalInfo {foundingDate} name={address?.name} />
+        <LegalInfo foundingDate={foundingDate} name={address?.name} />
         <LocalizedLink to="/privacy/">{t('footer.privacyPolicy')}</LocalizedLink>
       </div>
     </Container>

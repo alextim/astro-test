@@ -31,13 +31,13 @@
 html {
   scroll-padding-top: calc(theme('spacing.header') + 1.5rem);
 }
-@media (min-width: theme('screens.xl')) {
+@media (min-width: theme('screens.lg')) {
   html {
     scroll-padding-top: calc(theme('spacing.header-xl') + 1.5rem);
   }
 }
 
-@media (max-width: theme('screens.xl')) {
+@media (max-width: theme('screens.lg')) {
   .js-body__no-scroll {
     height: 100%;
     position: fixed;

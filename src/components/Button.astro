@@ -1,8 +1,7 @@
 ---
 import Link from './LocalizedLink.astro';
 
-
-const { to = '', target = '', overrideCSS = '', icon = '', as = 'button', secondary = false, variant = '', ...rest }  = Astro.props;
+const { to = '', target = '', overrideCSS = '', icon = '', as = 'button', secondary = false, variant = '', ...rest } = Astro.props;
 
 let styles = `
   shrink-0
@@ -37,14 +36,12 @@ let styles = `
 if (secondary) {
   styles += ' ' + buttonStyles.secondary;
 }
-*/
-/*
 if (variant && buttons[variant]) {
   styles += ' ' + buttons[variant];
 }
 */
 if (overrideCSS) {
-  styles += ' ' + overrideCSS;
+  styles = `${styles} ${overrideCSS}`;
 }
 ---
 {as === 'link' && (
@@ -54,7 +51,7 @@ if (overrideCSS) {
   </Link>
 )}
 
- {as === 'a' && (
+{as === 'a' && (
   <a class={styles} href={to} target={target} {...rest}>
     <slot />
     {icon}

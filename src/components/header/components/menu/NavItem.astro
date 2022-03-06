@@ -10,10 +10,12 @@ const pathname = Astro.request.url.pathname;
 
 const { title, to, submenu, submenuId = '' } = Astro.props as Props;
 ---
+
 {submenu ? <SubMenu submenuId={submenuId} to={to} title={title} items={submenu} pathname={pathname} /> : null}
-{!submenu ? <li class="m-0 lg:inline-flex lg:h-full lg:items-center">
+{!submenu ? (
+  <li class="m-0 lg:inline-flex lg:h-full lg:items-center">
     <MenuItem to={to} isActive={to === pathname}>
       {title}
     </MenuItem>
   </li>
-: null}
+) : null}

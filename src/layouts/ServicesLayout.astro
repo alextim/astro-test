@@ -23,11 +23,12 @@ const seo = {
   nofollow,
 };
 
-const services = (await fetchPages('services', locale) || [])
+const services = ((await fetchPages('services', locale)) || [])
   .filter((p) => (p as any).slug !== 'index')
   .sort((a, b) => (a as any).sortOrder - (b as any).sortOrder);
 ---
-<Layout {seo} {title} {headline} {breadcrumbs}>
+
+<Layout seo={seo} title={title} headline={headline} breadcrumbs={breadcrumbs}>
   {html && <div class="mt-6 mb-10" set:html={html} />}
 
   <div class="grid gap-7 lg:grid-cols-2 lg:grid-cols-3">

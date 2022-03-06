@@ -9,8 +9,8 @@ import NavItem from './NavItem.astro';
 const pathname = Astro.request.url.pathname;
 const locale = getLocaleFromUrlPathname(pathname);
 const navItems = fetchMainNav(locale);
-
 ---
+
 <div id="main-menu" class="main-menu">
   <nav aria-label="Main menu" class="lg:h-full">
     <ul class="flex flex-col m-0 p-0 list-none lg:inline-flex lg:flex-row lg:items-center lg:h-full">
@@ -24,53 +24,52 @@ const navItems = fetchMainNav(locale);
 </div>
 
 <style>
-.h-main-menu {
-  height: calc(100vh - theme('spacing.header'));
-}
-.main-menu {
-  @apply flex-1
-  min-w-[50%]
+  .h-main-menu {
+    height: calc(100vh - theme('spacing.header'));
+  }
+  .main-menu {
+    @apply h-main-menu
+  pointer-events-none
 
-  flex
-  flex-col
-  bg-white
-
+  invisible
   absolute
   top-header
-  h-main-menu
 
-  overflow-y-scroll
-
-  transition-transform duration-500 ease-linear
-  will-change-transform
-
-  w-full
-  m-auto
   left-0
   z-40
+  m-auto
+
+  flex
+
+  w-full min-w-[50%] flex-1
+  -translate-x-[110%]
+
+  flex-col
+  overflow-y-scroll
+  bg-white
+  transition-transform
+
+  duration-500
+  ease-linear
+  will-change-transform
+  lg:!pointer-events-auto
+
+  lg:!visible
+  lg:static
+  lg:top-0
 
   lg:inline-flex
+
+  lg:h-full
+  lg:!transform-none
+
   lg:flex-row
   lg:items-center
   lg:justify-between
 
-  lg:static
-  lg:top-0
-  lg:h-full
-
-  lg:overflow-visible
-
-  lg:!transition-none
-  lg:!will-change-[unset]
-
-  lg:!pointer-events-auto
-  lg:!visible
-  lg:!transform-none
-
-  pointer-events-none invisible -translate-x-[110%];
-
-}
-.main-menu.open {
-  @apply pointer-events-auto visible transform-none;
-}
+  lg:overflow-visible lg:!transition-none lg:!will-change-[unset];
+  }
+  .main-menu.open {
+    @apply pointer-events-auto visible transform-none;
+  }
 </style>

@@ -15,8 +15,21 @@ import LastUpdated from './components/LastUpdated.astro';
 import TagsList from './components/TagList.astro';
 const locale = getLocaleFromUrlPathname(Astro.request.url.pathname);
 const post = getPostFromContent(Astro.props.content, Astro.request.canonicalURL.pathname, locale);
-const { title, metaTitle, headline, metaDescription, cover, noindex, nofollow, datePublished, dateModified, readingTime, html, authors, tags } =
-  post;
+const {
+  title,
+  metaTitle,
+  headline,
+  metaDescription,
+  cover,
+  noindex,
+  nofollow,
+  datePublished,
+  dateModified,
+  readingTime,
+  html,
+  authors,
+  tags,
+} = post;
 /* <AsideServices mainNav={mainNav} /> */
 const translations = fetchTranslations(locale);
 const t: ITranslationFunc = function (key: string, params?: Record<string, string>): string {
@@ -45,11 +58,11 @@ const seo = {
 };
 ---
 
-<Layout {seo} {title} {headline} {breadcrumbs}>
+<Layout seo={seo} title={title} headline={headline} breadcrumbs={breadcrumbs}>
   <PostInfo authors={authors} datePublished={datePublished} readingTime={readingTime} t={t} />
   <InnerAsideLayout cover={cover}>
     <div slot="html">
-      <div set:html={html} />
+      <div set:html={html}></div>
       {tags && <TagsList tags={tags} extraStyle="mt-12" />}
     </div>
     <aside slot="aside" class="flex flex-col">
@@ -57,5 +70,7 @@ const seo = {
       <AsideRecentPosts t={t} />
     </aside>
   </InnerAsideLayout>
-  {dateModified && ((datePublished && dateModified !== datePublished) || !datePublished) && <LastUpdated dateModified={dateModified} t={t} />}
+  {dateModified && ((datePublished && dateModified !== datePublished) || !datePublished) && (
+    <LastUpdated dateModified={dateModified} t={t} />
+  )}
 </Layout>
